@@ -1,5 +1,7 @@
 package science.skywhale.bloodmortgage;
 
+import science.skywhale.bloodmortgage.masterspellbook.Glyph;
+
 public class Dice {
     private Glyph[] glyphs;
 
