@@ -1,4 +1,4 @@
-package science.skywhale.bloodmortgage;
+package science.skywhale.bloodmortgage.masterspellbook;
 
 public abstract class Glyph {
     //private image
