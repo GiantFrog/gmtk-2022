@@ -1,3 +1,5 @@
+package science.skywhale.bloodmortgage;
+
 public abstract class Glyph {
     //private image
 
