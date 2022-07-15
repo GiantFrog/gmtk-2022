@@ -1,2 +1,4 @@
-package science.skywhale.bloodmortgage;public class Battle {
+package science.skywhale.bloodmortgage;
+
+public class Battle {
 }

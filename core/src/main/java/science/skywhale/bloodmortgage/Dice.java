@@ -1,3 +1,5 @@
+package science.skywhale.bloodmortgage;
+
 public class Dice {
     private Glyph[] glyphs;
 
