@@ -1,12 +1,11 @@
 package science.skywhale.bloodmortgage;
 
-import java.util.ArrayList;
 
 public class Battle {
 	//TODO: negative damage heals other side
     private CharacterEntity opponent;
     private CharacterEntity player;
-	private CharacterEntity winner;
+	private Character winner;
     //private ArrayList<CharacterEntity> opponentMinions;
     //private ArrayList<CharacterEntity> playerMinions;
 
@@ -15,22 +14,9 @@ public class Battle {
         this.opponent = new CharacterEntity(opponent);
 		this.winner = null;
     }
-
-	public void battleRound(){
-		// Player goes
-		CharacterEntity current = player;
-		
-		winner = turn(current);
-		logScores();
-		// switch players to opponent
-		current = getOtherSide(current);
-		// take players turn
-		winner = turn(current);
-		logScores();
-	}
 	
 	private CharacterEntity getOtherSide(CharacterEntity current){
-		if (current.name == opponent.name){
+		if (current.name.equals(opponent.name)){
 			current = player;
 		} else {
 			current = opponent;
@@ -47,39 +33,34 @@ public class Battle {
 	
 	// **** TRUE RESPONSE means there was a winner, not which one won*****
 	public Boolean playerTurn(){
-		CharacterEntity result = turn(player);
-		if (result != null){
-			winner = result;
-			return true;
-		} else {
-			return false;
-		}
+		turn(player);
+		return winner != null;
 	}
 	
 	public Boolean opponentTurn(){
-		CharacterEntity result = turn(opponent);
-		if (result != null){
-			winner = result;
-			return true;
-		} else {
-			return false;
-		}
+		turn(opponent);
+		
+		return winner != null;
 	}
 	
-	public Character checkWinner(){
+	public void checkWinner(){
 		// TODO: Only one winner so this could be interesting if both are 0
 		if (opponent.health <= 0){
-			winner = player;
-			return player.character;
+			winner = player.character;
+			//return player;
 		}
 		if (player.health <= 0){
-			winner = opponent;
-			return opponent.character;
+			winner = opponent.character;
+			//return opponent;
 		}
-		return null;
+		//return null;
 	}
 	
-    public CharacterEntity turn(CharacterEntity myTurn){
+	public Character getWinner(){
+		return winner;
+	}
+	
+    public void turn(CharacterEntity myTurn){
         System.out.println("Turn: " + myTurn.name);
 		
 		// roll dice
@@ -93,23 +74,17 @@ public class Battle {
 		
 		int damageDone = dice.executeRoll(roll);
 		
-		// negative dameDone heals
-		if (damageDone < 0){
-			CharacterEntity otherSide = getOtherSide(myTurn);
-			otherSide.health -= damageDone;
-			// don't let helath go above max possible
-			if (otherSide.health > otherSide.character.getMaxHealth()){
-				otherSide.health = otherSide.character.getMaxHealth();
-			}
-			// return null because nobody will lose because no loss in health
-			return null;
+		// heal first
+		CharacterEntity otherSide = getOtherSide(myTurn);
+		// do negative damage, heal opponent
+		if (damageDone < 0) {
+			otherSide.character.setToHeal((-1*damageDone));
+			damageDone = 0; // set to 0 so don't take damage
 		}
-		// damage other side
-		if (getOtherSide(myTurn).takeDamage(damageDone) == true){
-			return myTurn;
-		} else {
-			return null;
-		}
+		otherSide.heal();
+		myTurn.heal();
+		otherSide.takeDamage(damageDone);
+		checkWinner();
     }
 
 
@@ -124,30 +99,25 @@ public class Battle {
             this.health = character.getMaxHealth();
 			this.name = character.getName();
         }
+		@Override
+		public String toString() {
+			return name;
+		}
+		public void heal(){
+			health += character.getToHeal();
+			if (health > character.getMaxHealth()){
+				health = character.getMaxHealth();
+			}
+			character.setToHeal(0);
+		}
 
-
-        public Boolean takeDamage(int damage){
+        public void takeDamage(int damage){
             // if this is > 0 all damage was blocked
             int block = character.getBattleBlock();
             if (damage - block > 0) {
                 health = health - damage + block;
             }
             character.setBattleBlock(0);
-			
-			// look for healing
-			health += character.getToHeal();
-			// make sure doesn't go over max health
-			if (health > character.getMaxHealth()){
-				health = character.getMaxHealth();
-			}
-			character.setToHeal(0);
-			
-			// check if dead
-			if (health <= 0){
-				return true;
-			} else {
-				return false;
-			}
         }
     }
 
