@@ -11,6 +11,7 @@ public class Dice {
     }
 
     public void setSide(Glyph newSide, int side){
+        // TODO: Remove existing glyph if there is one
         // TODO: Check that side is within proper range and handle
         glyphs[side-1] = newSide;
     }
@@ -26,8 +27,22 @@ public class Dice {
         }
     }
 
-    // returns an integer 1 to the number of sides of the dice
+    // returns damage points done by roll
     public int roll(){
+        int rolled = getRoll();
+        Glyph glyph = glyphs[rolled];
+
+        // see if roll resulted in a glyph
+        if (glyph == null){
+            // if not return rolled for damage
+            return rolled;
+        } else {
+            return glyph.useGlyph(rolled);
+        }
+    }
+
+    // returns an integer 1 to the number of sides of the dice
+    public int getRoll(){
         String options = "";
         for(int i = 0; i<glyphs.length; i++){
             if (glyphs[i] == null) {
