@@ -12,6 +12,7 @@ public class Character {
     private ArrayList<Glyph> spellbook;
     private int battleBlock = 0;
 	float x = 0, y = 0;
+	boolean movingLeft = false;
 	private Texture texture;
 
     public Character(String name, int numDice, Texture texture){
@@ -41,6 +42,6 @@ public class Character {
 	
 	
 	public void render (SpriteBatch batch) {
-		batch.draw(texture, x, y, (float)texture.getWidth()/FirstScreen.TILESIZE, (float)texture.getHeight()/FirstScreen.TILESIZE);
+		batch.draw(texture, x, y, (float)texture.getWidth()/FirstScreen.TILESIZE, (float)texture.getHeight()/FirstScreen.TILESIZE, 0, 0, 64, 64, movingLeft, false);
 	}
 }

@@ -34,7 +34,7 @@ public class FirstScreen implements Screen
 	boolean sprint = false;
 	float horiSpeed = 0, vertiSpeed = 0;
 	
-	private Character testCharacter;
+	Character testCharacter;
 	
 	public FirstScreen()
 	{
