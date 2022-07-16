@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -16,6 +17,7 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.github.tommyettinger.textra.Font;
@@ -73,7 +75,8 @@ public class GameScreen implements Screen
 		chaeriDialog = new TypingLabel(tooltip, new Font("fairies-32.fnt"));
 		bigTable.add(chaeriDialog);
 		
-		testCharacter = new Character("Kal", 1, new Texture("Kal.png"));
+		Texture[] kalTextureArray = {new Texture(Gdx.files.internal("Kal.png")), new Texture(Gdx.files.internal("Kal down walk.png"))};
+		testCharacter = new Character("Kal", 1, new Animation<Texture>(0.25f, kalTextureArray));
 		testCharacter.x = 6;
 		testCharacter.y = 7;
 		chaeri = new Character("Chaeri", 2, new Texture("chaeri.png"));
@@ -138,7 +141,7 @@ public class GameScreen implements Screen
 		hudBatch.begin();
 		hudBatch.draw(two, 40, 40);
 		chaeri.render(delta, hudBatch, 1);
-		stage.draw();
+		//stage.draw();
 		hudBatch.end();
 	}
 	

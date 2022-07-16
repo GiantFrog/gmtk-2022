@@ -1,6 +1,7 @@
 package science.skywhale.bloodmortgage;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import science.skywhale.bloodmortgage.masterspellbook.*;
 
@@ -14,9 +15,10 @@ public class Character {
 	private int toHeal = 0;
 	private int maxHealth;
 
-	float x = 0, y = 0, horiSpeed = 0, vertiSpeed = 0;
+	float x = 0, y = 0, horiSpeed = 0, vertiSpeed = 0, elapsedTime = 0;
 	boolean movingLeft = false, sprinting = false;
 	private Texture texture;
+	private Animation<Texture> animation;
 
     public Character(String name, int numDice, Texture texture){
         this.name = name;
@@ -25,6 +27,14 @@ public class Character {
         this.initSpellbook();
 		this.texture = texture;
     }
+	public Character(String name, int numDice, Animation<Texture> animation){
+		this.name = name;
+		dice = new Dice[numDice];
+		spellbook = new ArrayList<Glyph>();
+		this.initSpellbook();
+		this.animation = animation;
+		this.texture = animation.getKeyFrame(0);
+	}
 	// ADDED MAX HELATH - TODO: Integrate later!
 	public Character(String name, int numDice, Texture texture, int maxHealth){
 		this.name = name;
@@ -116,6 +126,12 @@ public class Character {
 	
 	
 	public void render (float delta, SpriteBatch batch, int tilesize) {
+		if (animation != null && (horiSpeed != 0 || vertiSpeed != 0))
+		{
+			elapsedTime += delta;
+			texture = animation.getKeyFrame(elapsedTime, true);
+		}
+		
 		//update the player position
 		if (sprinting)
 		{
