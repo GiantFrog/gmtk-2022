@@ -6,25 +6,27 @@ public class Battle {
 	//TODO: negative damage heals other side
     private CharacterEntity opponent;
     private CharacterEntity player;
+	private CharacterEntity winner;
     //private ArrayList<CharacterEntity> opponentMinions;
     //private ArrayList<CharacterEntity> playerMinions;
 
     public Battle(Character player, int playerStartHealth, Character opponent, int opponentStartHealth){
         this.player = new CharacterEntity(player, playerStartHealth);
         this.opponent = new CharacterEntity(opponent, opponentStartHealth);
+		this.winner = null;
     }
 
-	public void battle(){
-		CharacterEntity winner = null;
-		CharacterEntity current = opponent;
-		while (winner == null){
-			// switch players
-			current = getOtherSide(current);
-			// take players turn
-			winner = turn(current);
-			logScores();
-		}
-		System.out.println("WINNER! " + current.name);
+	public void battleRound(){
+		// Player goes
+		CharacterEntity current = player;
+		
+		winner = turn(current);
+		logScores();
+		// switch players to opponent
+		current = getOtherSide(current);
+		// take players turn
+		winner = turn(current);
+		logScores();
 	}
 	
 	private CharacterEntity getOtherSide(CharacterEntity current){
@@ -36,11 +38,45 @@ public class Battle {
 		return current;
 	}
 	
-	private void logScores(){
+	public void logScores(){
 		//System.out.println("ROUND");
 		System.out.println("Player: " + player.health);
 		System.out.println("Opponent: " + opponent.health);
 		System.out.println();
+	}
+	
+	// **** TRUE RESPONSE means there was a winner, not which one won*****
+	public Boolean playerTurn(){
+		CharacterEntity result = turn(player);
+		if (result != null){
+			winner = result;
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public Boolean opponentTurn(){
+		CharacterEntity result = turn(opponent);
+		if (result != null){
+			winner = result;
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	public Character checkWinner(){
+		// TODO: Only one winner so this could be interesting if both are 0
+		if (opponent.health <= 0){
+			winner = player;
+			return player.character;
+		}
+		if (player.health <= 0){
+			winner = opponent;
+			return opponent.character;
+		}
+		return null;
 	}
 	
     public CharacterEntity turn(CharacterEntity myTurn){
@@ -52,8 +88,13 @@ public class Battle {
 		System.out.println("Rolled: " + roll);
 		
 		int damageDone = dice.executeRoll(roll);
-		// TODO: if damageDone is negative, heal other player
 		
+		// negative dameDone heals
+		if (damageDone < 0){
+			getOtherSide(myTurn).health -= damageDone;
+			// return null because nobody will lose because no loss in health
+			return null;
+		}
 		// damage other side
 		if (getOtherSide(myTurn).takeDamage(damageDone) == true){
 			return myTurn;
