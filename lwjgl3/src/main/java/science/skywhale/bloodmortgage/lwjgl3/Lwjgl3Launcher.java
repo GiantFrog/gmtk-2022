@@ -26,10 +26,20 @@ public class Lwjgl3Launcher {
 		opponent.setDie(6);
 		
 		// Test with just regular dice
-		fight(player, opponent);
+		//fight(player, opponent);
 		
 		// test glyphs
+		//player.printSpellbook();
 		
+		player.addGlyphToDice(0, 1);
+		player.addGlyphToDice(0, 2);
+		player.addGlyphToDice(0, 3);
+		player.addGlyphToDice(0, 4);
+		player.getDie().printGlyphs();
+		//player.printSpellbook();
+		
+		
+		fight(player, opponent);
 		
 		
 		
