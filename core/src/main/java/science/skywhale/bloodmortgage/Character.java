@@ -20,20 +20,15 @@ public class Character {
 	private Texture texture;
 	private Animation<Texture> animation;
 
-    public Character(String name, int numDice, Texture texture){
-        this.name = name;
-        dice = new Dice[numDice];
-        spellbook = new ArrayList<Glyph>();
-        this.initSpellbook();
-		this.texture = texture;
-    }
-	public Character(String name, int numDice, Animation<Texture> animation){
+ 
+	public Character(String name, int numDice, Animation<Texture> animation, int maxHealth){
 		this.name = name;
 		dice = new Dice[numDice];
 		spellbook = new ArrayList<Glyph>();
 		this.initSpellbook();
 		this.animation = animation;
 		this.texture = animation.getKeyFrame(0);
+		this.maxHealth = maxHealth;
 	}
 	// ADDED MAX HELATH - TODO: Integrate later!
 	public Character(String name, int numDice, Texture texture, int maxHealth){

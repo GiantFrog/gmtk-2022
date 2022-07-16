@@ -76,10 +76,10 @@ public class GameScreen implements Screen
 		bigTable.add(chaeriDialog);
 		
 		Texture[] kalTextureArray = {new Texture(Gdx.files.internal("Kal.png")), new Texture(Gdx.files.internal("Kal down walk.png"))};
-		testCharacter = new Character("Kal", 1, new Animation<Texture>(0.25f, kalTextureArray));
+		testCharacter = new Character("Kal", 1, new Animation<Texture>(0.24f, kalTextureArray), 20);
 		testCharacter.x = 6;
 		testCharacter.y = 7;
-		chaeri = new Character("Chaeri", 2, new Texture("chaeri.png"));
+		chaeri = new Character("Chaeri", 2, new Texture("chaeri.png"), 1000);
 		chaeri.x = (float)Gdx.graphics.getWidth()/TILESIZE + 100;
 		chaeri.y = (float)Gdx.graphics.getHeight()/TILESIZE;
 		
