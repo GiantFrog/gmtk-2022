@@ -13,6 +13,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 
 /**
  * First screen of the application. Displayed after the application is created.
@@ -22,7 +23,7 @@ public class FirstScreen implements Screen
 	public static final int TILESIZE = 64;
 	
 	OrthographicCamera camera;
-	ExtendViewport viewport;
+	FitViewport viewport;
 	private MouseKeyboardInput mouseKeyboardInput;
 	private OrthogonalTiledMapRenderer mapRenderer;
 	private TiledMap map;
@@ -39,8 +40,8 @@ public class FirstScreen implements Screen
 		map = new TmxMapLoader().load("empty-map.tmx");
 		mapRenderer = new OrthogonalTiledMapRenderer(map, (float)1 / TILESIZE);
 		camera = new OrthographicCamera();
-		viewport = new ExtendViewport(8, 8, 50, 50, camera);
-		camera.setToOrtho(false, 40, 22.5f);
+		viewport = new FitViewport(8, 8, camera);
+		camera.setToOrtho(false, 10, 10);
 		mapRenderer.setView(camera);
 		
 		mouseKeyboardInput = new MouseKeyboardInput(this);
@@ -60,7 +61,6 @@ public class FirstScreen implements Screen
 	public void render(float delta)
 	{
 		//update the player position
-		//TODO multiple delta by a speed if sprint, make it faster
 		if (sprint)
 		{
 			testCharacter.x += delta*horiSpeed*1.75f;
