@@ -10,27 +10,54 @@ import science.skywhale.bloodmortgage.Character;
 /** Launches the desktop (LWJGL3) application. */
 public class Lwjgl3Launcher {
 	public static void main(String[] args) {
-		//System.out.println("Testing battle");
 		//testBattle();
 		createApplication();
 	}
 	
 	public static void testBattle(){
+		System.out.println("Testing battle");
 		//Texture text = new Texture("Kal.png");
 		// make characters player
-		Character player = new Character("player", 1);
+		Character player = new Character("player", 1, 20);
 		player.setDie(6);
 		
 		// make character opponent
-		Character opponent = new Character("opponent", 1);
+		Character opponent = new Character("opponent", 1, 20);
 		opponent.setDie(6);
 		
+		// Test with just regular dice
+		fight(player, opponent);
 		
-		// fight
-		Battle battle = new Battle(player, 20, opponent, 20);
-		battle.battle();
+		// test glyphs
+		
+		
+		
 		
 	}
+	
+	public static void fight(Character player, Character opponent){
+		Battle battle = new Battle(player, opponent);
+		
+		// fight
+		Boolean fightOver = false;
+		battle.logScores();
+		System.out.println("START BATTLE!");
+		// while loop for testing
+		Boolean playerTurn = true;
+		while (!fightOver){
+			if (playerTurn) {
+				fightOver = battle.playerTurn();
+			} else {
+				fightOver = battle.opponentTurn();
+			}
+			battle.logScores();
+			playerTurn = !playerTurn;
+		}
+		
+		// print winner
+		System.out.println("WINNER: " + battle.checkWinner().getName());
+	}
+	
 	private static Lwjgl3Application createApplication() {
 		return new Lwjgl3Application(new BloodMortgage(), getDefaultConfiguration());
 	}

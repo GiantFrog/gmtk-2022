@@ -12,6 +12,7 @@ public class Character {
     private ArrayList<Glyph> spellbook;
     private int battleBlock = 0;
 	private int toHeal = 0;
+	private int maxHealth;
 
 	float x = 0, y = 0, horiSpeed = 0, vertiSpeed = 0;
 	boolean movingLeft = false, sprinting = false;
@@ -24,16 +25,26 @@ public class Character {
         this.initSpellbook();
 		this.texture = texture;
     }
-	
+	// ADDED MAX HELATH - TODO: Integrate later!
+	public Character(String name, int numDice, Texture texture, int maxHealth){
+		this.name = name;
+		dice = new Dice[numDice];
+		spellbook = new ArrayList<Glyph>();
+		this.initSpellbook();
+		this.texture = texture;
+		this.maxHealth = maxHealth;
+	}
 	//NOTE: FOR TESTING ONLY
-	public Character(String name, int numDice){
+	public Character(String name, int numDice, int maxHealth){
 		this.name = name;
 		dice = new Dice[numDice];
 		spellbook = new ArrayList<Glyph>();
 		this.initSpellbook();
 		//this.texture = texture;
+		this.maxHealth = maxHealth;
 	}
 
+	// spellbook methods
     private void initSpellbook(){
         spellbook.add(new C1(this));
 		spellbook.add(new C2(this));
@@ -41,6 +52,16 @@ public class Character {
 		spellbook.add(new C4(this));
 		spellbook.add(new C5(this));
     }
+	public void addGlyphToDice(int index, int diceSide){
+		addGlyphToDice(index, diceSide, 0);
+	}
+	
+	public void addGlyphToDice(int index, int diceSide, int diceNum){
+		Glyph oldGlyph = dice[diceNum].setSide(spellbook.remove(index), diceSide);
+		if (oldGlyph != null){
+			spellbook.add(oldGlyph);
+		}
+	}
 	
 	// set Dice
 	public void setDie(int numSides){
@@ -57,6 +78,14 @@ public class Character {
 	}
 	public String getName(){
 		return name;
+	}
+	
+	// battle specific tracked within character
+	public int getMaxHealth(){
+		return maxHealth;
+	}
+	public void addToMaxHealth(int add){
+		maxHealth += add;
 	}
 	
 	// battle specific methods for tracking things

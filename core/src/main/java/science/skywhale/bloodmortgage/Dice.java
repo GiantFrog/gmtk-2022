@@ -10,12 +10,18 @@ public class Dice {
 
     }
 
-    public void setSide(Glyph newSide, int side){
-        // TODO: Remove existing glyph if there is one
+    public Glyph setSide(Glyph newSide, int side){
+		Glyph oldGlyph = glyphs[side-1];
         // TODO: Check that side is within proper range and handle
         glyphs[side-1] = newSide;
+		return oldGlyph; // return old glyph to add back to spellbook
     }
+	
+	public Glyph getSide(int side){
+		return glyphs[side-1];
+	}
 
+	
     public void printGlyphs(){
         for(int i=0; i<glyphs.length; i++){
             System.out.print((i+1) + ": ");
