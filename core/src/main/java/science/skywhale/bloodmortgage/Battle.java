@@ -3,6 +3,7 @@ package science.skywhale.bloodmortgage;
 import java.util.ArrayList;
 
 public class Battle {
+	//TODO: negative damage heals other side
     private CharacterEntity opponent;
     private CharacterEntity player;
     //private ArrayList<CharacterEntity> opponentMinions;
