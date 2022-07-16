@@ -16,7 +16,7 @@ public class R1 extends Glyph {
 	public int useGlyph() {
 		// TODO: CHANGE THIS FOR EACH GLYPH
 		owner.addToMaxHealth(this.diceSide);
-		owner.setToHeal(this.diceSide)
+		owner.setToHeal(this.diceSide);
 		return this.diceSide;
 	}
 }
