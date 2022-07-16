@@ -2,10 +2,20 @@ package science.skywhale.bloodmortgage;
 
 import com.badlogic.gdx.Game;
 
-/** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
-public class BloodMortgage extends Game {
+/**
+ * {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms.
+ */
+public class BloodMortgage extends Game
+{
 	@Override
-	public void create() {
+	public void create()
+	{
 		setScreen(new FirstScreen());
+	}
+	
+	@Override
+	public void dispose()
+	{
+		getScreen().dispose();
 	}
 }
