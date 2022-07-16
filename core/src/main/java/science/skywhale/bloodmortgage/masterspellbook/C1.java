@@ -1,5 +1,7 @@
 package science.skywhale.bloodmortgage.masterspellbook;
 
+import science.skywhale.bloodmortgage.Character;
+
 public class Common1 extends Glyph {
     public Common1(Character owner) {
         super();
