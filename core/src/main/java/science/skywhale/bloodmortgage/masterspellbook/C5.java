@@ -6,7 +6,7 @@ public class C5 extends Glyph {
 	public C5(Character owner) {
 		super();
 		this.name = "Confetti!";
-		this.description = "";
+		this.description = "No effect besides heralding a good time!";
 		this.owner = owner;
 		this.glyphType = 0;
 	}
