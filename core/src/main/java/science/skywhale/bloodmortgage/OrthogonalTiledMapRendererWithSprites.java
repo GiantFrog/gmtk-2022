@@ -22,7 +22,7 @@ public class OrthogonalTiledMapRendererWithSprites extends OrthogonalTiledMapRen
 	{
 		super(map, scale);
 		batch = sb;
-		sprites = new ArrayList<>();
+		sprites = new ArrayList<Sprite>();
 	}
 	
 	public void addSprite(Sprite sprite)

@@ -6,7 +6,7 @@ public class C2 extends Glyph{
     public C2(Character owner) {
         super();
         this.name = "Ward";
-        this.description = "Block up to 2N damage";
+        this.description = "Block twice the Value of this Face.";
         this.owner = owner;
         this.glyphType = 0;
     }

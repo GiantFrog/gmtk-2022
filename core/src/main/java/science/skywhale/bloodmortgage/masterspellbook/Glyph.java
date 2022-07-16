@@ -7,13 +7,14 @@ public abstract class Glyph {
 
     // these are set within each glyph
     // TODO: Image
-    private int weightMod = 0;
+    protected int weightMod = 0;
     protected String[] types = new String[]{"Common", "Uncommon", "Rare", "Legendary"};
     protected int glyphType;
     protected String name;
     protected String description;
     protected Character owner;
     protected Dice dice;
+	protected String flavor;
     protected int diceSide = 0; // 0 means no side
 
 

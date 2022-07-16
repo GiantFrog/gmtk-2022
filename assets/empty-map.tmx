@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.9" tiledversion="1.9.0" orientation="orthogonal" renderorder="right-down" width="10" height="10" tilewidth="64" tileheight="64" infinite="0" nextlayerid="2" nextobjectid="1">
- <tileset firstgid="1" name="Test" tilewidth="640" tileheight="640" tilecount="1" columns="0">
-  <grid orientation="orthogonal" width="1" height="1"/>
-  <tile id="0">
-   <image width="640" height="640" source="test map.png"/>
-  </tile>
+ <tileset firstgid="1" name="Box" tilewidth="64" tileheight="64" tilecount="100" columns="10">
+  <image source="test map.png" width="640" height="640"/>
  </tileset>
  <layer id="1" name="Tile Layer 1" width="10" height="10">
   <data encoding="base64" compression="zlib">
-   eJxjYBgF9ACMRKoDAAG4AAI=
+   eJwNw4c2QgEAANBHIXuvSBq2CCEjK0RmCNnF/3+De8+5TUEQNBsybIutthmx3Q477bLbHnvts98BBx1y2BFHHXPcqBNOGnPKuNMmTJoy7YyzzjnvgosuuWzGFVfNuua6G+bcdMtt8+646577Fjzw0COPPbHoqWeeW/LCS8teee2Nt955b8UHH32y6rMvvlrzzXc//PTLb3+s2/DXP/8BfPYTuw==
   </data>
  </layer>
 </map>

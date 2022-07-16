@@ -10,7 +10,7 @@ public class BloodMortgage extends Game
 	@Override
 	public void create()
 	{
-		setScreen(new FirstScreen());
+		setScreen(new GameScreen());
 	}
 	
 	@Override

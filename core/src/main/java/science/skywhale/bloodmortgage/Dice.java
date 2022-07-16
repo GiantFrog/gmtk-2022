@@ -28,9 +28,8 @@ public class Dice {
     }
 
     // returns damage points done by roll
-    public int roll(){
-        int rolled = getRoll();
-        Glyph glyph = glyphs[rolled];
+    public int executeRoll(int rolled){
+        Glyph glyph = glyphs[rolled-1];
 
         // see if roll resulted in a glyph
         if (glyph == null){
@@ -42,7 +41,7 @@ public class Dice {
     }
 
     // returns an integer 1 to the number of sides of the dice
-    public int getRoll(){
+    public int roll(){
         String options = "";
         for(int i = 0; i<glyphs.length; i++){
             if (glyphs[i] == null) {
