@@ -3,17 +3,19 @@ package science.skywhale.bloodmortgage.masterspellbook;
 import science.skywhale.bloodmortgage.Character;
 
 public class C3 extends Glyph{
+	int damage;
     public C3(Character owner) {
         super();
         this.name = "Channel Energy";
-        this.description = "Block up to 2N damage";
+        this.description = "";
         this.owner = owner;
         this.glyphType = 0;
+		damage = -3;
     }
 
     @Override
     public int useGlyph() {
-        owner.setBattleBlock(2*diceSide);
-        return 0;
+        damage++;
+        return damage;
     }
 }
