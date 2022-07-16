@@ -1,4 +1,4 @@
-package science.skywhale.bloodmortgage.masterspellbook;
+package science.skywhale.bloodmortgage;
 
 import science.skywhale.bloodmortgage.Dice;
 
@@ -11,7 +11,7 @@ public abstract class Glyph {
     protected int glyphType;
     protected String name;
     protected String description;
-    protected Character owner;
+    protected java.lang.Character owner;
     protected Dice dice;
     protected int diceSide = 0; // 0 means no side
 
