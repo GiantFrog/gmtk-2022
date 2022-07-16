@@ -1,6 +1,6 @@
 package science.skywhale.bloodmortgage;
 
-import science.skywhale.bloodmortgage.masterspellbook.Glyph;
+import science.skywhale.bloodmortgage.masterspellbook.*;
 
 import java.util.ArrayList;
 
@@ -15,6 +15,12 @@ public class Character {
         this.name = name;
         dice = new Dice[numDice];
         spellbook = new ArrayList<Glyph>();
+        this.initSpellbook();
+    }
+
+    private void initSpellbook(){
+        spellbook.add(new C1(this));
+        spellbook.add(new C2(this));
     }
 
     public int getBattleBlock(){
