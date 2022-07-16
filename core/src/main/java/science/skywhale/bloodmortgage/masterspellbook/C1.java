@@ -2,8 +2,8 @@ package science.skywhale.bloodmortgage.masterspellbook;
 
 import science.skywhale.bloodmortgage.Character;
 
-public class Common1 extends Glyph {
-    public Common1(Character owner) {
+public class C1 extends Glyph {
+    public C1(Character owner) {
         super();
         this.name = "Common1";
         this.description = "Increase this face by 1";
