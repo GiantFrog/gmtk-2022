@@ -9,6 +9,7 @@ public class C5 extends Glyph {
 		this.description = "No effect besides heralding a good time!";
 		this.owner = owner;
 		this.glyphType = 0;
+		this.flavor = "Look at them enjoying a faceful of celebration!";
 	}
 	
 	@Override
