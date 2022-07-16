@@ -15,7 +15,7 @@ public class U1 extends Glyph {
 	@Override
 	public int useGlyph() {
 		// TODO: CHANGE THIS FOR EACH GLYPH
-		
+		owner.addToMaxHealth(this.diceSide);
 		return 0;
 	}
 }
