@@ -1,19 +1,34 @@
 package science.skywhale.bloodmortgage.masterspellbook;
 
+import science.skywhale.bloodmortgage.Dice;
+
 public abstract class Glyph {
-    //private image
 
+    // these are set within each glyph
+    // TODO: Image
     private int weightMod = 0;
-    private String glyphName;
+    protected String name;
+    protected String description;
+    protected Character owner;
+    protected Dice dice;
+    protected int diceSide = 0; // 0 means no side
 
-    public Glyph(String glyphName){
-        this.glyphName = glyphName;
-    }
 
+
+    // returns the number of damage points done
+    public abstract int useGlyph();
+
+    // set methods
     public String getName(){
-        return glyphName;
+        return name;
     }
 
+    public void addToDice(Dice dice, int side){
+        this.dice = dice;
+        this.diceSide = side;
+    }
+
+    // TODO: public void removeGlyph(){}
     public void setWeightMod(int newMod){
         weightMod = newMod;
     }
@@ -22,5 +37,4 @@ public abstract class Glyph {
         return weightMod;
     }
 
-    public abstract void useGlyph();
 }
