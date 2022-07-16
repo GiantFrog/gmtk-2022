@@ -97,6 +97,10 @@ public class Character {
 	public String getName(){
 		return name;
 	}
+	@Override
+	public String toString() {
+		return name;
+	}
 	
 	// battle specific tracked within character
 	public int getMaxHealth(){

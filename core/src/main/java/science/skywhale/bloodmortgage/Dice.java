@@ -12,8 +12,12 @@ public class Dice {
 
     public Glyph setSide(Glyph newSide, int side){
 		Glyph oldGlyph = glyphs[side-1];
+		if (oldGlyph != null) {
+			oldGlyph.removeFromDice();
+		}
         // TODO: Check that side is within proper range and handle
         glyphs[side-1] = newSide;
+		newSide.addToDice(this, side);
 		return oldGlyph; // return old glyph to add back to spellbook
     }
 	

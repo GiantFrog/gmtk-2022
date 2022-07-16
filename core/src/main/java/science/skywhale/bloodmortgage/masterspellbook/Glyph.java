@@ -31,6 +31,10 @@ public abstract class Glyph {
         this.dice = dice;
         this.diceSide = side;
     }
+	public void removeFromDice(){
+		dice = null;
+		diceSide = 0;
+	}
 
     // TODO: public void removeGlyph(){}
     public void setWeightMod(int newMod){
