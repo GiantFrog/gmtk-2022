@@ -5,7 +5,7 @@ import science.skywhale.bloodmortgage.Character;
 public class C2 extends Glyph{
     public C2(Character owner) {
         super();
-        this.name = "Common2";
+        this.name = "Ward";
         this.description = "Block up to 2N damage";
         this.owner = owner;
         this.glyphType = 0;
