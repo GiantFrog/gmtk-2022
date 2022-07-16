@@ -9,6 +9,7 @@ public class C2 extends Glyph{
         this.description = "Block twice the Value of this Face.";
         this.owner = owner;
         this.glyphType = 0;
+		this.flavor = "\"For the knight is dumb and full of errors\" --Athdranax";
     }
 
     @Override

@@ -9,6 +9,7 @@ public class C7 extends Glyph {
 		this.description = "Increase the likelihood that this Face will be rolled. Effect stacks each time this Glyph is Rolled.";
 		this.owner = owner;
 		this.glyphType = 0;
+		this.flavor = "\"You're going to have to learn to tip the Die in your favor if you want to survive in this cutthroat market\" --Athdranax";
 	}
 	
 	@Override

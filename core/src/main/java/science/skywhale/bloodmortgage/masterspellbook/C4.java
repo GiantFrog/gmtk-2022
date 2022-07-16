@@ -9,10 +9,11 @@ public class C4 extends Glyph {
 		this.description = "Description not found.";
 		this.owner = owner;
 		this.glyphType = 0;
+		this.flavor = "You didn't think you'd get to start with a fully enhanced Die, did you?";
 	}
 	
 	@Override
 	public int useGlyph() {
-		return 0;
+		return this.diceSide;
 	}
 }

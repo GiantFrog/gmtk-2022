@@ -85,13 +85,22 @@ public class Battle {
 		// roll dice
 		Dice dice = myTurn.character.getDie();
 		int roll = dice.roll();
-		System.out.println("Rolled: " + roll);
+		String glyphName = "NONE";
+		if (dice.getSide(roll) != null){
+			glyphName = dice.getSide(roll).getName();
+		}
+		System.out.println("Rolled: " + roll + " Glyph: " + glyphName);
 		
 		int damageDone = dice.executeRoll(roll);
 		
 		// negative dameDone heals
 		if (damageDone < 0){
-			getOtherSide(myTurn).health -= damageDone;
+			CharacterEntity otherSide = getOtherSide(myTurn);
+			otherSide.health -= damageDone;
+			// don't let helath go above max possible
+			if (otherSide.health > otherSide.character.getMaxHealth()){
+				otherSide.health = otherSide.character.getMaxHealth();
+			}
 			// return null because nobody will lose because no loss in health
 			return null;
 		}

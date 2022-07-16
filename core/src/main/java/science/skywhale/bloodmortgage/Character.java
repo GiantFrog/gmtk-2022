@@ -51,7 +51,15 @@ public class Character {
 		spellbook.add(new C3(this));
 		spellbook.add(new C4(this));
 		spellbook.add(new C5(this));
+		spellbook.add(new C11(this));
     }
+	public void printSpellbook(){
+		System.out.println("Spellbook");
+		for (int i=0; i<spellbook.size(); i++){
+			System.out.println(i + " " + spellbook.get(i).getName());
+		}
+		System.out.println();
+	}
 	public void addGlyphToDice(int index, int diceSide){
 		addGlyphToDice(index, diceSide, 0);
 	}
