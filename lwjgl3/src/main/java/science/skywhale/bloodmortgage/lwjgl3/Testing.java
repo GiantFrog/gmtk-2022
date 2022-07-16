@@ -77,6 +77,7 @@ public class Testing {
 				fightOver = battle.opponentTurn();
 			}
 			battle.logScores();
+			System.out.println(battle.renderLog(10));
 			playerTurn = !playerTurn;
 		}
 		
