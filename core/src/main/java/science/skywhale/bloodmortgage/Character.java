@@ -12,7 +12,9 @@ public class Character {
     private ArrayList<Glyph> spellbook;
     private int battleBlock = 0;
 	private int toHeal = 0;
-	float x = 0, y = 0;
+
+	float x = 0, y = 0, horiSpeed = 0, vertiSpeed = 0;
+	boolean movingLeft = false, sprinting = false;
 	private Texture texture;
 
     public Character(String name, int numDice, Texture texture){
@@ -76,7 +78,19 @@ public class Character {
 	}
 	
 	
-	public void render (SpriteBatch batch) {
-		batch.draw(texture, x, y, (float)texture.getWidth()/FirstScreen.TILESIZE, (float)texture.getHeight()/FirstScreen.TILESIZE);
+	public void render (float delta, SpriteBatch batch, int tilesize) {
+		//update the player position
+		if (sprinting)
+		{
+			x += delta*horiSpeed*1.75f;
+			y += delta*vertiSpeed*1.75f;
+		}
+		else
+		{
+			x += delta*horiSpeed;
+			y += delta*vertiSpeed;
+		}
+		
+		batch.draw(texture, x, y, (float)texture.getWidth()/tilesize, (float)texture.getHeight()/tilesize, 0, 0, 64, 64, movingLeft, false);
 	}
 }

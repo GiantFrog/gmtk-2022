@@ -1,6 +1,7 @@
 package science.skywhale.bloodmortgage;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -12,42 +13,45 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 
 /**
  * First screen of the application. Displayed after the application is created.
  */
 public class FirstScreen implements Screen
 {
-	public static final int TILESIZE = 64;
+	private static final int TILESIZE = 64;
 	
 	OrthographicCamera camera;
 	ExtendViewport viewport;
 	private MouseKeyboardInput mouseKeyboardInput;
 	private OrthogonalTiledMapRenderer mapRenderer;
 	private TiledMap map;
-	private SpriteBatch batch;
+	private SpriteBatch batch, hudBatch;
 	double leftToZoom = 0;
-	boolean sprint = false;
-	float horiSpeed = 0, vertiSpeed = 0;
 	
-	private Character testCharacter;
+	Character testCharacter, chaeri;
 	
 	public FirstScreen()
 	{
 		batch = new SpriteBatch();
+		hudBatch = new SpriteBatch();
 		map = new TmxMapLoader().load("empty-map.tmx");
 		mapRenderer = new OrthogonalTiledMapRenderer(map, (float)1 / TILESIZE);
 		camera = new OrthographicCamera();
-		viewport = new ExtendViewport(8, 8, 50, 50, camera);
-		camera.setToOrtho(false, 40, 22.5f);
+		viewport = new ExtendViewport(10, 10, camera);
+		camera.setToOrtho(false, 8, 8);
 		mapRenderer.setView(camera);
 		
 		mouseKeyboardInput = new MouseKeyboardInput(this);
 		Gdx.input.setInputProcessor(mouseKeyboardInput);
 		
-		batch = new SpriteBatch();
 		testCharacter = new Character("Kal", 1, new Texture("Kal.png"));
+		chaeri = new Character("Chaeri", 2, new Texture("chaeri.png"));
+		chaeri.x = (float)Gdx.graphics.getWidth()/TILESIZE + 100;
+		chaeri.y = (float)Gdx.graphics.getHeight()/TILESIZE;
 	}
 	
 	@Override
@@ -59,21 +63,20 @@ public class FirstScreen implements Screen
 	@Override
 	public void render(float delta)
 	{
-		//update the player position
-		//TODO multiple delta by a speed if sprint, make it faster
-		if (sprint)
-		{
-			testCharacter.x += delta*horiSpeed*1.75f;
-			testCharacter.y += delta*vertiSpeed*1.75f;
-		}
-		else
-		{
-			testCharacter.x += delta*horiSpeed;
-			testCharacter.y += delta*vertiSpeed;
-		}
+		//camera movement
+		camera.position.x = testCharacter.x;
+		camera.position.y = testCharacter.y;
 		
 		
+		//smoothly scroll to the target level of zoom
+		if (leftToZoom <= -.005 || leftToZoom >= .005)
+		{
+			//zoom the camera by the amount we need to multiplied by the time passed and the zoom speed, both are <1
+			camera.zoom += 10 * leftToZoom * delta;
+			leftToZoom -= 10 * leftToZoom * delta;
+		}
 		camera.update();
+		mapRenderer.setView(camera);
 		
 		//clear the last frame
 		Gdx.gl.glClearColor(0, 0, 0, 1);
@@ -82,8 +85,14 @@ public class FirstScreen implements Screen
 		//render world
 		batch.begin();
 		mapRenderer.render();
-		testCharacter.render(batch);
+		testCharacter.render(delta, batch, TILESIZE);
 		batch.end();
+		
+		//render overlay & HUD
+		//TODO fix aspect ratio of things rendered in this way (they have no viewport)
+		hudBatch.begin();
+		chaeri.render(delta, hudBatch, 1);
+		hudBatch.end();
 	}
 	
 	@Override
@@ -91,6 +100,8 @@ public class FirstScreen implements Screen
 	{
 		// Resize your screen here. The parameters represent the new window size.
 		viewport.update(width, height);
+		chaeri.x = 5;
+		chaeri.y = 5;
 	}
 	
 	@Override
