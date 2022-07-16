@@ -23,6 +23,7 @@ public class Character {
 		spellbook.add(new C2(this));
 		spellbook.add(new C3(this));
 		spellbook.add(new C4(this));
+		spellbook.add(new C5(this));
     }
 
     public int getBattleBlock(){
