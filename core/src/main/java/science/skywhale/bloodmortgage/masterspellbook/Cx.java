@@ -3,7 +3,7 @@ package science.skywhale.bloodmortgage.masterspellbook;
 import science.skywhale.bloodmortgage.Character;
 
 public class Cx extends Glyph {
-	public Rx (Character owner) {  // TODO: CHange to glyph file name
+	public Cx (Character owner) {  // TODO: CHange to glyph file name
 		super();
 		this.name = "";
 		this.description = "";
