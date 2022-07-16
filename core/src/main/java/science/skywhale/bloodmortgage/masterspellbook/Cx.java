@@ -2,8 +2,7 @@ package science.skywhale.bloodmortgage.masterspellbook;
 
 import science.skywhale.bloodmortgage.Character;
 
-public class Cx extends Glyph{
-	int damage;
+public class Cx extends Glyph {
 	public Cx (Character owner) {  // TODO: CHange to glyph file name
 		super();
 		this.name = "Channel Energy";
