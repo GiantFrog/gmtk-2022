@@ -37,7 +37,7 @@ public class Dice {
             // if not return rolled for damage
             return rolled;
         } else {
-            return glyph.useGlyph(rolled);
+            return glyph.useGlyph();
         }
     }
 

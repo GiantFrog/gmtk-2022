@@ -2,8 +2,8 @@ package science.skywhale.bloodmortgage.masterspellbook;
 
 import science.skywhale.bloodmortgage.Character;
 
-public class Common2 extends Glyph{
-    public Common2(Character owner) {
+public class C2 extends Glyph{
+    public C2(Character owner) {
         super();
         this.name = "Common2";
         this.description = "Block up to 2N damage";
