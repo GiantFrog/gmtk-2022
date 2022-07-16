@@ -14,8 +14,52 @@ public class Battle {
         this.opponent = new CharacterEntity(opponent, opponentStartHealth);
     }
 
-    public void playerTurn(){
-        // player roll dice
+	public void battle(){
+		CharacterEntity winner = null;
+		CharacterEntity current = opponent;
+		while (winner == null){
+			// switch players
+			current = getOtherSide(current);
+			// take players turn
+			winner = turn(current);
+			logScores();
+		}
+		System.out.println("WINNER! " + current.name);
+	}
+	
+	private CharacterEntity getOtherSide(CharacterEntity current){
+		if (current.name == opponent.name){
+			current = player;
+		} else {
+			current = opponent;
+		}
+		return current;
+	}
+	
+	private void logScores(){
+		//System.out.println("ROUND");
+		System.out.println("Player: " + player.health);
+		System.out.println("Opponent: " + opponent.health);
+		System.out.println();
+	}
+	
+    public CharacterEntity turn(CharacterEntity myTurn){
+        System.out.println("Turn: " + myTurn.name);
+		
+		// roll dice
+		Dice dice = myTurn.character.getDie();
+		int roll = dice.roll();
+		System.out.println("Rolled: " + roll);
+		
+		int damageDone = dice.executeRoll(roll);
+		// TODO: if damageDone is negative, heal other player
+		
+		// damage other side
+		if (getOtherSide(myTurn).takeDamage(damageDone) == true){
+			return myTurn;
+		} else {
+			return null;
+		}
     }
 
 
@@ -23,14 +67,16 @@ public class Battle {
     private class CharacterEntity {
         public Character character;
         public int health;
+		public String name;
 
         public CharacterEntity(Character character, int health){
             this.character = character;
             this.health = health;
+			this.name = character.getName();
         }
 
 
-        public void takeDamage(int damage){
+        public Boolean takeDamage(int damage){
             // if this is > 0 all damage was blocked
             int block = character.getBattleBlock();
             if (damage - block > 0) {
@@ -41,6 +87,13 @@ public class Battle {
 			// look for healing
 			health += character.getToHeal();
 			character.setToHeal(0);
+			
+			// check if dead
+			if (health <= 0){
+				return true;
+			} else {
+				return false;
+			}
         }
     }
 

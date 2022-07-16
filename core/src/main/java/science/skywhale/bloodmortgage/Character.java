@@ -22,6 +22,15 @@ public class Character {
         this.initSpellbook();
 		this.texture = texture;
     }
+	
+	//NOTE: FOR TESTING ONLY
+	public Character(String name, int numDice){
+		this.name = name;
+		dice = new Dice[numDice];
+		spellbook = new ArrayList<Glyph>();
+		this.initSpellbook();
+		//this.texture = texture;
+	}
 
     private void initSpellbook(){
         spellbook.add(new C1(this));
@@ -30,7 +39,25 @@ public class Character {
 		spellbook.add(new C4(this));
 		spellbook.add(new C5(this));
     }
-
+	
+	// set Dice
+	public void setDie(int numSides){
+		setDie(numSides, 0);
+	}
+	
+	public void setDie(int numSides, int diePosition){
+		dice[diePosition] = new Dice(numSides);
+	}
+	
+	// getter methods
+	public Dice getDie(){
+		return dice[0];
+	}
+	public String getName(){
+		return name;
+	}
+	
+	// battle specific methods for tracking things
     public int getBattleBlock(){
         return battleBlock;
     }
