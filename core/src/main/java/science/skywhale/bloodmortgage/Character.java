@@ -20,7 +20,9 @@ public class Character {
 
     private void initSpellbook(){
         spellbook.add(new C1(this));
-        spellbook.add(new C2(this));
+		spellbook.add(new C2(this));
+		spellbook.add(new C3(this));
+		spellbook.add(new C4(this));
     }
 
     public int getBattleBlock(){
