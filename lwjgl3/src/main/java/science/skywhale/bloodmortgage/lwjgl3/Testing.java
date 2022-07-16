@@ -5,15 +5,38 @@ import science.skywhale.bloodmortgage.Character;
 
 public class Testing {
 	
-	public static void testBattle(){
-		System.out.println("Testing battle");
-		//Texture text = new Texture("Kal.png");
+	public static void testSpecifics(){
 		// make characters player
 		Character player = new Character("player", 1, 20);
 		player.setDie(6);
 		
 		// make character opponent
 		Character opponent = new Character("opponent", 1, 20);
+		opponent.setDie(6);
+		
+		// tODO: Test ward  C2
+		
+		player.addGlyphToDice(1, 2);
+		Battle battle = new Battle(player, opponent);
+		battle.playerTurn();
+		battle.logScores();
+		
+		battle.opponentTurn();
+		battle.logScores();
+		
+		
+		// todo: TEST Archane boost C1
+	}
+	
+	public static void testBattle(){
+		System.out.println("Testing battle");
+		//Texture text = new Texture("Kal.png");
+		// make characters player
+		Character player = new Character("player", 1, 50);
+		player.setDie(6);
+		
+		// make character opponent
+		Character opponent = new Character("opponent", 1, 50);
 		opponent.setDie(6);
 		
 		// Test with just regular dice
@@ -26,6 +49,8 @@ public class Testing {
 		player.addGlyphToDice(0, 2);
 		player.addGlyphToDice(0, 3);
 		player.addGlyphToDice(0, 4);
+		player.addGlyphToDice(0, 5);
+		player.addGlyphToDice(0, 6);
 		player.getDie().printGlyphs();
 		//player.printSpellbook();
 		
@@ -56,7 +81,7 @@ public class Testing {
 		}
 		
 		// print winner
-		System.out.println("WINNER: " + battle.checkWinner().getName());
+		System.out.println("WINNER: " + battle.getWinner());
 	}
 	
 }
