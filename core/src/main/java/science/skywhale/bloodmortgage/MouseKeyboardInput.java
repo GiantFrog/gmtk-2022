@@ -7,10 +7,10 @@ import com.badlogic.gdx.math.Vector3;
 
 public class MouseKeyboardInput implements InputProcessor
 {
-	private FirstScreen level;
+	private GameScreen level;
 	private Vector3 curr, lastTouched, delta;
 	
-	public MouseKeyboardInput(FirstScreen level)
+	public MouseKeyboardInput(GameScreen level)
 	{
 		this.level = level;
 		curr = new Vector3();

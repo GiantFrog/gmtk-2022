@@ -5,10 +5,10 @@ import com.badlogic.gdx.math.Vector2;
 
 public class TouchInput implements GestureDetector.GestureListener
 {
-	private FirstScreen level;
+	private GameScreen level;
 	private float previousDistance;
 	
-	public TouchInput(FirstScreen level)
+	public TouchInput(GameScreen level)
 	{
 		this.level = level;
 		previousDistance = Float.NaN;

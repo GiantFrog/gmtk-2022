@@ -1,26 +1,21 @@
 package science.skywhale.bloodmortgage;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 
 /**
  * First screen of the application. Displayed after the application is created.
  */
-public class FirstScreen implements Screen
+public class GameScreen implements Screen
 {
 	private static final int TILESIZE = 64;
 	
@@ -34,7 +29,9 @@ public class FirstScreen implements Screen
 	
 	Character testCharacter, chaeri;
 	
-	public FirstScreen()
+	Music intro, vibing;
+	
+	public GameScreen()
 	{
 		batch = new SpriteBatch();
 		hudBatch = new SpriteBatch();
@@ -52,6 +49,17 @@ public class FirstScreen implements Screen
 		chaeri = new Character("Chaeri", 2, new Texture("chaeri.png"));
 		chaeri.x = (float)Gdx.graphics.getWidth()/TILESIZE + 100;
 		chaeri.y = (float)Gdx.graphics.getHeight()/TILESIZE;
+		
+		//audio setup
+		/*
+		intro = Gdx.audio.newMusic(Gdx.files.internal("intro.mp3"));
+		intro.setVolume(0.8f);
+		vibing = Gdx.audio.newMusic(Gdx.files.internal("vibing.mp3"));
+		vibing.setVolume(0.5f);
+		vibing.setLooping(true);
+		
+		intro.play();
+		*/
 	}
 	
 	@Override
