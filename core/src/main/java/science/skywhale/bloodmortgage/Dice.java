@@ -28,7 +28,7 @@ public class Dice {
             if (glyphs[i] != null){
                 System.out.println(glyphs[i].getName());
             } else {
-                System.out.println("Empty");
+                System.out.println("NONE");
             }
         }
     }
