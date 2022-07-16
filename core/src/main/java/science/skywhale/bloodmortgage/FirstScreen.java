@@ -1,6 +1,7 @@
 package science.skywhale.bloodmortgage;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
@@ -12,6 +13,7 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 
@@ -23,7 +25,7 @@ public class FirstScreen implements Screen
 	public static final int TILESIZE = 64;
 	
 	OrthographicCamera camera;
-	FitViewport viewport;
+	ExtendViewport viewport;
 	private MouseKeyboardInput mouseKeyboardInput;
 	private OrthogonalTiledMapRenderer mapRenderer;
 	private TiledMap map;
@@ -40,8 +42,8 @@ public class FirstScreen implements Screen
 		map = new TmxMapLoader().load("empty-map.tmx");
 		mapRenderer = new OrthogonalTiledMapRenderer(map, (float)1 / TILESIZE);
 		camera = new OrthographicCamera();
-		viewport = new FitViewport(8, 8, camera);
-		camera.setToOrtho(false, 10, 10);
+		viewport = new ExtendViewport(10, 10, camera);
+		camera.setToOrtho(false, 8, 8);
 		mapRenderer.setView(camera);
 		
 		mouseKeyboardInput = new MouseKeyboardInput(this);
@@ -72,8 +74,20 @@ public class FirstScreen implements Screen
 			testCharacter.y += delta*vertiSpeed;
 		}
 		
+		//camera movement
+		camera.position.x = testCharacter.x;
+		camera.position.y = testCharacter.y;
 		
+		
+		//smoothly scroll to the target level of zoom
+		if (leftToZoom <= -.005 || leftToZoom >= .005)
+		{
+			//zoom the camera by the amount we need to multiplied by the time passed and the zoom speed, both are <1
+			camera.zoom += 10 * leftToZoom * delta;
+			leftToZoom -= 10 * leftToZoom * delta;
+		}
 		camera.update();
+		mapRenderer.setView(camera);
 		
 		//clear the last frame
 		Gdx.gl.glClearColor(0, 0, 0, 1);
