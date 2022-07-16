@@ -24,23 +24,28 @@ public class MouseKeyboardInput implements InputProcessor
 		switch (keycode)
 		{
 			//move camera around the map
-			case Input.Keys.W, Input.Keys.UP:
+			case Input.Keys.W:
+			case Input.Keys.UP:
 				level.vertiSpeed = 3;
 				break;
-			case Input.Keys.A, Input.Keys.LEFT:
+			case Input.Keys.A:
+			case Input.Keys.LEFT:
 				level.horiSpeed = -3;
 				level.testCharacter.movingLeft = true;
 				break;
-			case Input.Keys.S, Input.Keys.DOWN:
+			case Input.Keys.S:
+			case Input.Keys.DOWN:
 				level.vertiSpeed = -3;
 				break;
-			case Input.Keys.D, Input.Keys.RIGHT:
+			case Input.Keys.D:
+			case Input.Keys.RIGHT:
 				level.horiSpeed = 3;
 				level.testCharacter.movingLeft = false;
 				break;
 			
 			//modify cameraSpeed when shift is pressed
-			case Input.Keys.SHIFT_LEFT, Input.Keys.SHIFT_RIGHT:
+			case Input.Keys.SHIFT_LEFT:
+			case Input.Keys.SHIFT_RIGHT:
 				level.sprint = true;
 				break;
 		}
@@ -59,7 +64,9 @@ public class MouseKeyboardInput implements InputProcessor
 		
 		switch (keycode)
 		{
-			case Input.Keys.SHIFT_LEFT, Input.Keys.SHIFT_RIGHT -> level.sprint = false;
+			case Input.Keys.SHIFT_LEFT:
+			case Input.Keys.SHIFT_RIGHT:
+				level.sprint = false;
 		}
 		return false;
 	}
