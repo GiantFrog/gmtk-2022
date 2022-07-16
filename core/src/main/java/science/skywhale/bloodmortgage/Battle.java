@@ -1,11 +1,13 @@
 package science.skywhale.bloodmortgage;
 
 
+import java.util.ArrayList;
+
 public class Battle {
-	//TODO: negative damage heals other side
     private CharacterEntity opponent;
     private CharacterEntity player;
 	private Character winner;
+	private ArrayList<String> log;
     //private ArrayList<CharacterEntity> opponentMinions;
     //private ArrayList<CharacterEntity> playerMinions;
 
@@ -13,7 +15,19 @@ public class Battle {
         this.player = new CharacterEntity(player);
         this.opponent = new CharacterEntity(opponent);
 		this.winner = null;
+		log = new ArrayList<>();
+		log.add("Battle Started");
+		log.add(0, player.getName() + " vs. " + opponent.getName());
     }
+	
+	public String renderLog(int numLines){
+		String output = "";
+		for(int i =0; i < log.size()-numLines;i++){
+			output += "\n";
+		}
+		
+		return output;
+	}
 	
 	private CharacterEntity getOtherSide(CharacterEntity current){
 		if (current.name.equals(opponent.name)){
@@ -39,7 +53,6 @@ public class Battle {
 	
 	public Boolean opponentTurn(){
 		turn(opponent);
-		
 		return winner != null;
 	}
 	
@@ -62,6 +75,7 @@ public class Battle {
 	
     public void turn(CharacterEntity myTurn){
         System.out.println("Turn: " + myTurn.name);
+		log.add(0, myTurn.name + "'s turn");
 		
 		// roll dice
 		Dice dice = myTurn.character.getDie();
@@ -71,6 +85,7 @@ public class Battle {
 			glyphName = dice.getSide(roll).getName();
 		}
 		System.out.println("Rolled: " + roll + " Glyph: " + glyphName);
+		log.add(0, "   Rolled " + roll + " with glpyh " + glyphName);
 		
 		int damageDone = dice.executeRoll(roll);
 		
@@ -84,7 +99,12 @@ public class Battle {
 		otherSide.heal();
 		myTurn.heal();
 		otherSide.takeDamage(damageDone);
+		log.add(0, "   " + player.name + ": " + player.health +
+				   " " + opponent.name + ": " + opponent.health);
 		checkWinner();
+		if (winner != null){
+			log.add(0, "**" + winner.getName() + " won!**");
+		}
     }
 
 

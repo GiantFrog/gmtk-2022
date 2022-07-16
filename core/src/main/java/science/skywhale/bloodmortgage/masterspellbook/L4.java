@@ -1,5 +1,7 @@
 package science.skywhale.bloodmortgage.masterspellbook;
 
+import science.skywhale.bloodmortgage.Character;
+
 public class L4 extends Glyph {
 	public L4 (Character owner) {  // TODO: CHange to glyph file name
 		super();
