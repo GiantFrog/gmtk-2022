@@ -14,6 +14,7 @@ public abstract class Glyph {
     protected String description;
     protected Character owner;
     protected Dice dice;
+	protected String flavor;
     protected int diceSide = 0; // 0 means no side
 
 
