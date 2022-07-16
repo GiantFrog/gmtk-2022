@@ -37,6 +37,10 @@ public class Battle {
                 health = health - damage + block;
             }
             character.setBattleBlock(0);
+			
+			// look for healing
+			health += character.getToHeal();
+			character.setToHeal(0);
         }
     }
 

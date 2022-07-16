@@ -11,6 +11,7 @@ public class Character {
     private Dice[] dice;
     private ArrayList<Glyph> spellbook;
     private int battleBlock = 0;
+	private int toHeal = 0;
 	float x = 0, y = 0;
 	private Texture texture;
 
@@ -33,11 +34,16 @@ public class Character {
     public int getBattleBlock(){
         return battleBlock;
     }
-
     public void setBattleBlock(int setTo){
         battleBlock = setTo;
     }
-
+	public int getToHeal(){
+		return toHeal;
+	}
+	public void setToHeal(int setTo){
+		toHeal = setTo;
+	}
+	
 	public Texture getTexture() {
 		return texture;
 	}
