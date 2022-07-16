@@ -10,9 +10,9 @@ public class Battle {
     //private ArrayList<CharacterEntity> opponentMinions;
     //private ArrayList<CharacterEntity> playerMinions;
 
-    public Battle(Character player, int playerStartHealth, Character opponent, int opponentStartHealth){
-        this.player = new CharacterEntity(player, playerStartHealth);
-        this.opponent = new CharacterEntity(opponent, opponentStartHealth);
+    public Battle(Character player, Character opponent){
+        this.player = new CharacterEntity(player);
+        this.opponent = new CharacterEntity(opponent);
 		this.winner = null;
     }
 
@@ -110,9 +110,9 @@ public class Battle {
         public int health;
 		public String name;
 
-        public CharacterEntity(Character character, int health){
+        public CharacterEntity(Character character){
             this.character = character;
-            this.health = health;
+            this.health = character.getMaxHealth();
 			this.name = character.getName();
         }
 
@@ -127,6 +127,10 @@ public class Battle {
 			
 			// look for healing
 			health += character.getToHeal();
+			// make sure doesn't go over max health
+			if (health > character.getMaxHealth()){
+				health = character.getMaxHealth();
+			}
 			character.setToHeal(0);
 			
 			// check if dead

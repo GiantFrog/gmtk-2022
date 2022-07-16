@@ -18,11 +18,11 @@ public class Lwjgl3Launcher {
 		System.out.println("Testing battle");
 		//Texture text = new Texture("Kal.png");
 		// make characters player
-		Character player = new Character("player", 1);
+		Character player = new Character("player", 1, 20);
 		player.setDie(6);
 		
 		// make character opponent
-		Character opponent = new Character("opponent", 1);
+		Character opponent = new Character("opponent", 1, 20);
 		opponent.setDie(6);
 		
 		// Test with just regular dice
@@ -36,7 +36,7 @@ public class Lwjgl3Launcher {
 	}
 	
 	public static void fight(Character player, Character opponent){
-		Battle battle = new Battle(player, 20, opponent, 20);
+		Battle battle = new Battle(player, opponent);
 		
 		// fight
 		Boolean fightOver = false;
