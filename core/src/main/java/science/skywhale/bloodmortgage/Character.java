@@ -34,6 +34,7 @@ public class Character {
 		//this.texture = texture;
 	}
 
+	// spellbook methods
     private void initSpellbook(){
         spellbook.add(new C1(this));
 		spellbook.add(new C2(this));
@@ -41,6 +42,16 @@ public class Character {
 		spellbook.add(new C4(this));
 		spellbook.add(new C5(this));
     }
+	public void addGlyphToDice(int index, int diceSide){
+		addGlyphToDice(index, diceSide, 0);
+	}
+	
+	public void addGlyphToDice(int index, int diceSide, int diceNum){
+		Glyph oldGlyph = dice[diceNum].setSide(spellbook.remove(index), diceSide);
+		if (oldGlyph != null){
+			spellbook.add(oldGlyph);
+		}
+	}
 	
 	// set Dice
 	public void setDie(int numSides){
