@@ -2,72 +2,15 @@ package science.skywhale.bloodmortgage.lwjgl3;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.badlogic.gdx.graphics.Texture;
-import science.skywhale.bloodmortgage.Battle;
 import science.skywhale.bloodmortgage.BloodMortgage;
-import science.skywhale.bloodmortgage.Character;
 
 /** Launches the desktop (LWJGL3) application. */
 public class Lwjgl3Launcher {
 	public static void main(String[] args) {
-		//testBattle();
+		//Testing.testBattle();
 		createApplication();
 	}
-	
-	public static void testBattle(){
-		System.out.println("Testing battle");
-		//Texture text = new Texture("Kal.png");
-		// make characters player
-		Character player = new Character("player", 1, 20);
-		player.setDie(6);
-		
-		// make character opponent
-		Character opponent = new Character("opponent", 1, 20);
-		opponent.setDie(6);
-		
-		// Test with just regular dice
-		//fight(player, opponent);
-		
-		// test glyphs
-		//player.printSpellbook();
-		
-		player.addGlyphToDice(0, 1);
-		player.addGlyphToDice(0, 2);
-		player.addGlyphToDice(0, 3);
-		player.addGlyphToDice(0, 4);
-		player.getDie().printGlyphs();
-		//player.printSpellbook();
-		
-		
-		fight(player, opponent);
-		
-		
-		
-	}
-	
-	public static void fight(Character player, Character opponent){
-		Battle battle = new Battle(player, opponent);
-		
-		// fight
-		Boolean fightOver = false;
-		battle.logScores();
-		System.out.println("START BATTLE!");
-		// while loop for testing
-		Boolean playerTurn = true;
-		while (!fightOver){
-			if (playerTurn) {
-				fightOver = battle.playerTurn();
-			} else {
-				fightOver = battle.opponentTurn();
-			}
-			battle.logScores();
-			playerTurn = !playerTurn;
-		}
-		
-		// print winner
-		System.out.println("WINNER: " + battle.checkWinner().getName());
-	}
-	
+
 	private static Lwjgl3Application createApplication() {
 		return new Lwjgl3Application(new BloodMortgage(), getDefaultConfiguration());
 	}
