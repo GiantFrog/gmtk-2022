@@ -19,25 +19,22 @@ import com.badlogic.gdx.utils.viewport.ExtendViewport;
  */
 public class FirstScreen implements Screen
 {
-	public final int TILESIZE = 64;
+	public static final int TILESIZE = 64;
 	
 	OrthographicCamera camera;
 	ExtendViewport viewport;
 	private MouseKeyboardInput mouseKeyboardInput;
-	private TouchInput touchInput;
-	private InputMultiplexer inputMultiplexer;
 	private OrthogonalTiledMapRenderer mapRenderer;
 	private TiledMap map;
 	private SpriteBatch batch;
 	double leftToZoom = 0;
-	boolean sprint, movingUp, movingDown, movingLeft, movingRight;
+	boolean sprint = false;
+	float horiSpeed = 0, vertiSpeed = 0;
 	
-	private Texture testTexture;
+	private Character testCharacter;
 	
 	public FirstScreen()
 	{
-		sprint = movingUp = movingDown = movingLeft = movingRight = false;
-		
 		batch = new SpriteBatch();
 		map = new TmxMapLoader().load("empty-map.tmx");
 		mapRenderer = new OrthogonalTiledMapRenderer(map, (float)1 / TILESIZE);
@@ -47,14 +44,10 @@ public class FirstScreen implements Screen
 		mapRenderer.setView(camera);
 		
 		mouseKeyboardInput = new MouseKeyboardInput(this);
-		touchInput = new TouchInput(this);
-		inputMultiplexer = new InputMultiplexer();
-		inputMultiplexer.addProcessor(new GestureDetector(touchInput));
-		inputMultiplexer.addProcessor(mouseKeyboardInput);
-		Gdx.input.setInputProcessor(inputMultiplexer);
+		Gdx.input.setInputProcessor(mouseKeyboardInput);
 		
 		batch = new SpriteBatch();
-		testTexture = new Texture(Gdx.files.internal("Kal.png"));
+		testCharacter = new Character("Kal", 1, new Texture("Kal.png"));
 	}
 	
 	@Override
@@ -68,6 +61,17 @@ public class FirstScreen implements Screen
 	{
 		//update the player position
 		//TODO multiple delta by a speed if sprint, make it faster
+		if (sprint)
+		{
+			testCharacter.x += delta*horiSpeed*1.75f;
+			testCharacter.y += delta*vertiSpeed*1.75f;
+		}
+		else
+		{
+			testCharacter.x += delta*horiSpeed;
+			testCharacter.y += delta*vertiSpeed;
+		}
+		
 		
 		camera.update();
 		
@@ -78,7 +82,7 @@ public class FirstScreen implements Screen
 		//render world
 		batch.begin();
 		mapRenderer.render();
-		batch.draw(testTexture, 1, 1, (float)testTexture.getWidth()/TILESIZE, (float)testTexture.getHeight()/TILESIZE);
+		testCharacter.render(batch);
 		batch.end();
 	}
 	

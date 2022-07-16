@@ -1,5 +1,7 @@
 package science.skywhale.bloodmortgage;
 
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import science.skywhale.bloodmortgage.masterspellbook.*;
 
 import java.util.ArrayList;
@@ -9,13 +11,15 @@ public class Character {
     private Dice[] dice;
     private ArrayList<Glyph> spellbook;
     private int battleBlock = 0;
+	float x = 0, y = 0;
+	private Texture texture;
 
-
-    public Character(String name, int numDice){
+    public Character(String name, int numDice, Texture texture){
         this.name = name;
         dice = new Dice[numDice];
         spellbook = new ArrayList<Glyph>();
         this.initSpellbook();
+		this.texture = texture;
     }
 
     private void initSpellbook(){
@@ -31,4 +35,12 @@ public class Character {
         battleBlock = setTo;
     }
 
+	public Texture getTexture() {
+		return texture;
+	}
+	
+	
+	public void render (SpriteBatch batch) {
+		batch.draw(texture, x, y, (float)texture.getWidth()/FirstScreen.TILESIZE, (float)texture.getHeight()/FirstScreen.TILESIZE);
+	}
 }

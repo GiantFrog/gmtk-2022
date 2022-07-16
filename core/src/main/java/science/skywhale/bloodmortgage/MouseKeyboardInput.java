@@ -24,10 +24,10 @@ public class MouseKeyboardInput implements InputProcessor
 		switch (keycode)
 		{
 			//move camera around the map
-			case Input.Keys.W, Input.Keys.UP -> level.movingUp = true;
-			case Input.Keys.A, Input.Keys.LEFT -> level.movingLeft = true;
-			case Input.Keys.S, Input.Keys.DOWN -> level.movingDown = true;
-			case Input.Keys.D, Input.Keys.RIGHT -> level.movingRight = true;
+			case Input.Keys.W, Input.Keys.UP -> level.vertiSpeed = 3;
+			case Input.Keys.A, Input.Keys.LEFT -> level.horiSpeed = -3;
+			case Input.Keys.S, Input.Keys.DOWN -> level.vertiSpeed = -3;
+			case Input.Keys.D, Input.Keys.RIGHT -> level.horiSpeed = 3;
 			
 			//modify cameraSpeed when shift is pressed
 			case Input.Keys.SHIFT_LEFT, Input.Keys.SHIFT_RIGHT -> level.sprint = true;
@@ -38,13 +38,15 @@ public class MouseKeyboardInput implements InputProcessor
 	@Override
 	public boolean keyUp(int keycode)
 	{
+		if (!Gdx.input.isKeyPressed(Input.Keys.W) && !Gdx.input.isKeyPressed(Input.Keys.UP) &&
+			!Gdx.input.isKeyPressed(Input.Keys.S) && !Gdx.input.isKeyPressed(Input.Keys.DOWN))
+			level.vertiSpeed = 0;
+		if (!Gdx.input.isKeyPressed(Input.Keys.A) && !Gdx.input.isKeyPressed(Input.Keys.LEFT) &&
+			!Gdx.input.isKeyPressed(Input.Keys.D) && !Gdx.input.isKeyPressed(Input.Keys.RIGHT))
+			level.horiSpeed = 0;
+		
 		switch (keycode)
 		{
-			case Input.Keys.W, Input.Keys.UP -> level.movingUp = false;
-			case Input.Keys.A, Input.Keys.LEFT -> level.movingLeft = false;
-			case Input.Keys.S, Input.Keys.DOWN -> level.movingDown = false;
-			case Input.Keys.D, Input.Keys.RIGHT -> level.movingRight = false;
-			
 			case Input.Keys.SHIFT_LEFT, Input.Keys.SHIFT_RIGHT -> level.sprint = false;
 		}
 		return false;
