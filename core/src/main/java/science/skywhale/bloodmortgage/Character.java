@@ -60,6 +60,9 @@ public class Character {
 		spellbook.add(new C5(this));
 		spellbook.add(new C11(this));
     }
+	public ArrayList<Glyph> getSpellbook(){
+		return spellbook;
+	}
 	public void printSpellbook(){
 		System.out.println("Spellbook");
 		for (int i=0; i<spellbook.size(); i++){
