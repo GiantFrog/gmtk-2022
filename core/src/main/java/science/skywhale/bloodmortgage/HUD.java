@@ -35,7 +35,7 @@ public class HUD
 		stage = new Stage(hudView);
 		tooltip = "Press R to {SHAKE}roll!";
 		chaeriDialog = new TypingLabel(tooltip, new Font("fairies-32.fnt"));
-		chaeri = new Character("Chaeri", 2, new Texture("chaeri.png"));
+		chaeri = new Character("Chaeri", 2, new Texture("chaeri.png"), 1000);
 		chaeri.x = 580;
 		chaeri.y = 0;
 		
