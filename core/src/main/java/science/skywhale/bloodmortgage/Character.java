@@ -17,6 +17,7 @@ public class Character {
 	private Boolean inBattle = false;
 
 	float x = 0, y = 0, horiSpeed = 0, vertiSpeed = 0, elapsedTime = 0;
+	float homeX = 0, homeY = 0;
 	boolean movingLeft = false, sprinting = false;
 	private Texture texture;
 	private Animation<Texture> animation;
