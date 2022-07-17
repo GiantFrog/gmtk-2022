@@ -134,7 +134,7 @@ public class HUD
 		batch.draw(enemyRoll, 792, 40);
 		if (enemyGlyph != null)
 			batch.draw(enemyGlyph, 792, 40);
-		chaeri.render(delta, batch, 1, null);
+		chaeri.render(delta, batch, .35f, null);
 		batch.end();
 	}
 	
