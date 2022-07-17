@@ -104,7 +104,9 @@ public class HUD
 		if (chaeriCounter >= Dialogs.chaeriDialogList.length){
 			chaeriCounter = 0;
 		}
-		chaeriDialog.setText(Dialogs.chaeriDialogList[chaeriCounter]);
+		String newDiag = Dialogs.addLineBreaks(Dialogs.chaeriDialogList[chaeriCounter],
+											   40);
+		chaeriDialog.setText(newDiag);
 		// remove when player starts moving again
 	}
 	
