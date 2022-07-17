@@ -14,7 +14,7 @@ public class Dialogs
 			if (lastSpace > 0){
 				endIndex = startIndex + lastSpace;
 			}
-			//System.out.println("Start: " + startIndex + " end: " + endIndex);
+			//giSystem.out.println("Start: " + startIndex + " end: " + endIndex);
 			newSub = str.substring(startIndex, endIndex);
 			newStr += newSub + "\n";
 			
