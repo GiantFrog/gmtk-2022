@@ -10,6 +10,7 @@ public class C16 extends Glyph {
 		this.owner = owner;
 		this.glyphType = 0;  // TODO: MODIFY FOR GLYPH TYPE
 		this.flavor = "You should see the other guy!";
+		this.imgPath = "runes/c11.png";
 	}
 	
 	@Override

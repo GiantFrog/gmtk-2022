@@ -13,6 +13,7 @@ public class C3 extends Glyph{
         this.owner = owner;
         this.glyphType = 0;
 		this.flavor = "It might not look like much now, but wait until next time!";
+		this.imgPath = "runes/c3.png";
     }
 
     @Override

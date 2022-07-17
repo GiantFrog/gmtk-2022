@@ -23,6 +23,7 @@ public class HUD
 	SpriteBatch batch;
 	TypingLabel chaeriDialog;
 	String tooltip;
+	Boolean battleOver;
 	
 	Texture d6Texture;
 	TextureRegion one, two, three, four, five, six;
@@ -40,6 +41,7 @@ public class HUD
 		hudView = new FitViewport((float) Gdx.graphics.getWidth() / TILESIZE,
 						(float)Gdx.graphics.getHeight() / TILESIZE, camera);
 		batch = new SpriteBatch();
+		battleOver = false;
 		battleStage = new Stage(hudView);
 		battleStage = new Stage();
 		table = new Table();
@@ -84,14 +86,14 @@ public class HUD
 	
 	public void render (float delta)
 	{
-		if (level.kal.inBattle()) {
+		if (level.kal.inBattle() || battleOver) {
 			battleStage.act(delta);
 			battleStage.draw();
 		}
 		
 		batch.begin();
 		batch.draw(two, 40, 40);
-		chaeri.render(delta, batch, 1);
+		chaeri.render(delta, batch, 1, null);
 		batch.end();
 	}
 	

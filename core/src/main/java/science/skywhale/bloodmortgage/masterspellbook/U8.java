@@ -10,6 +10,7 @@ public class U8 extends Glyph {
 		this.owner = owner;
 		this.glyphType = 1;  // TODO: MODIFY FOR GLYPH TYPE
 		this.flavor = "Somehow, the Die always seems to roll off the table or land on an uneven surface when this side comes up. And we all know that means you get a re-roll";
+		//this.imgPath = "runes/.png";
 	}
 	
 	@Override

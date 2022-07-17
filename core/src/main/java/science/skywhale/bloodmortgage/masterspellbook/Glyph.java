@@ -7,6 +7,7 @@ public abstract class Glyph {
 
     // these are set within each glyph
     // TODO: Image
+	protected String imgPath;
     protected int weightMod = 0;
     protected String[] types = new String[]{"Common", "Uncommon", "Rare", "Legendary"};
     protected int glyphType;
@@ -41,6 +42,10 @@ public abstract class Glyph {
         weightMod = newMod;
     }
 
+	public String getImgPath(){
+		return imgPath;
+	}
+	
     public int getWeightMod(){
         return weightMod;
     }

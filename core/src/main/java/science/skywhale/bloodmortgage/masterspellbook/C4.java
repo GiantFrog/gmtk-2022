@@ -10,6 +10,7 @@ public class C4 extends Glyph {
 		this.owner = owner;
 		this.glyphType = 0;
 		this.flavor = "You didn't think you'd get to start with a fully enhanced Die, did you?";
+		this.imgPath = "runes/c4 none.png";
 	}
 	
 	@Override

@@ -8,9 +8,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.github.tommyettinger.textra.TypingLabel;
+import science.skywhale.bloodmortgage.masterspellbook.Glyph;
+
+import java.util.ArrayList;
 
 public class PauseMenu implements Screen
 {
@@ -19,50 +24,81 @@ public class PauseMenu implements Screen
 	SpriteBatch batch;
 	Texture dice;
 	TextureRegion[] diceSides;
+	Texture background;
 	
 	Stage stage;
-	Table diceButtons;
-	Button btnOne, btnTwo, btnThree, btnFour, btnFive, btnSix;
-	ClickListener clThree;
+	Table table;
+	Table sideSelect, glyphSelect, space;
+	int editingSide = 1;
+	ArrayList<Glyph> spellbook;
+	Character kal;
+	int[] glyphX, glyphY;
 	
+	Skin skinn = new Skin(Gdx.files.internal("MyTracer/myTracer.json"));
+	Skin skin = new Skin(Gdx.files.internal("tracer/tracer-ui.json"));
 	public PauseMenu (GameScreen previousScreen)
 	{
 		this.previousScreen = previousScreen;
 		input = new PauseMenuInput(this);
 		Gdx.input.setInputProcessor(input);
 		batch = previousScreen.batch;
+		background = new Texture("Menu.png");
+		
 		dice = previousScreen.hud.d6Texture;
 		diceSides = previousScreen.hud.diceSides;
 		
+		spellbook = previousScreen.kal.getSpellbook();
+		glyphX = new int[]{256, 384, 384, 384, 640, 512};
+		glyphY = new int[]{256, 256, 384, 128, 256, 256};
+		kal = previousScreen.kal;
 		// make screen button things
 		stage = new Stage();
-		diceButtons = new Table();
-		diceButtons.setDebug(true);
-		diceButtons.setFillParent(true);
-		btnOne = new Button(previousScreen.hud.skin);
-		btnTwo = new Button(previousScreen.hud.skin);
-		btnThree = new Button(previousScreen.hud.skin, "home");
-		btnFour = new Button(previousScreen.hud.skin);
-		btnFive = new Button(previousScreen.hud.skin);
-		btnSix = new Button(previousScreen.hud.skin);
-		//previousScreen.hud.skin.
-		clThree = new ClickListener();
-		btnThree.addListener(clThree);
-		makeDiceButtonTable();
-		stage.addActor(diceButtons);
+		space = new Table();
+		space.add(new Label("              ", skin, "menu"));
+		table = new Table();
+		table.left();
+		table.padLeft(Gdx.graphics.getWidth()/5);
+		table.top();
+		table.padTop(Gdx.graphics.getHeight()/10);
+		table.setFillParent(true);
+		sideSelect = new Table();
+		sideSelect.padRight(Gdx.graphics.getWidth()/5);
+		sideSelect.padTop(10);
+		sideSelect.setDebug(true);
+		table.add(sideSelect);
+		//table.add(space);
+		glyphSelect = new Table();
+		glyphSelect.setDebug(true);
+		glyphSelect.left();
+		table.add(glyphSelect);
+		stage.addActor(table);
+		
+		setSideSelected(1);
 	}
 	
-	public void makeDiceButtonTable(){
-		
-		diceButtons.add();
-		diceButtons.add(btnThree);
-		diceButtons.add();
-		diceButtons.add();
-		diceButtons.row();
-		diceButtons.add(btnOne);
-		diceButtons.add(btnTwo);
-		diceButtons.add(btnSix);
-		diceButtons.add(btnFive);
+	public void changeDiceSide(int index){
+		if (index < spellbook.size()) {
+			kal.addGlyphToDice(index, editingSide);
+			listGlyphs();
+		}
+	}
+	
+	public void setSideSelected(int side){
+		editingSide = side;
+		sideSelect.clearChildren(false);
+		sideSelect.add(new TypingLabel(side + " selected", skin, "menu"));
+		listGlyphs();
+	}
+	
+	public void listGlyphs(){
+		glyphSelect.clearChildren(false);
+		spellbook = previousScreen.kal.getSpellbook();
+		String alpha = "abcdefghijklmnopqrstuvwxyz";
+		String toRender = "";
+		for (int i=0; i < spellbook.size(); i++){
+			toRender += alpha.charAt(i) + " " + spellbook.get(i).getName() + "\n";
+		}
+		glyphSelect.add(new Label(toRender, skin, "menu"));
 	}
 	
 	@Override
@@ -79,12 +115,28 @@ public class PauseMenu implements Screen
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		batch.begin();
-		batch.draw(dice, 10, 10);
+		batch.draw(background, 0, 0,960,704);
+		batch.draw(dice, 256, 128);
+		renderGlyphs();
 		batch.end();
 		
 		stage.act(delta);
 		stage.draw();
 		
+		
+	}
+	
+	public void renderGlyphs(){
+		// get kal's die
+		Dice kalDie = kal.getDie();
+		
+		// overlay glyph on image
+		for (int i=0; i < 6; i++){
+			Glyph glySide = kalDie.getSide(i+1);
+			if (glySide != null){
+				batch.draw(new Texture(glySide.getImgPath()), glyphX[i], glyphY[i]);
+			}
+		}
 	}
 	
 	@Override

@@ -9,6 +9,7 @@ public class R7 extends Glyph {
 		this.owner = owner;
 		this.glyphType = 2;  // TODO: MODIFY FOR GLYPH TYPE
 		this.flavor = "Who needs nine lives when this one never ends?";
+		this.imgPath = "runes/r7.png";
 	}
 	
 	@Override

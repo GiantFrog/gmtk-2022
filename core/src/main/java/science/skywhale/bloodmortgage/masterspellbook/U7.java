@@ -10,6 +10,7 @@ public class U7 extends Glyph {
 		this.owner = owner;
 		this.glyphType = 1;  // TODO: MODIFY FOR GLYPH TYPE
 		this.flavor = "Turns out, all it takes to elevate this Glyph from 'Arcane' to 'Mystic' is a bit of flair";
+		this.imgPath = "runes/u7.png";
 	}
 	
 	@Override

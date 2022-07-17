@@ -10,6 +10,7 @@ public class C11 extends Glyph {
 		this.owner = owner;
 		this.glyphType = 0;  // TODO: MODIFY FOR GLYPH TYPE
 		this.flavor = "No pain, no gain. It rhymes so it must be true.";
+		this.imgPath = "runes/c11.png";
 	}
 	
 	@Override

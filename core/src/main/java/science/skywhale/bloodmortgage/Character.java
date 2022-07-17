@@ -3,6 +3,7 @@ package science.skywhale.bloodmortgage;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import science.skywhale.bloodmortgage.masterspellbook.*;
 
 import java.util.ArrayList;
@@ -53,13 +54,36 @@ public class Character {
 
 	// spellbook methods
     private void initSpellbook(){
+		//Base
         spellbook.add(new C1(this));
 		spellbook.add(new C2(this));
 		spellbook.add(new C3(this));
 		spellbook.add(new C4(this));
 		spellbook.add(new C5(this));
 		spellbook.add(new C11(this));
+		//Full List
+		spellbook.add(new C6(this));
+		spellbook.add(new C7(this));
+		spellbook.add(new C8(this));
+		spellbook.add(new C15(this));
+		spellbook.add(new C16(this));
+		spellbook.add(new C18(this));
+		spellbook.add(new U1(this));
+		spellbook.add(new U2(this));
+		spellbook.add(new U4(this));
+		spellbook.add(new U5(this));
+		spellbook.add(new U6(this));
+		spellbook.add(new U7(this));
+		spellbook.add(new U11(this));
+		spellbook.add(new R1(this));
+		spellbook.add(new R7(this));
+		spellbook.add(new R8(this));
+		spellbook.add(new L1(this));
+		spellbook.add(new L4(this));
     }
+	public ArrayList<Glyph> getSpellbook(){
+		return spellbook;
+	}
 	public void printSpellbook(){
 		System.out.println("Spellbook");
 		for (int i=0; i<spellbook.size(); i++){
@@ -132,7 +156,7 @@ public class Character {
 	}
 	
 	
-	public void render (float delta, SpriteBatch batch, int tilesize) {
+	public void render (float delta, SpriteBatch batch, int tilesize, TiledMapTileLayer mapLayer) {
 		if (animation != null && (horiSpeed != 0 || vertiSpeed != 0))
 		{
 			elapsedTime += delta;
@@ -140,17 +164,30 @@ public class Character {
 		}
 		
 		//update the player position
-		if (sprinting)
+		if (horiSpeed != 0 || vertiSpeed != 0)
 		{
-			x += delta*horiSpeed*1.75f;
-			y += delta*vertiSpeed*1.75f;
-		}
-		else
-		{
-			x += delta*horiSpeed;
-			y += delta*vertiSpeed;
+			float xChange = 0, yChange = 0;
+			if (sprinting)
+			{
+				xChange = delta * horiSpeed * 1.75f;
+				yChange = delta * vertiSpeed * 1.75f;
+			}
+			else
+			{
+				xChange = delta * horiSpeed;
+				yChange = delta * vertiSpeed;
+			}
+			//look to see if we would rub against a tile marked as solid
+			if (!mapLayer.getCell(Math.round(x + xChange), Math.round(y)).getTile().getProperties().get("solid", Boolean.class))
+				x += xChange;
+			if (!mapLayer.getCell(Math.round(x), Math.round(y + yChange)).getTile().getProperties().get("solid", Boolean.class))
+				y += yChange;
 		}
 		
 		batch.draw(texture, x, y, (float)texture.getWidth()/tilesize, (float)texture.getHeight()/tilesize, 0, 0, 64, 64, movingLeft, false);
+	}
+	
+	public void addGlyphToDice()
+	{
 	}
 }

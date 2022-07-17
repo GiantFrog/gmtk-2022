@@ -10,6 +10,7 @@ public class U5 extends Glyph {
 		this.owner = owner;
 		this.glyphType = 1;  // TODO: MODIFY FOR GLYPH TYPE
 		this.flavor = "The only reason it isn't obvious this die is weighted is magic, obviously.";
+		this.imgPath = "runes/u5.png";
 	}
 	
 	@Override

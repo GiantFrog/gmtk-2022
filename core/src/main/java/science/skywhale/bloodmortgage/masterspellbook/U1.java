@@ -10,6 +10,7 @@ public class U1 extends Glyph {
 		this.owner = owner;
 		this.glyphType = 1;  // TODO: MODIFY FOR GLYPH TYPE
 		this.flavor = "Draw forth from the soil the nutrients for growth.";
+		this.imgPath = "runes/u1.png";
 	}
 	
 	@Override
