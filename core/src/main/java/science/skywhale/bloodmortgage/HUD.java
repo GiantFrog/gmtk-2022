@@ -16,6 +16,8 @@ import static science.skywhale.bloodmortgage.GameScreen.TILESIZE;
 
 public class HUD
 {
+	static final Texture d6Texture = new Texture(Gdx.files.internal("basic dice.png"));
+	
 	OrthographicCamera camera;
 	FitViewport hudView;
 	Character chaeri;
@@ -29,9 +31,8 @@ public class HUD
 	int chaeriCounter;
 	TypingLabel chaeriDialog;
 	
-	Texture d6Texture;
-	TextureRegion one, two, three, four, five, six;
-	TextureRegion[] diceSides;
+	TextureRegion lastRoll;
+	Texture lastGlyph;
 	
 	Table battleTable, table;
 	Skin skin;
@@ -76,19 +77,11 @@ public class HUD
 		chaeri.x = 580;
 		chaeri.y = 0;
 		
-		//dice textures
-		d6Texture = new Texture(Gdx.files.internal("basic dice.png"));
-		one = new TextureRegion(d6Texture, 0, 128, 128, 128);
-		two = new TextureRegion(d6Texture, 128, 128, 128, 128);
-		three = new TextureRegion(d6Texture, 128, 256, 128, 128);
-		four = new TextureRegion(d6Texture, 128, 0, 128, 128);
-		five = new TextureRegion(d6Texture, 256, 128, 128, 128);
-		six = new TextureRegion(d6Texture, 384, 128, 128, 128);
-		diceSides = new TextureRegion[]{one, two, three, four, five, six};
-		
 		// character dialog controls
 		chaeriDialogUp = false;
 		chaeriCounter = 0;
+		
+		lastRoll = Dice.diceSides[0];
 	}
 	
 	public void updateBattleStage(String updates){
@@ -130,7 +123,9 @@ public class HUD
 		stage.draw();
 		
 		batch.begin();
-		//batch.draw(two, 40, 40);
+		batch.draw(lastRoll, 40, 40);
+		if (lastGlyph != null)
+			batch.draw(lastGlyph, 40, 40);
 		chaeri.render(delta, batch, 1, null);
 		batch.end();
 	}

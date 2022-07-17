@@ -45,7 +45,7 @@ public class PauseMenu implements Screen
 		background = new Texture("Menu.png");
 		
 		dice = previousScreen.hud.d6Texture;
-		diceSides = previousScreen.hud.diceSides;
+		diceSides = Dice.diceSides;
 		
 		spellbook = previousScreen.kal.getSpellbook();
 		glyphX = new int[]{256, 384, 384, 384, 640, 512};
