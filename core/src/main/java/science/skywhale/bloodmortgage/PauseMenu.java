@@ -6,6 +6,11 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 
 public class PauseMenu implements Screen
 {
@@ -13,6 +18,12 @@ public class PauseMenu implements Screen
 	PauseMenuInput input;
 	SpriteBatch batch;
 	Texture dice;
+	TextureRegion[] diceSides;
+	
+	Stage stage;
+	Table diceButtons;
+	Button btnOne, btnTwo, btnThree, btnFour, btnFive, btnSix;
+	ClickListener clThree;
 	
 	public PauseMenu (GameScreen previousScreen)
 	{
@@ -21,6 +32,37 @@ public class PauseMenu implements Screen
 		Gdx.input.setInputProcessor(input);
 		batch = previousScreen.batch;
 		dice = previousScreen.hud.d6Texture;
+		diceSides = previousScreen.hud.diceSides;
+		
+		// make screen button things
+		stage = new Stage();
+		diceButtons = new Table();
+		diceButtons.setDebug(true);
+		diceButtons.setFillParent(true);
+		btnOne = new Button(previousScreen.hud.skin);
+		btnTwo = new Button(previousScreen.hud.skin);
+		btnThree = new Button(previousScreen.hud.skin, "home");
+		btnFour = new Button(previousScreen.hud.skin);
+		btnFive = new Button(previousScreen.hud.skin);
+		btnSix = new Button(previousScreen.hud.skin);
+		//previousScreen.hud.skin.
+		clThree = new ClickListener();
+		btnThree.addListener(clThree);
+		makeDiceButtonTable();
+		stage.addActor(diceButtons);
+	}
+	
+	public void makeDiceButtonTable(){
+		
+		diceButtons.add();
+		diceButtons.add(btnThree);
+		diceButtons.add();
+		diceButtons.add();
+		diceButtons.row();
+		diceButtons.add(btnOne);
+		diceButtons.add(btnTwo);
+		diceButtons.add(btnSix);
+		diceButtons.add(btnFive);
 	}
 	
 	@Override
@@ -39,6 +81,10 @@ public class PauseMenu implements Screen
 		batch.begin();
 		batch.draw(dice, 10, 10);
 		batch.end();
+		
+		stage.act(delta);
+		stage.draw();
+		
 	}
 	
 	@Override
