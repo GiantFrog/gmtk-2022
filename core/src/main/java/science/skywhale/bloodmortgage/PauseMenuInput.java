@@ -40,6 +40,7 @@ public class PauseMenuInput implements InputProcessor
 				break;
 			case Input.Keys.BACKSPACE:
 				menu.kal.removeGlyphToDice(menu.editingSide);
+				break;
 			case Input.Keys.A:
 				menu.changeDiceSide(0);
 				break;

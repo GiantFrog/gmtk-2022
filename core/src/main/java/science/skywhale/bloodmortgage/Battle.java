@@ -1,7 +1,12 @@
 package science.skywhale.bloodmortgage;
 
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
+
 import java.util.ArrayList;
+
+import static science.skywhale.bloodmortgage.Dice.diceSides;
 
 public class Battle {
     private CharacterEntity opponent;
@@ -106,6 +111,13 @@ public class Battle {
 		String glyphName = "NONE";
 		if (dice.getSide(roll) != null){
 			glyphName = dice.getSide(roll).getName();
+		}
+		if (myTurn.name.equals("Kal"))
+		{
+			game.hud.lastRoll = diceSides[roll-1];
+			//TODO I think each Glyph should have a Texture, making a new one from the path is bad
+			if (dice.getSide(roll) != null)
+				game.hud.lastGlyph = new Texture(Gdx.files.internal(dice.getSide(roll).getImgPath()));
 		}
 		System.out.println("Rolled: " + roll + " Glyph: " + glyphName);
 		log.add(0, "   Rolled " + roll + " with glpyh " + glyphName);

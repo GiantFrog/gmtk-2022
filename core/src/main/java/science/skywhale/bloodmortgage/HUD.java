@@ -16,20 +16,25 @@ import static science.skywhale.bloodmortgage.GameScreen.TILESIZE;
 
 public class HUD
 {
+	static final Texture d6Texture = new Texture(Gdx.files.internal("basic dice.png"));
+	
 	OrthographicCamera camera;
 	FitViewport hudView;
 	Character chaeri;
-	Stage battleStage;
+	Stage stage;
 	SpriteBatch batch;
-	TypingLabel chaeriDialog;
 	String tooltip;
 	Boolean battleOver;
 	
-	Texture d6Texture;
-	TextureRegion one, two, three, four, five, six;
-	TextureRegion[] diceSides;
+	// dialog bools
+	Boolean chaeriDialogUp;
+	int chaeriCounter;
+	TypingLabel chaeriDialog;
 	
-	Table table;
+	TextureRegion lastRoll;
+	Texture lastGlyph;
+	
+	Table battleTable, table;
 	Skin skin;
 	GameScreen level;
 	
@@ -42,8 +47,9 @@ public class HUD
 						(float)Gdx.graphics.getHeight() / TILESIZE, camera);
 		batch = new SpriteBatch();
 		battleOver = false;
-		battleStage = new Stage(hudView);
-		battleStage = new Stage();
+		stage = new Stage(hudView);
+		stage = new Stage();
+		
 		table = new Table();
 		table.left();
 		table.top();
@@ -51,52 +57,75 @@ public class HUD
 		table.padLeft(20);
 		table.setDebug(true); // This is optional, but enables debug lines for tables.
 		table.setFillParent(true);
+		battleTable = new Table();
+		battleTable.padBottom(Gdx.graphics.getWidth()/5);
+		//battleTable.left();
+		//battleTable.top();
+		//battleTable.padTop(20);
+		//battleTable.padLeft(20);
+		//battleTable.setDebug(true); // This is optional, but enables debug lines for tables.
+		//battleTable.setFillParent(true);
 		
-		battleStage.addActor(table);
+		
+		table.add(battleTable);
+		chaeriDialog = new TypingLabel("", skin);
+		table.row();
+		table.add(chaeriDialog);
+		
+		stage.addActor(table);
 		chaeri = new Character("Chaeri", 2, new Texture("chaeri.png"), 1000);
 		chaeri.x = 580;
 		chaeri.y = 0;
 		
-		//dice textures
-		d6Texture = new Texture(Gdx.files.internal("basic dice.png"));
-		one = new TextureRegion(d6Texture, 0, 128, 128, 128);
-		two = new TextureRegion(d6Texture, 128, 128, 128, 128);
-		three = new TextureRegion(d6Texture, 128, 256, 128, 128);
-		four = new TextureRegion(d6Texture, 128, 0, 128, 128);
-		five = new TextureRegion(d6Texture, 256, 128, 128, 128);
-		six = new TextureRegion(d6Texture, 384, 128, 128, 128);
-		diceSides = new TextureRegion[]{one, two, three, four, five, six};
+		// character dialog controls
+		chaeriDialogUp = false;
+		chaeriCounter = 0;
+		
+		lastRoll = Dice.diceSides[0];
 	}
 	
 	public void updateBattleStage(String updates){
-		table.clearChildren(false); // TODO: want true or false?
-		table.add(new Label(updates, skin));
+		battleTable.clearChildren(false); // TODO: want true or false?
+		battleTable.add(new Label(updates, skin));
 		//table.
 	}
 	public void initBattleScreen(){
-		table.clearChildren(false);
+		battleTable.clearChildren(false);
 		tooltip = "[WHITE]{FADE}BATTLE TIME{ENDFADE}";
-		table.add(new TypingLabel(tooltip, skin));
-		table.row();
+		battleTable.add(new TypingLabel(tooltip, skin));
+		battleTable.row();
 		
 		tooltip = "[WHITE]Press R to {SHAKE}roll!";
-		chaeriDialog = new TypingLabel(tooltip, skin);
-		table.add(chaeriDialog);
+		battleTable.add(new TypingLabel(tooltip, skin));
 	}
 	public void showChaeriTip()
 	{
-	
+		// run everytime press c
+		chaeriDialogUp = true;
+		if (chaeriCounter >= Dialogs.chaeriDialogList.length){
+			chaeriCounter = 0;
+		}
+		chaeriDialog.setText(Dialogs.chaeriDialogList[chaeriCounter]);
+		// remove when player starts moving again
 	}
 	
 	public void render (float delta)
 	{
-		if (level.kal.inBattle() || battleOver) {
-			battleStage.act(delta);
-			battleStage.draw();
+		/*if (level.kal.inBattle() || battleOver) {
+			stage.act(delta);
+			stage.draw();
+		}*/
+		if (!level.kal.inBattle() && !battleOver){
+			battleTable.clearChildren();
 		}
 		
+		stage.act(delta);
+		stage.draw();
+		
 		batch.begin();
-		batch.draw(two, 40, 40);
+		batch.draw(lastRoll, 40, 40);
+		if (lastGlyph != null)
+			batch.draw(lastGlyph, 40, 40);
 		chaeri.render(delta, batch, 1, null);
 		batch.end();
 	}

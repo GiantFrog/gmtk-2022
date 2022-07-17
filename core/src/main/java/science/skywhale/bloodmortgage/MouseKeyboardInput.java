@@ -26,9 +26,7 @@ public class MouseKeyboardInput implements InputProcessor
 			//move camera around the map
 			case Input.Keys.W:
 			case Input.Keys.UP:
-				if (!level.kal.inBattle() && level.hud.battleOver){
-					level.hud.battleOver = false;
-				}
+				clearScreenOnMove();
 				if (!level.kal.inBattle() && !level.hud.battleOver)
 					level.kal.vertiSpeed = 2;
 					level.athdranax.vertiSpeed = (float)0.01;
@@ -36,9 +34,7 @@ public class MouseKeyboardInput implements InputProcessor
 				break;
 			case Input.Keys.A:
 			case Input.Keys.LEFT:
-				if (!level.kal.inBattle() && level.hud.battleOver){
-					level.hud.battleOver = false;
-				}
+				clearScreenOnMove();
 				if (!level.kal.inBattle() && !level.hud.battleOver)
 				{
 					level.kal.horiSpeed = -2;
@@ -49,9 +45,7 @@ public class MouseKeyboardInput implements InputProcessor
 				break;
 			case Input.Keys.S:
 			case Input.Keys.DOWN:
-				if (!level.kal.inBattle() && level.hud.battleOver){
-					level.hud.battleOver = false;
-				}
+				clearScreenOnMove();
 				if (!level.kal.inBattle() && !level.hud.battleOver)
 					level.kal.vertiSpeed = -2;
 					level.athdranax.vertiSpeed = (float) -0.01;
@@ -59,9 +53,7 @@ public class MouseKeyboardInput implements InputProcessor
 				break;
 			case Input.Keys.D:
 			case Input.Keys.RIGHT:
-				if (!level.kal.inBattle() && level.hud.battleOver){
-					level.hud.battleOver = false;
-				}
+				clearScreenOnMove();
 				if (!level.kal.inBattle() && !level.hud.battleOver)
 				{
 					level.kal.horiSpeed = 2;
@@ -89,6 +81,19 @@ public class MouseKeyboardInput implements InputProcessor
 		return false;
 	}
 	
+	private void clearScreenOnMove(){
+		if (!level.kal.inBattle() && level.hud.battleOver){
+			level.hud.battleOver = false;
+		}
+		// ch dialog
+		if (level.hud.chaeriDialogUp) {
+			level.hud.chaeriDialogUp = false;
+			level.hud.chaeriCounter++;
+			level.hud.chaeriDialog.setText("");
+		}
+		
+	}
+	
 	@Override
 	public boolean keyUp(int keycode)
 	{
@@ -106,6 +111,9 @@ public class MouseKeyboardInput implements InputProcessor
 			case Input.Keys.SHIFT_RIGHT:
 				level.kal.sprinting = false;
 				break;
+			case Input.Keys.C:
+				level.hud.showChaeriTip();
+				break;
 			case Input.Keys.R:
 				if (level.kal.inBattle())
 				{
@@ -117,6 +125,7 @@ public class MouseKeyboardInput implements InputProcessor
 					level.hud.updateBattleStage(level.battle.renderLog(	15));
 					System.out.println("*****************");
 				}
+				break;
 		}
 		return false;
 	}
