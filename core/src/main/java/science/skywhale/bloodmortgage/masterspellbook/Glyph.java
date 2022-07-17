@@ -28,6 +28,14 @@ public abstract class Glyph {
         return name;
     }
 
+	public String getDescription(){
+		return description;
+	}
+	public String getFlavor(){
+		return flavor;
+	}
+	
+	
     public void addToDice(Dice dice, int side){
         this.dice = dice;
         this.diceSide = side;
