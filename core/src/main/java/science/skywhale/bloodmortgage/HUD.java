@@ -79,7 +79,7 @@ public class HUD
 	
 	public void render (float delta)
 	{
-		if (level.testCharacter.getInBattle()) {
+		if (level.kal.getInBattle()) {
 			battleStage.act(delta);
 			battleStage.draw();
 		}
