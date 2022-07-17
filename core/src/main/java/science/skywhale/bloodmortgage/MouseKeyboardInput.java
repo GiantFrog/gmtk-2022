@@ -26,24 +26,32 @@ public class MouseKeyboardInput implements InputProcessor
 			//move camera around the map
 			case Input.Keys.W:
 			case Input.Keys.UP:
-				level.kal.vertiSpeed = 3;
+				if (!level.kal.inBattle())
+					level.kal.vertiSpeed = 3;
 				break;
 			case Input.Keys.A:
 			case Input.Keys.LEFT:
-				level.kal.horiSpeed = -3;
-				level.kal.movingLeft = true;
+				if (!level.kal.inBattle())
+				{
+					level.kal.horiSpeed = - 3;
+					level.kal.movingLeft = true;
+				}
 				break;
 			case Input.Keys.S:
 			case Input.Keys.DOWN:
-				level.kal.vertiSpeed = -3;
+				if (!level.kal.inBattle())
+					level.kal.vertiSpeed = -3;
 				break;
 			case Input.Keys.D:
 			case Input.Keys.RIGHT:
-				level.kal.horiSpeed = 3;
-				level.kal.movingLeft = false;
+				if (!level.kal.inBattle())
+				{
+					level.kal.horiSpeed = 3;
+					level.kal.movingLeft = false;
+				}
 				break;
 			
-			//modify cameraSpeed when shift is pressed
+			//modify speed when shift is pressed
 			case Input.Keys.SHIFT_LEFT:
 			case Input.Keys.SHIFT_RIGHT:
 				level.kal.sprinting = true;
@@ -60,6 +68,7 @@ public class MouseKeyboardInput implements InputProcessor
 	@Override
 	public boolean keyUp(int keycode)
 	{
+		//stop moving
 		if (!Gdx.input.isKeyPressed(Input.Keys.W) && !Gdx.input.isKeyPressed(Input.Keys.UP) &&
 			!Gdx.input.isKeyPressed(Input.Keys.S) && !Gdx.input.isKeyPressed(Input.Keys.DOWN))
 			level.kal.vertiSpeed = 0;
@@ -72,11 +81,10 @@ public class MouseKeyboardInput implements InputProcessor
 			case Input.Keys.SHIFT_LEFT:
 			case Input.Keys.SHIFT_RIGHT:
 				level.kal.sprinting = false;
-		}
-		if (level.kal.getInBattle()){
-			switch (keycode){
-				case Input.Keys.R:
-					System.out.println("R pressed");
+				break;
+			case Input.Keys.R:
+				if (level.kal.inBattle())
+				{
 					if (!level.battle.playerTurn()){
 						// if no winner with player, op fgoes
 						Boolean opTurn = level.battle.opponentTurn();
@@ -84,7 +92,7 @@ public class MouseKeyboardInput implements InputProcessor
 					System.out.println(level.battle.renderLog(10));
 					level.hud.updateBattleStage(level.battle.renderLog(	15));
 					System.out.println("*****************");
-			}
+				}
 		}
 		return false;
 	}

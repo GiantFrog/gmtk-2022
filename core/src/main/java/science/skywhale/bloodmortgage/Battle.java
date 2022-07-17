@@ -17,7 +17,7 @@ public class Battle {
         this.player = new CharacterEntity(player);
         this.opponent = new CharacterEntity(opponent);
 		this.winner = null;
-		log = new ArrayList<>();
+		log = new ArrayList<String>();
 		log.add("Battle Started");
 		log.add(0, player.getName() + " vs. " + opponent.getName());
 		this.onMap = onMap;

@@ -33,7 +33,7 @@ public class GameScreen implements Screen
 	
 	HUD hud;
 	Character kal, testCharacter2;
-	Music intro, vibing, battlemusic;
+	Music intro, vibing, battlemusic, currentSong;
 	
 	Battle battle;
 	ArrayList<Character> onMap = new ArrayList<Character>();
@@ -80,7 +80,8 @@ public class GameScreen implements Screen
 		battlemusic.setVolume(0.5f);
 		battlemusic.setLooping(true);
 		
-		vibing.play();
+		intro.play();
+		currentSong = intro;
 	}
 	
 	@Override
@@ -124,7 +125,7 @@ public class GameScreen implements Screen
 		hud.render(delta);
 		
 		// test distances
-		if (! kal.getInBattle()){
+		if (! kal.inBattle()){
 			for (int i=0; i <onMap.size(); i++){
 				testToBattle(onMap.get(i));
 			}
@@ -140,8 +141,11 @@ public class GameScreen implements Screen
 		if (dist < 1){
 			System.out.println("Battle mode engaged");
 			// TODO: Put log on screen here
+			kal.vertiSpeed = kal.horiSpeed = 0;
 			battle = new Battle(kal, compare, onMap);
 			hud.initBattleScreen();
+			currentSong.pause();
+			battlemusic.play();
 		}
 	}
 	

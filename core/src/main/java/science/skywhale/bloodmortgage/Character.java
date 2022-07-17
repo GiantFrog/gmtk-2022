@@ -109,7 +109,7 @@ public class Character {
 	public void setInBattle(Boolean inBattle){
 		this.inBattle = inBattle;
 	}
-	public Boolean getInBattle(){
+	public Boolean inBattle(){
 		return inBattle;
 	}
 	
