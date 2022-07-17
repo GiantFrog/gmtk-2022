@@ -30,6 +30,7 @@ public class PauseMenu implements Screen
 	int editingSide = 1;
 	ArrayList<Glyph> spellbook;
 	Character kal;
+	Texture background;
 	
 	Skin skinn = new Skin(Gdx.files.internal("MyTracer/myTracer.json"));
 	Skin skin = new Skin(Gdx.files.internal("tracer/tracer-ui.json"));
@@ -39,6 +40,8 @@ public class PauseMenu implements Screen
 		input = new PauseMenuInput(this);
 		Gdx.input.setInputProcessor(input);
 		batch = previousScreen.batch;
+		background = new Texture("Menu.png");
+		
 		dice = previousScreen.hud.d6Texture;
 		diceSides = previousScreen.hud.diceSides;
 		
@@ -102,6 +105,7 @@ public class PauseMenu implements Screen
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		batch.begin();
+		batch.draw(background, 0, 0);
 		batch.draw(dice, 10, 10);
 		batch.end();
 		
