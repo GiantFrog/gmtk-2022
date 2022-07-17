@@ -49,13 +49,6 @@ public class HUD
 		table.setDebug(true); // This is optional, but enables debug lines for tables.
 		table.setFillParent(true);
 		
-		tooltip = "[WHITE]{FADE}BATTLE TIME{ENDFADE}";
-		table.add(new TypingLabel(tooltip, skin));
-		table.row();
-		
-		tooltip = "[WHITE]Press R to {SHAKE}roll!";
-		chaeriDialog = new TypingLabel(tooltip, skin);
-		table.add(chaeriDialog);
 		battleStage.addActor(table);
 		chaeri = new Character("Chaeri", 2, new Texture("chaeri.png"), 1000);
 		chaeri.x = 580;
@@ -75,6 +68,16 @@ public class HUD
 		table.clearChildren(false); // TODO: want true or false?
 		table.add(new Label(updates, skin));
 		//table.
+	}
+	public void initBattleScreen(){
+		table.clearChildren(false);
+		tooltip = "[WHITE]{FADE}BATTLE TIME{ENDFADE}";
+		table.add(new TypingLabel(tooltip, skin));
+		table.row();
+		
+		tooltip = "[WHITE]Press R to {SHAKE}roll!";
+		chaeriDialog = new TypingLabel(tooltip, skin);
+		table.add(chaeriDialog);
 	}
 	
 	public void render (float delta)

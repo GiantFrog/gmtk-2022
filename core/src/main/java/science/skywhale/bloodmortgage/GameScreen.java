@@ -141,6 +141,7 @@ public class GameScreen implements Screen
 			System.out.println("Battle mode engaged");
 			// TODO: Put log on screen here
 			battle = new Battle(kal, compare, onMap);
+			hud.initBattleScreen();
 		}
 	}
 	
