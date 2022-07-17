@@ -10,6 +10,7 @@ public class C19 extends Glyph {
 		this.owner = owner;
 		this.glyphType = 0;  // TODO: MODIFY FOR GLYPH TYPE
 		this.flavor = "Sometimes they just don't have anything to offer. Shame.";
+		//this.imgPath = "runes/.png";
 	}
 	
 	@Override

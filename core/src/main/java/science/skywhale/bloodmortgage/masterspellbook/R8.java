@@ -11,6 +11,7 @@ public class R8 extends Glyph {
 		this.owner = owner;
 		this.glyphType = 2;  // TODO: MODIFY FOR GLYPH TYPE
 		this.flavor = "It's blatant cheating at this point. But Athdranax was never bothered by that.";
+		this.imgPath = "runes/r8.png";
 	}
 	
 	@Override

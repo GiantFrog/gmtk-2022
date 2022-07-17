@@ -10,6 +10,7 @@ public class C2 extends Glyph{
         this.owner = owner;
         this.glyphType = 0;
 		this.flavor = "\"For the knight is dumb and full of errors\" --Athdranax";
+		this.imgPath = "runes/c2.png";
     }
 
     @Override

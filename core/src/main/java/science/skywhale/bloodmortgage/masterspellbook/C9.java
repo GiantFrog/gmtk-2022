@@ -10,6 +10,7 @@ public class C9 extends Glyph {
 		this.owner = owner;
 		this.glyphType = 0;
 		this.flavor = "Not really a punch, but you get the idea.";
+		this.imgPath = "runes/c9.png";
 		// MEDIUM PRIORITY
 	}
 	

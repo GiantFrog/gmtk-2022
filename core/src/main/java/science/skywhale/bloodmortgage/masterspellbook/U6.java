@@ -12,6 +12,7 @@ public class U6 extends Glyph {
 		this.owner = owner;
 		this.glyphType = 1;
 		this.flavor = "They say \"Patience is a virtue,\" but I want to skip to the good parts!";
+		this.imgPath = "runes/u6.png";
 	}
 	
 	@Override

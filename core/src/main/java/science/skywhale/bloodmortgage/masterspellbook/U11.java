@@ -10,6 +10,7 @@ public class U11 extends Glyph {
 		this.owner = owner;
 		this.glyphType = 1;  // TODO: MODIFY FOR GLYPH TYPE
 		this.flavor = "It took decades for hospitals to develop the magic behind this medical marvel.";
+		this.imgPath = "runes/u11.png";
 	}
 	
 	@Override

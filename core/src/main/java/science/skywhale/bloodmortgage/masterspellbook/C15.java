@@ -10,6 +10,7 @@ public class C15 extends Glyph {
 		this.owner = owner;
 		this.glyphType = 0;  // TODO: MODIFY FOR GLYPH TYPE
 		this.flavor = "It might be 'just a flesh wound', but you should still get that checked out";
+		this.imgPath = "runes/c15.png";
 	}
 	
 	@Override

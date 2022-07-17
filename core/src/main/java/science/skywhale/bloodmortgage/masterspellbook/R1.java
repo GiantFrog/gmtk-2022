@@ -10,6 +10,7 @@ public class R1 extends Glyph {
 		this.owner = owner;
 		this.glyphType = 2;  // TODO: MODIFY FOR GLYPH TYPE
 		this.flavor = "A birch with no trunk is just a bush. And this is the Magnificent Birch, not Magnificent Bush.";
+		this.imgPath = "runes/r1.png";
 	}
 	
 	@Override

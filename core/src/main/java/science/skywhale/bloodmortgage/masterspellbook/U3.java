@@ -10,6 +10,7 @@ public class U3 extends Glyph {
 		this.owner = owner;
 		this.glyphType = 0;  // TODO: MODIFY FOR GLYPH TYPE
 		this.flavor = "";
+		//this.imgPath = "runes/.png";
 	}
 	
 	@Override

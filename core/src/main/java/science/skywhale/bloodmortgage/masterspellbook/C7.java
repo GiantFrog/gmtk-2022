@@ -10,6 +10,7 @@ public class C7 extends Glyph {
 		this.owner = owner;
 		this.glyphType = 0;
 		this.flavor = "\"You're going to have to learn to tip the Die in your favor if you want to survive in this cutthroat market\" --Athdranax";
+		this.imgPath = "runes/c7.png";
 	}
 	
 	@Override

@@ -10,6 +10,7 @@ public class C8 extends Glyph {
 		this.owner = owner;
 		this.glyphType = 0;
 		this.flavor = "The healing power of nature starts with soaking up some sun";
+		this.imgPath = "runes/c8.png";
 	}
 	
 	@Override
