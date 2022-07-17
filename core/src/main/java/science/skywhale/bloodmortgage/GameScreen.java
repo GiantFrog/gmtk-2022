@@ -35,7 +35,7 @@ public class GameScreen implements Screen
 	
 	HUD hud;
 	Character kal, scrungle, hut, athdranax, rand, birch, vampcat, matty, scraggy, scrumpus, chaeriNPC;
-	Music intro, vibing, battlemusic, tophat_guy_anthem, currentSong, enemyTheme;
+	Music intro, vibing, battlemusic, tophat_guy_anthem, bossmusic, currentSong, enemyTheme;
 	
 	Battle battle;
 	ArrayList<Character> onMap = new ArrayList<>();
@@ -193,6 +193,9 @@ public class GameScreen implements Screen
 		tophat_guy_anthem = Gdx.audio.newMusic(Gdx.files.internal("tophat_guy_anthem.wav"));
 		tophat_guy_anthem.setVolume(1.0f);
 		tophat_guy_anthem.setLooping(true);
+		bossmusic = Gdx.audio.newMusic(Gdx.files.internal("Baba_yaga.wav"));
+		bossmusic.setVolume(0.9f);
+		bossmusic.setLooping(true);
 		
 		intro.play();
 		currentSong = intro;
@@ -271,6 +274,9 @@ public class GameScreen implements Screen
 				{
 					case "Athdranax":
 						enemyTheme = tophat_guy_anthem;
+						break;
+					case "the Hut of Baba Yaga":
+						enemyTheme = bossmusic;
 						break;
 					default:
 						enemyTheme = battlemusic;
