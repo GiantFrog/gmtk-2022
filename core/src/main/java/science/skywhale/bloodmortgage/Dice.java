@@ -1,19 +1,29 @@
 package science.skywhale.bloodmortgage;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import science.skywhale.bloodmortgage.masterspellbook.Glyph;
 
-import static science.skywhale.bloodmortgage.HUD.d6Texture;
-
 public class Dice {
     private Glyph[] glyphs;
-	static TextureRegion[] diceSides = new TextureRegion[] {
-			new TextureRegion(d6Texture, 0, 128, 128, 128),
-			new TextureRegion(d6Texture, 128, 128, 128, 128),
-			new TextureRegion(d6Texture, 128, 0, 128, 128),
-			new TextureRegion(d6Texture, 128, 256, 128, 128),
-			new TextureRegion(d6Texture, 384, 128, 128, 128),
-			new TextureRegion(d6Texture, 256, 128, 128, 128)
+	static Texture redD6Texture = new Texture(Gdx.files.internal("basic dice.png"));
+	static TextureRegion[] redSides = new TextureRegion[] {
+			new TextureRegion(redD6Texture, 0, 128, 128, 128),
+			new TextureRegion(redD6Texture, 128, 128, 128, 128),
+			new TextureRegion(redD6Texture, 128, 0, 128, 128),
+			new TextureRegion(redD6Texture, 128, 256, 128, 128),
+			new TextureRegion(redD6Texture, 384, 128, 128, 128),
+			new TextureRegion(redD6Texture, 256, 128, 128, 128)
+	};
+	static final Texture blueD6Texture = new Texture(Gdx.files.internal("blue basic dice.png"));
+	static TextureRegion[] blueSides = new TextureRegion[] {
+			new TextureRegion(blueD6Texture, 0, 128, 128, 128),
+			new TextureRegion(blueD6Texture, 128, 128, 128, 128),
+			new TextureRegion(blueD6Texture, 128, 0, 128, 128),
+			new TextureRegion(blueD6Texture, 128, 256, 128, 128),
+			new TextureRegion(blueD6Texture, 384, 128, 128, 128),
+			new TextureRegion(blueD6Texture, 256, 128, 128, 128)
 	};
 
     public Dice(int numSides){

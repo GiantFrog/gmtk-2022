@@ -16,8 +16,6 @@ import static science.skywhale.bloodmortgage.GameScreen.TILESIZE;
 
 public class HUD
 {
-	static final Texture d6Texture = new Texture(Gdx.files.internal("basic dice.png"));
-	
 	OrthographicCamera camera;
 	FitViewport hudView;
 	Character chaeri;
@@ -31,8 +29,8 @@ public class HUD
 	int chaeriCounter;
 	TypingLabel chaeriDialog;
 	
-	TextureRegion lastRoll;
-	Texture lastGlyph;
+	TextureRegion lastRoll, enemyRoll;
+	Texture lastGlyph, enemyGlyph;
 	
 	Table battleTable, table;
 	Skin skin;
@@ -58,7 +56,7 @@ public class HUD
 		table.setDebug(true); // This is optional, but enables debug lines for tables.
 		table.setFillParent(true);
 		battleTable = new Table();
-		battleTable.padBottom(Gdx.graphics.getWidth()/5);
+		battleTable.padBottom(Gdx.graphics.getWidth()/5f);
 		//battleTable.left();
 		//battleTable.top();
 		//battleTable.padTop(20);
@@ -81,7 +79,8 @@ public class HUD
 		chaeriDialogUp = false;
 		chaeriCounter = 0;
 		
-		lastRoll = Dice.diceSides[0];
+		lastRoll = Dice.blueSides[0];
+		enemyRoll = Dice.redSides[0];
 	}
 	
 	public void updateBattleStage(String updates){
@@ -126,6 +125,9 @@ public class HUD
 		batch.draw(lastRoll, 40, 40);
 		if (lastGlyph != null)
 			batch.draw(lastGlyph, 40, 40);
+		batch.draw(enemyRoll, 792, 40);
+		if (enemyGlyph != null)
+			batch.draw(enemyGlyph, 792, 40);
 		chaeri.render(delta, batch, 1, null);
 		batch.end();
 	}

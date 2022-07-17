@@ -68,7 +68,7 @@ public class GameScreen implements Screen
 		//testCharacter2.setDie(6);
 		//onMap.add(testCharacter2);
 		Texture scrungleTexture = new Texture(Gdx.files.internal("Generic Demon.png"));
-		scrungle = new Character("Scrungle",1,scrungleTexture,30);
+		scrungle = new Character("Scrungle",1,scrungleTexture,20);
 		scrungle.x = 12;
 		scrungle.y = 12;
 		scrungle.setDie(6);
@@ -81,7 +81,7 @@ public class GameScreen implements Screen
 		onMap.add(scrungle);
 		
 		Texture[] hutTextureArray = {new Texture(Gdx.files.internal("baba yaga house.png")), new Texture(Gdx.files.internal("baba yaga house down.png"))};
-		hut = new Character("the Hut of Baba Yaga", 1, new Animation<Texture>(0.24f, hutTextureArray),60);
+		hut = new Character("the Hut of Baba Yaga", 1, new Animation<Texture>(0.24f, hutTextureArray),70);
 		hut.x = 16;
 		hut.y = 3;
 		hut.movingLeft = true;
@@ -116,7 +116,7 @@ public class GameScreen implements Screen
 		allies.add(rand);
 		
 		Texture[] tophatTextureArray = {new Texture(Gdx.files.internal("flipped Athdrananax.png")), new Texture(Gdx.files.internal("flipped Athdrananax down.png"))};
-		athdranax = new Character("Athdranax",1,new Animation<Texture>(0.24f, tophatTextureArray),15);
+		athdranax = new Character("Athdranax",1,new Animation<Texture>(0.24f, tophatTextureArray),30);
 		athdranax.x = 3;
 		athdranax.y = 10;
 		athdranax.setDie(6);
@@ -152,7 +152,7 @@ public class GameScreen implements Screen
 		onMap.add(chaeriNPC);
 		allies.add(chaeriNPC);
 		
-		scraggy = new Character("Scraggy",1,scrungleTexture,30);
+		scraggy = new Character("Scraggy",1,scrungleTexture,20);
 		scraggy.x = 10;
 		scraggy.y = 6;
 		scraggy.setDie(6);
@@ -164,7 +164,7 @@ public class GameScreen implements Screen
 		scraggy.addGlyphToDice(1,3);
 		onMap.add(scraggy);
 		
-		scrumpus = new Character("Scraggy",1,scrungleTexture,30);
+		scrumpus = new Character("Scraggy",1,scrungleTexture,20);
 		scrumpus.x = 8;
 		scrumpus.y = 16;
 		scrumpus.setDie(6);

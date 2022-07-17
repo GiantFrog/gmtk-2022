@@ -7,11 +7,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.github.tommyettinger.textra.TypingLabel;
 import science.skywhale.bloodmortgage.masterspellbook.Glyph;
 
@@ -44,8 +42,8 @@ public class PauseMenu implements Screen
 		batch = previousScreen.batch;
 		background = new Texture("Menu.png");
 		
-		dice = previousScreen.hud.d6Texture;
-		diceSides = Dice.diceSides;
+		dice = Dice.blueD6Texture;
+		diceSides = Dice.blueSides;
 		
 		spellbook = previousScreen.kal.getSpellbook();
 		glyphX = new int[]{256, 384, 384, 384, 640, 512};
