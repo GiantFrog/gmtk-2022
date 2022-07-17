@@ -28,6 +28,8 @@ public class MouseKeyboardInput implements InputProcessor
 			case Input.Keys.UP:
 				if (!level.kal.inBattle())
 					level.kal.vertiSpeed = 2;
+					level.athdranax.vertiSpeed = (float)0.01;
+					level.hut.vertiSpeed = (float)0.01;
 				break;
 			case Input.Keys.A:
 			case Input.Keys.LEFT:
@@ -35,12 +37,16 @@ public class MouseKeyboardInput implements InputProcessor
 				{
 					level.kal.horiSpeed = -2;
 					level.kal.movingLeft = true;
+					level.athdranax.vertiSpeed = (float)0.01;
+					level.hut.vertiSpeed = (float)0.01;
 				}
 				break;
 			case Input.Keys.S:
 			case Input.Keys.DOWN:
 				if (!level.kal.inBattle())
 					level.kal.vertiSpeed = -2;
+					level.athdranax.vertiSpeed = (float) -0.01;
+					level.hut.vertiSpeed = (float) -0.01;
 				break;
 			case Input.Keys.D:
 			case Input.Keys.RIGHT:
@@ -48,6 +54,8 @@ public class MouseKeyboardInput implements InputProcessor
 				{
 					level.kal.horiSpeed = 2;
 					level.kal.movingLeft = false;
+					level.athdranax.vertiSpeed = (float) -0.01;
+					level.hut.vertiSpeed = (float) -0.01;
 				}
 				break;
 			

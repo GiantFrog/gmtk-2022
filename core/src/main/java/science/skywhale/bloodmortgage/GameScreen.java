@@ -32,7 +32,7 @@ public class GameScreen implements Screen
 	double leftToZoom = 0;
 	
 	HUD hud;
-	Character kal, testCharacter2, scrungle, hut, athdranax, rand, birch, vampcat;
+	Character kal, testCharacter2, scrungle, hut, athdranax, rand, birch, vampcat, matty, scraggy, scrumpus;
 	Music intro, vibing, battlemusic, tophat_guy_anthem, currentSong;
 	
 	Battle battle;
@@ -68,6 +68,12 @@ public class GameScreen implements Screen
 		scrungle.x = 12;
 		scrungle.y = 12;
 		scrungle.setDie(6);
+		scrungle.addGlyphToDice(17,5);
+		scrungle.addGlyphToDice(13,6);
+		scrungle.addGlyphToDice(6,2);
+		scrungle.addGlyphToDice(5,4);
+		scrungle.addGlyphToDice(4,1);
+		scrungle.addGlyphToDice(1,3);
 		onMap.add(scrungle);
 		
 		Texture[] hutTextureArray = {new Texture(Gdx.files.internal("baba yaga house.png")), new Texture(Gdx.files.internal("baba yaga house down.png"))};
@@ -75,6 +81,12 @@ public class GameScreen implements Screen
 		hut.x = 16;
 		hut.y = 3;
 		hut.setDie(6);
+		hut.addGlyphToDice(21,3);
+		hut.addGlyphToDice(20,6);
+		hut.addGlyphToDice(17,2);
+		hut.addGlyphToDice(15,1);
+		hut.addGlyphToDice(5,5);
+		hut.addGlyphToDice(1,4);
 		onMap.add(hut);
 		
 		Texture vampcatTexture = new Texture("vampire cat.png");
@@ -82,12 +94,18 @@ public class GameScreen implements Screen
 		vampcat.x = 17;
 		vampcat.y = 15;
 		vampcat.setDie(6);
+		vampcat.addGlyphToDice(20,5);
+		vampcat.addGlyphToDice(15,1);
+		vampcat.addGlyphToDice(11,4);
+		vampcat.addGlyphToDice(7,6);
+		vampcat.addGlyphToDice(5,2);
+		vampcat.addGlyphToDice(3,3);
 		onMap.add(vampcat);
 		
 		Texture randTexture = new Texture("bob.png");
 		rand = new Character("Rand the Rock",1,randTexture,2000);
-		rand.x = 10;
-		rand.y = 6;
+		rand.x = 3;
+		rand.y = 3;
 		rand.setDie(6);
 		onMap.add(rand);
 		
@@ -96,10 +114,51 @@ public class GameScreen implements Screen
 		athdranax.x = 3;
 		athdranax.y = 10;
 		athdranax.setDie(6);
+		athdranax.addGlyphToDice(21,3);
+		athdranax.addGlyphToDice(9,4);
+		athdranax.addGlyphToDice(4,5);
+		athdranax.addGlyphToDice(2,6);
+		athdranax.addGlyphToDice(1,2);
+		athdranax.addGlyphToDice(0,1);
 		onMap.add(athdranax);
 		
-
+		Texture mattyTexture = new Texture("Matty Mercy.png");
+		matty = new Character("Matty Murky", 1,mattyTexture,100);
+		matty.x = 10;
+		matty.y = 16;
+		matty.setDie(6);
+		onMap.add(matty);
 		
+		Texture birchTexture = new Texture("MAGNIFICENT BIRCHt.png");
+		birch = new Character("Magnificent Birch",1,birchTexture,200);
+		birch.x = 6;
+		birch.y = 7;
+		birch.setDie(6);
+		onMap.add(birch);
+		
+		scraggy = new Character("Scraggy",1,scrungleTexture,25);
+		scraggy.x = 10;
+		scraggy.y = 6;
+		scraggy.setDie(6);
+		scraggy.addGlyphToDice(17,5);
+		scraggy.addGlyphToDice(13,6);
+		scraggy.addGlyphToDice(6,2);
+		scraggy.addGlyphToDice(5,4);
+		scraggy.addGlyphToDice(4,1);
+		scraggy.addGlyphToDice(1,3);
+		onMap.add(scraggy);
+		
+		scrumpus = new Character("Scraggy",1,scrungleTexture,25);
+		scrumpus.x = 8;
+		scrumpus.y = 16;
+		scrumpus.setDie(6);
+		scrumpus.addGlyphToDice(17,5);
+		scrumpus.addGlyphToDice(13,6);
+		scrumpus.addGlyphToDice(6,2);
+		scrumpus.addGlyphToDice(5,4);
+		scrumpus.addGlyphToDice(4,1);
+		scrumpus.addGlyphToDice(1,3);
+		onMap.add(scrumpus);
 		
 		hud = new HUD(camera, this);
 		
