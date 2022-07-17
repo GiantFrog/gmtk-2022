@@ -42,6 +42,10 @@ public abstract class Glyph {
         weightMod = newMod;
     }
 
+	public String getImgPath(){
+		return imgPath;
+	}
+	
     public int getWeightMod(){
         return weightMod;
     }

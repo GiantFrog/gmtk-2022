@@ -24,6 +24,7 @@ public class PauseMenu implements Screen
 	SpriteBatch batch;
 	Texture dice;
 	TextureRegion[] diceSides;
+	Texture background;
 	
 	Stage stage;
 	Table table;
@@ -31,7 +32,7 @@ public class PauseMenu implements Screen
 	int editingSide = 1;
 	ArrayList<Glyph> spellbook;
 	Character kal;
-	Texture background;
+	int[] glyphX, glyphY;
 	
 	Skin skinn = new Skin(Gdx.files.internal("MyTracer/myTracer.json"));
 	Skin skin = new Skin(Gdx.files.internal("tracer/tracer-ui.json"));
@@ -47,6 +48,8 @@ public class PauseMenu implements Screen
 		diceSides = previousScreen.hud.diceSides;
 		
 		spellbook = previousScreen.kal.getSpellbook();
+		glyphX = new int[]{256, 384, 384, 384, 640, 512};
+		glyphY = new int[]{256, 256, 384, 128, 256, 256};
 		kal = previousScreen.kal;
 		// make screen button things
 		stage = new Stage();
@@ -114,12 +117,26 @@ public class PauseMenu implements Screen
 		batch.begin();
 		batch.draw(background, 0, 0,960,704);
 		batch.draw(dice, 256, 128);
+		renderGlyphs();
 		batch.end();
 		
 		stage.act(delta);
 		stage.draw();
 		
 		
+	}
+	
+	public void renderGlyphs(){
+		// get kal's die
+		Dice kalDie = kal.getDie();
+		
+		// overlay glyph on image
+		for (int i=0; i < 6; i++){
+			Glyph glySide = kalDie.getSide(i+1);
+			if (glySide != null){
+				batch.draw(new Texture(glySide.getImgPath()), glyphX[i], glyphY[i]);
+			}
+		}
 	}
 	
 	@Override
