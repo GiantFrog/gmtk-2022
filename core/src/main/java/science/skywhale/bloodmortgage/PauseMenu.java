@@ -28,7 +28,7 @@ public class PauseMenu implements Screen
 	
 	Stage stage;
 	Table table;
-	Table sideSelect, glyphSelect, space;
+	Table sideSelect, glyphSelect, space, displayGlyphInfo;
 	int editingSide = 1;
 	ArrayList<Glyph> spellbook;
 	Character kal;
@@ -57,15 +57,19 @@ public class PauseMenu implements Screen
 		space.add(new Label("              ", skin, "menu"));
 		table = new Table();
 		table.left();
-		table.padLeft(Gdx.graphics.getWidth()/5);
+		//table.padLeft(Gdx.graphics.getWidth()/5);
 		table.top();
 		table.padTop(Gdx.graphics.getHeight()/10);
 		table.setFillParent(true);
 		sideSelect = new Table();
-		sideSelect.padRight(Gdx.graphics.getWidth()/5);
+		sideSelect.padRight(Gdx.graphics.getWidth()/4);
+		sideSelect.padLeft(Gdx.graphics.getWidth()/5);
 		sideSelect.padTop(10);
 		sideSelect.setDebug(true);
 		table.add(sideSelect);
+		table.row();
+		displayGlyphInfo = new Table();
+		table.add(displayGlyphInfo);
 		//table.add(space);
 		glyphSelect = new Table();
 		glyphSelect.setDebug(true);
@@ -80,6 +84,19 @@ public class PauseMenu implements Screen
 		if (index < spellbook.size()) {
 			kal.addGlyphToDice(index, editingSide);
 			listGlyphs();
+		}
+	}
+	
+	public void updateGlyphInfo(int keycode){
+		// get index a = 29
+		int index = keycode - 29;
+		if (index < spellbook.size()){
+			Glyph sel = spellbook.get(index);
+			displayGlyphInfo.add(new Label(sel.getName(), skin, "menu"));
+			displayGlyphInfo.row();
+			displayGlyphInfo.add(new Label(sel.getFlavor(), skin, "menu"));
+			displayGlyphInfo.row();
+			displayGlyphInfo.add(new Label(sel.getDescription(), skin, "menu"));
 		}
 	}
 	
