@@ -54,10 +54,8 @@ public class GameScreen implements Screen
 		
 		Texture[] kalTextureArray = {new Texture(Gdx.files.internal("Kal.png")), new Texture(Gdx.files.internal("Kal down walk.png"))};
 		kal = new Character("Kal", 1, new Animation<Texture>(0.24f, kalTextureArray), 20);
-		kal.x = 6;
-		kal.y = 7;
-		kal.homeX = 6;
-		kal.homeY = 7;
+		kal.x = kal.homeX = 3.6f;
+		kal.y = kal.homeY = 15.2f;
 		kal.setDie(6);
 		// TESTING TESTY THIBNGS
 		testCharacter2 = new Character("Ennis", 1, new Animation<Texture>(0.24f, kalTextureArray), 20);
@@ -142,9 +140,9 @@ public class GameScreen implements Screen
 			System.out.println("Battle mode engaged");
 			// TODO: Put log on screen here
 			kal.vertiSpeed = kal.horiSpeed = 0;
-			battle = new Battle(kal, compare, onMap);
+			battle = new Battle(kal, compare, onMap, this);
 			hud.initBattleScreen();
-			currentSong.pause();
+			currentSong.stop();
 			battlemusic.play();
 		}
 	}

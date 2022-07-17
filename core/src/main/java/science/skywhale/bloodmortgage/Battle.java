@@ -9,10 +9,11 @@ public class Battle {
 	private Character winner;
 	private ArrayList<String> log;
 	private ArrayList<Character> onMap;
+	private GameScreen game;
     //private ArrayList<CharacterEntity> opponentMinions;
     //private ArrayList<CharacterEntity> playerMinions;
 
-    public Battle(Character player, Character opponent, ArrayList<Character> onMap){
+    public Battle(Character player, Character opponent, ArrayList<Character> onMap, GameScreen game){
 		player.setInBattle(true);
         this.player = new CharacterEntity(player);
         this.opponent = new CharacterEntity(opponent);
@@ -21,6 +22,7 @@ public class Battle {
 		log.add("Battle Started");
 		log.add(0, player.getName() + " vs. " + opponent.getName());
 		this.onMap = onMap;
+		this.game = game;
     }
 	
 	public String renderLog(int numLines){
@@ -72,6 +74,9 @@ public class Battle {
 			winner = player.character;
 			player.character.setInBattle(false);
 			onMap.remove(opponent.character);
+			game.battlemusic.stop();
+			game.vibing.play();
+			game.currentSong = game.vibing;
 			//return player;
 		}
 		if (player.health <= 0){
@@ -79,6 +84,9 @@ public class Battle {
 			player.character.setInBattle(false);
 			player.character.x = player.character.homeX;
 			player.character.y = player.character.homeY;
+			game.battlemusic.stop();
+			game.intro.play();
+			game.currentSong = game.intro;
 			//return opponent;
 		}
 		//return null;

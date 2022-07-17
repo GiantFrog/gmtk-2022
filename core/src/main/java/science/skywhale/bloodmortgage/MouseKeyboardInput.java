@@ -27,26 +27,26 @@ public class MouseKeyboardInput implements InputProcessor
 			case Input.Keys.W:
 			case Input.Keys.UP:
 				if (!level.kal.inBattle())
-					level.kal.vertiSpeed = 3;
+					level.kal.vertiSpeed = 2;
 				break;
 			case Input.Keys.A:
 			case Input.Keys.LEFT:
 				if (!level.kal.inBattle())
 				{
-					level.kal.horiSpeed = - 3;
+					level.kal.horiSpeed = -2;
 					level.kal.movingLeft = true;
 				}
 				break;
 			case Input.Keys.S:
 			case Input.Keys.DOWN:
 				if (!level.kal.inBattle())
-					level.kal.vertiSpeed = -3;
+					level.kal.vertiSpeed = -2;
 				break;
 			case Input.Keys.D:
 			case Input.Keys.RIGHT:
 				if (!level.kal.inBattle())
 				{
-					level.kal.horiSpeed = 3;
+					level.kal.horiSpeed = 2;
 					level.kal.movingLeft = false;
 				}
 				break;
