@@ -32,7 +32,7 @@ public class HUD
 	TextureRegion lastRoll, enemyRoll;
 	Texture lastGlyph, enemyGlyph;
 	
-	Table battleTable, table;
+	Table battleTable, table, chaeriTable;
 	Skin skin;
 	GameScreen level;
 	
@@ -68,7 +68,11 @@ public class HUD
 		table.add(battleTable);
 		chaeriDialog = new TypingLabel("", skin);
 		table.row();
-		table.add(chaeriDialog);
+		chaeriTable = new Table();
+		chaeriTable.add(chaeriDialog);
+		chaeriTable.padLeft(Gdx.graphics.getWidth()/5*2);
+		chaeriTable.padTop(Gdx.graphics.getHeight()/3);
+		table.add(chaeriTable);
 		
 		stage.addActor(table);
 		chaeri = new Character("Chaeri", 2, new Texture("chaeri.png"), 1000);
