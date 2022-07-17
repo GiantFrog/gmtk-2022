@@ -94,7 +94,7 @@ public class PauseMenu implements Screen
 		glyphSelect.clearChildren(false);
 		spellbook = previousScreen.kal.getSpellbook();
 		String alpha = "abcdefghijklmnopqrstuvwxyz";
-		String toRender = "";
+		String toRender = "Backspace Clear ruin\n";
 		for (int i=0; i < spellbook.size(); i++){
 			toRender += alpha.charAt(i) + " " + spellbook.get(i).getName() + "\n";
 		}
@@ -133,8 +133,10 @@ public class PauseMenu implements Screen
 		// overlay glyph on image
 		for (int i=0; i < 6; i++){
 			Glyph glySide = kalDie.getSide(i+1);
-			if (glySide != null){
+			try {
 				batch.draw(new Texture(glySide.getImgPath()), glyphX[i], glyphY[i]);
+			} catch (NullPointerException e){
+			
 			}
 		}
 	}

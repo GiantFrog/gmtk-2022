@@ -83,6 +83,10 @@ public class HUD
 		chaeriDialog = new TypingLabel(tooltip, skin);
 		table.add(chaeriDialog);
 	}
+	public void showChaeriTip()
+	{
+	
+	}
 	
 	public void render (float delta)
 	{

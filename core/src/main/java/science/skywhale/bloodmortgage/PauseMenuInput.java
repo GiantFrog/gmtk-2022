@@ -38,6 +38,8 @@ public class PauseMenuInput implements InputProcessor
 			case Input.Keys.NUM_6:
 				menu.setSideSelected(6);
 				break;
+			case Input.Keys.BACKSPACE:
+				menu.kal.removeGlyphToDice(menu.editingSide);
 			case Input.Keys.A:
 				menu.changeDiceSide(0);
 				break;

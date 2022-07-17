@@ -70,6 +70,10 @@ public class MouseKeyboardInput implements InputProcessor
 					level.hut.vertiSpeed = (float) -0.01;
 				}
 				break;
+				
+			case Input.Keys.C:
+				level.hud.showChaeriTip();
+				break;
 			
 			//modify speed when shift is pressed
 			case Input.Keys.SHIFT_LEFT:

@@ -185,6 +185,9 @@ public class GameScreen implements Screen
 		battlemusic = Gdx.audio.newMusic(Gdx.files.internal("battle.wav"));
 		battlemusic.setVolume(0.5f);
 		battlemusic.setLooping(true);
+		tophat_guy_anthem = Gdx.audio.newMusic(Gdx.files.internal("tophat_guy_anthem.wav"));
+		tophat_guy_anthem.setVolume(1.0f);
+		tophat_guy_anthem.setLooping(true);
 		
 		intro.play();
 		currentSong = intro;
