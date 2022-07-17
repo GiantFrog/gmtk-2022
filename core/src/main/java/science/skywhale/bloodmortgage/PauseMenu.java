@@ -27,7 +27,7 @@ public class PauseMenu implements Screen
 	
 	Stage stage;
 	Table table;
-	Table sideSelect, glyphSelect;
+	Table sideSelect, glyphSelect, space;
 	int editingSide = 1;
 	ArrayList<Glyph> spellbook;
 	Character kal;
@@ -50,17 +50,23 @@ public class PauseMenu implements Screen
 		kal = previousScreen.kal;
 		// make screen button things
 		stage = new Stage();
+		space = new Table();
+		space.add(new Label("              ", skin, "menu"));
 		table = new Table();
 		table.left();
+		table.padLeft(Gdx.graphics.getWidth()/5);
 		table.top();
+		table.padTop(Gdx.graphics.getHeight()/10);
 		table.setFillParent(true);
 		sideSelect = new Table();
-		sideSelect.padLeft(15);
-		sideSelect.padTop(15);
+		sideSelect.padRight(Gdx.graphics.getWidth()/5);
+		sideSelect.padTop(10);
 		sideSelect.setDebug(true);
 		table.add(sideSelect);
+		//table.add(space);
 		glyphSelect = new Table();
 		glyphSelect.setDebug(true);
+		glyphSelect.left();
 		table.add(glyphSelect);
 		stage.addActor(table);
 		
