@@ -26,6 +26,7 @@ public class HUD
 	
 	Texture d6Texture;
 	TextureRegion one, two, three, four, five, six;
+	TextureRegion[] diceSides;
 	
 	Table table;
 	Skin skin;
@@ -62,6 +63,7 @@ public class HUD
 		four = new TextureRegion(d6Texture, 128, 0, 128, 128);
 		five = new TextureRegion(d6Texture, 256, 128, 128, 128);
 		six = new TextureRegion(d6Texture, 384, 128, 128, 128);
+		diceSides = new TextureRegion[]{one, two, three, four, five, six};
 	}
 	
 	public void updateBattleStage(String updates){
