@@ -20,6 +20,46 @@ public class PauseMenuInput implements InputProcessor
 			case Input.Keys.ESCAPE:
 				menu.previousScreen.game.setScreen(menu.previousScreen);
 				break;
+			case Input.Keys.NUM_1:
+				menu.setSideSelected(1);
+				break;
+			case Input.Keys.NUM_2:
+				menu.setSideSelected(2);
+				break;
+			case Input.Keys.NUM_3:
+				menu.setSideSelected(3);
+				break;
+			case Input.Keys.NUM_4:
+				menu.setSideSelected(4);
+				break;
+			case Input.Keys.NUM_5:
+				menu.setSideSelected(5);
+				break;
+			case Input.Keys.NUM_6:
+				menu.setSideSelected(6);
+				break;
+			case Input.Keys.A:
+				menu.changeDiceSide(0);
+				break;
+			case Input.Keys.B:
+				menu.changeDiceSide(1);
+				break;
+			case Input.Keys.C:
+				menu.changeDiceSide(2);
+				break;
+			case Input.Keys.D:
+				menu.changeDiceSide(3);
+				break;
+			case Input.Keys.E:
+				menu.changeDiceSide(4);
+				break;
+			case Input.Keys.F:
+				menu.changeDiceSide(5);
+				break;
+			case Input.Keys.G:
+				menu.changeDiceSide(6);
+				break;
+				
 		}
 		return false;
 	}

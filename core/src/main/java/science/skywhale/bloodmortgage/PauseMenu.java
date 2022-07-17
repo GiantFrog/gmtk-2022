@@ -8,9 +8,13 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
+import com.github.tommyettinger.textra.TypingLabel;
+import science.skywhale.bloodmortgage.masterspellbook.Glyph;
+
+import java.util.ArrayList;
 
 public class PauseMenu implements Screen
 {
@@ -21,10 +25,14 @@ public class PauseMenu implements Screen
 	TextureRegion[] diceSides;
 	
 	Stage stage;
-	Table diceButtons;
-	Button btnOne, btnTwo, btnThree, btnFour, btnFive, btnSix;
-	ClickListener clThree;
+	Table table;
+	Table sideSelect, glyphSelect;
+	int editingSide = 1;
+	ArrayList<Glyph> spellbook;
+	Character kal;
 	
+	Skin skinn = new Skin(Gdx.files.internal("MyTracer/myTracer.json"));
+	Skin skin = new Skin(Gdx.files.internal("tracer/tracer-ui.json"));
 	public PauseMenu (GameScreen previousScreen)
 	{
 		this.previousScreen = previousScreen;
@@ -34,35 +42,50 @@ public class PauseMenu implements Screen
 		dice = previousScreen.hud.d6Texture;
 		diceSides = previousScreen.hud.diceSides;
 		
+		spellbook = previousScreen.kal.getSpellbook();
+		kal = previousScreen.kal;
 		// make screen button things
 		stage = new Stage();
-		diceButtons = new Table();
-		diceButtons.setDebug(true);
-		diceButtons.setFillParent(true);
-		btnOne = new Button(previousScreen.hud.skin);
-		btnTwo = new Button(previousScreen.hud.skin);
-		btnThree = new Button(previousScreen.hud.skin, "home");
-		btnFour = new Button(previousScreen.hud.skin);
-		btnFive = new Button(previousScreen.hud.skin);
-		btnSix = new Button(previousScreen.hud.skin);
-		//previousScreen.hud.skin.
-		clThree = new ClickListener();
-		btnThree.addListener(clThree);
-		makeDiceButtonTable();
-		stage.addActor(diceButtons);
+		table = new Table();
+		table.left();
+		table.top();
+		table.setFillParent(true);
+		sideSelect = new Table();
+		sideSelect.padLeft(15);
+		sideSelect.padTop(15);
+		sideSelect.setDebug(true);
+		table.add(sideSelect);
+		glyphSelect = new Table();
+		glyphSelect.setDebug(true);
+		table.add(glyphSelect);
+		stage.addActor(table);
+		
+		setSideSelected(1);
 	}
 	
-	public void makeDiceButtonTable(){
-		
-		diceButtons.add();
-		diceButtons.add(btnThree);
-		diceButtons.add();
-		diceButtons.add();
-		diceButtons.row();
-		diceButtons.add(btnOne);
-		diceButtons.add(btnTwo);
-		diceButtons.add(btnSix);
-		diceButtons.add(btnFive);
+	public void changeDiceSide(int index){
+		if (index < spellbook.size()) {
+			kal.addGlyphToDice(index, editingSide);
+			listGlyphs();
+		}
+	}
+	
+	public void setSideSelected(int side){
+		editingSide = side;
+		sideSelect.clearChildren(false);
+		sideSelect.add(new TypingLabel(side + " selected", skin));
+		listGlyphs();
+	}
+	
+	public void listGlyphs(){
+		glyphSelect.clearChildren(false);
+		spellbook = previousScreen.kal.getSpellbook();
+		String alpha = "abcdefghijklmnopqrstuvwxyz";
+		String toRender = "";
+		for (int i=0; i < spellbook.size(); i++){
+			toRender += alpha.charAt(i) + " " + spellbook.get(i).getName() + "\n";
+		}
+		glyphSelect.add(new TypingLabel(toRender, skin));
 	}
 	
 	@Override
@@ -84,6 +107,7 @@ public class PauseMenu implements Screen
 		
 		stage.act(delta);
 		stage.draw();
+		
 		
 	}
 	
