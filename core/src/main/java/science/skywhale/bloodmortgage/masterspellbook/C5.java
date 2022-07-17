@@ -10,7 +10,7 @@ public class C5 extends Glyph {
 		this.owner = owner;
 		this.glyphType = 0;
 		this.flavor = "Look at them enjoying a faceful of celebration!";
-		this.imgPath = "runes/c1.png";
+		this.imgPath = "runes/c5.png";
 	}
 	
 	@Override

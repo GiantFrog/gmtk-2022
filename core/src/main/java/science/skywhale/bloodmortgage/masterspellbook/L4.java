@@ -10,6 +10,7 @@ public class L4 extends Glyph {
 		this.owner = owner;
 		this.glyphType = 2;  // TODO: MODIFY FOR GLYPH TYPE
 		this.flavor = "Become the immovable obstacle and the unstoppable force!";
+		this.imgPath = "runes/L4.png";
 	}
 	
 	@Override

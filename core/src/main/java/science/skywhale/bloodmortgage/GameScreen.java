@@ -141,7 +141,7 @@ public class GameScreen implements Screen
 		onMap.add(birch);
 		
 		Texture chaeriTexture = new Texture("chaeri.png");
-		chaeriNPC = new Character("Chaeri_NPC",1,chaeriTexture,200);
+		chaeriNPC = new Character("Chaeri_NPC",1,chaeriTexture,2);
 		chaeriNPC.x = 4;
 		chaeriNPC.y = 13;
 		chaeriNPC.setDie(6);
