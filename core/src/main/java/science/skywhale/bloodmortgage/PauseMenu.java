@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -76,7 +77,7 @@ public class PauseMenu implements Screen
 	public void setSideSelected(int side){
 		editingSide = side;
 		sideSelect.clearChildren(false);
-		sideSelect.add(new TypingLabel(side + " selected", skin));
+		sideSelect.add(new TypingLabel(side + " selected", skin, "menu"));
 		listGlyphs();
 	}
 	
@@ -88,7 +89,7 @@ public class PauseMenu implements Screen
 		for (int i=0; i < spellbook.size(); i++){
 			toRender += alpha.charAt(i) + " " + spellbook.get(i).getName() + "\n";
 		}
-		glyphSelect.add(new TypingLabel(toRender, skin));
+		glyphSelect.add(new Label(toRender, skin, "menu"));
 	}
 	
 	@Override
