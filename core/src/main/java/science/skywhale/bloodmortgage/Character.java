@@ -14,6 +14,7 @@ public class Character {
     private int battleBlock = 0;
 	private int toHeal = 0;
 	private int maxHealth;
+	private Boolean inBattle = false;
 
 	float x = 0, y = 0, horiSpeed = 0, vertiSpeed = 0, elapsedTime = 0;
 	boolean movingLeft = false, sprinting = false;
@@ -103,6 +104,12 @@ public class Character {
 	}
 	public void addToMaxHealth(int add){
 		maxHealth += add;
+	}
+	public void setInBattle(Boolean inBattle){
+		this.inBattle = inBattle;
+	}
+	public Boolean getInBattle(){
+		return inBattle;
 	}
 	
 	// battle specific methods for tracking things

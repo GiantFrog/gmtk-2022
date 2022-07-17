@@ -12,6 +12,7 @@ public class Battle {
     //private ArrayList<CharacterEntity> playerMinions;
 
     public Battle(Character player, Character opponent){
+		player.setInBattle(true);
         this.player = new CharacterEntity(player);
         this.opponent = new CharacterEntity(opponent);
 		this.winner = null;
