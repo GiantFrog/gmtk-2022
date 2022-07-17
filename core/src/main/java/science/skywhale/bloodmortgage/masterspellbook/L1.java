@@ -10,6 +10,7 @@ public class L1 extends Glyph {
 		this.owner = owner;
 		this.glyphType = 3;  // TODO: MODIFY FOR GLYPH TYPE
 		this.flavor = "The might of the forest stands by your side!";
+		this.imgPath = "runes/L1.png";
 	}
 	
 	@Override
