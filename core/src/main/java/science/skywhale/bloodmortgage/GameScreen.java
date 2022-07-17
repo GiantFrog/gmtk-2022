@@ -32,7 +32,7 @@ public class GameScreen implements Screen
 	double leftToZoom = 0;
 	
 	HUD hud;
-	Character kal, testCharacter2;
+	Character kal, testCharacter2, scrungle, hut, athdranax, rand, birch, vampcat;
 	Music intro, vibing, battlemusic, tophat_guy_anthem, currentSong;
 	
 	Battle battle;
@@ -58,18 +58,54 @@ public class GameScreen implements Screen
 		kal.y = kal.homeY = 15.2f;
 		kal.setDie(6);
 		// TESTING TESTY THIBNGS
-		testCharacter2 = new Character("Ennis", 1, new Animation<Texture>(0.24f, kalTextureArray), 20);
-		testCharacter2.x = 9;
-		testCharacter2.y = 9;
-		testCharacter2.setDie(6);
-		onMap.add(testCharacter2);
+		//testCharacter2 = new Character("Ennis", 1, new Animation<Texture>(0.24f, kalTextureArray), 20);
+		//testCharacter2.x = 9;
+		//testCharacter2.y = 9;
+		//testCharacter2.setDie(6);
+		//onMap.add(testCharacter2);
+		Texture scrungleTexture = new Texture(Gdx.files.internal("Generic Demon.png"));
+		scrungle = new Character("Scrungle",1,scrungleTexture,25);
+		scrungle.x = 12;
+		scrungle.y = 12;
+		scrungle.setDie(6);
+		onMap.add(scrungle);
+		
+		Texture[] hutTextureArray = {new Texture(Gdx.files.internal("baba yaga house.png")), new Texture(Gdx.files.internal("baba yaga house down.png"))};
+		hut = new Character("the Hut of Baba Yaga", 1, new Animation<Texture>(0.24f, hutTextureArray),60);
+		hut.x = 16;
+		hut.y = 3;
+		hut.setDie(6);
+		onMap.add(hut);
+		
+		Texture vampcatTexture = new Texture("vampire cat.png");
+		vampcat = new Character("Vampire Cat",1,vampcatTexture,45);
+		vampcat.x = 17;
+		vampcat.y = 15;
+		vampcat.setDie(6);
+		onMap.add(vampcat);
+		
+		Texture randTexture = new Texture("bob.png");
+		rand = new Character("Rand the Rock",1,randTexture,2000);
+		rand.x = 10;
+		rand.y = 6;
+		rand.setDie(6);
+		onMap.add(rand);
+		
+		Texture[] tophatTextureArray = {new Texture(Gdx.files.internal("flipped Athdrananax.png")), new Texture(Gdx.files.internal("flipped Athdrananax down.png"))};
+		athdranax = new Character("Athdranax",1,new Animation<Texture>(0.24f, tophatTextureArray),20);
+		athdranax.x = 3;
+		athdranax.y = 10;
+		athdranax.setDie(6);
+		onMap.add(athdranax);
+		
+
 		
 		
 		hud = new HUD(camera, this);
 		
 		//audio setup
 		intro = Gdx.audio.newMusic(Gdx.files.internal("thewandererstheme.wav"));
-		intro.setVolume(0.9f);
+		intro.setVolume(0.8f);
 		intro.setLooping(true);
 		vibing = Gdx.audio.newMusic(Gdx.files.internal("vibing.wav"));
 		vibing.setVolume(0.5f);
@@ -77,9 +113,6 @@ public class GameScreen implements Screen
 		battlemusic = Gdx.audio.newMusic(Gdx.files.internal("battle.wav"));
 		battlemusic.setVolume(0.5f);
 		battlemusic.setLooping(true);
-		tophat_guy_anthem = Gdx.audio.newMusic(Gdx.files.internal("tophat_guy_anthem.wav"));
-		tophat_guy_anthem.setVolume(1.0f);
-		tophat_guy_anthem.setLooping(true);
 		
 		intro.play();
 		currentSong = intro;
