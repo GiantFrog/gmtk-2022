@@ -74,7 +74,7 @@ public class Battle {
 			winner = player.character;
 			player.character.setInBattle(false);
 			onMap.remove(opponent.character);
-			game.battlemusic.stop();
+			game.enemyTheme.stop();
 			game.vibing.play();
 			game.currentSong = game.vibing;
 			//return player;
@@ -84,7 +84,7 @@ public class Battle {
 			player.character.setInBattle(false);
 			player.character.x = player.character.homeX;
 			player.character.y = player.character.homeY;
-			game.battlemusic.stop();
+			game.enemyTheme.stop();
 			game.intro.play();
 			game.currentSong = game.intro;
 			//return opponent;
