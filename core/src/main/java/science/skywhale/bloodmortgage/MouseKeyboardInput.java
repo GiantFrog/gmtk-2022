@@ -88,7 +88,8 @@ public class MouseKeyboardInput implements InputProcessor
 		// ch dialog
 		if (level.hud.chaeriDialogUp) {
 			level.hud.chaeriDialogUp = false;
-			level.hud.chaeriDialog.setText("Cleared");
+			level.hud.chaeriCounter++;
+			level.hud.chaeriDialog.setText("");
 		}
 		
 	}

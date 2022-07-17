@@ -57,6 +57,7 @@ public class HUD
 		table.setDebug(true); // This is optional, but enables debug lines for tables.
 		table.setFillParent(true);
 		battleTable = new Table();
+		battleTable.padBottom(Gdx.graphics.getWidth()/5);
 		//battleTable.left();
 		//battleTable.top();
 		//battleTable.padTop(20);
@@ -87,6 +88,7 @@ public class HUD
 		
 		// character dialog controls
 		chaeriDialogUp = false;
+		chaeriCounter = 0;
 	}
 	
 	public void updateBattleStage(String updates){
@@ -101,14 +103,16 @@ public class HUD
 		battleTable.row();
 		
 		tooltip = "[WHITE]Press R to {SHAKE}roll!";
-		chaeriDialog = new TypingLabel(tooltip, skin);
-		battleTable.add(chaeriDialog);
+		battleTable.add(new TypingLabel(tooltip, skin));
 	}
 	public void showChaeriTip()
 	{
 		// run everytime press c
 		chaeriDialogUp = true;
-		chaeriDialog.setText("Cat");
+		if (chaeriCounter >= Dialogs.chaeriDialogList.length){
+			chaeriCounter = 0;
+		}
+		chaeriDialog.setText(Dialogs.chaeriDialogList[chaeriCounter]);
 		// remove when player starts moving again
 	}
 	
