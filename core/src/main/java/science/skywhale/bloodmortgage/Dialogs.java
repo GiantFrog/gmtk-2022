@@ -9,32 +9,42 @@ public class Dialogs
 		return addLineBreaks(str, 40);
 	}
 	public static String addLineBreaks(String str, int lineLength) {
-		int lenStr = str.length();
-		String newStr = "";
-		int endIndex = lineLength;
-		int startIndex = 0;
-		while (startIndex < lenStr){
-			String newSub = str.substring(startIndex, endIndex);
-			int lastSpace = newSub.lastIndexOf(" ");
-			//System.out.println("Start: " + startIndex + " end: " + endIndex + " last: " + lastSpace);
-			if (lastSpace > 0){
-				endIndex = startIndex + lastSpace;
+		try
+		{
+			int lenStr = str.length();
+			String newStr = "";
+			int endIndex = lineLength;
+			int startIndex = 0;
+			while (startIndex < lenStr)
+			{
+				String newSub = str.substring(startIndex, endIndex);
+				int lastSpace = newSub.lastIndexOf(" ");
+				//System.out.println("Start: " + startIndex + " end: " + endIndex + " last: " + lastSpace);
+				if (lastSpace > 0)
+				{
+					endIndex = startIndex + lastSpace;
+				}
+				//giSystem.out.println("Start: " + startIndex + " end: " + endIndex);
+				newSub = str.substring(startIndex, endIndex);
+				newStr += newSub + "\n";
+				
+				if (lastSpace > 0)
+				{
+					startIndex += newSub.length() + 1;
+				} else
+				{
+					startIndex += lineLength;
+				}
+				endIndex += lineLength;
+				if (endIndex > lenStr)
+				{
+					endIndex = lenStr;
+				}
 			}
-			//giSystem.out.println("Start: " + startIndex + " end: " + endIndex);
-			newSub = str.substring(startIndex, endIndex);
-			newStr += newSub + "\n";
-			
-			if (lastSpace > 0){
-				startIndex += newSub.length() + 1;
-			} else {
-				startIndex += lineLength;
-			}
-			endIndex += lineLength;
-			if (endIndex > lenStr){
-				endIndex = lenStr;
-			}
+			return newStr;
+		} catch (Exception e){
+			return str;
 		}
-		return newStr;
 	}
 	static String [] chaeriDialogList = new String[]{"Move and press 'C' again to hear a new piece of advice!",
 													 "When in the enchanting menu, you can hold Shift then type" +
