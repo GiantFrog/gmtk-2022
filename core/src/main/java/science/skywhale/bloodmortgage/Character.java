@@ -53,12 +53,32 @@ public class Character {
 
 	// spellbook methods
     private void initSpellbook(){
+		//Base
         spellbook.add(new C1(this));
 		spellbook.add(new C2(this));
 		spellbook.add(new C3(this));
 		spellbook.add(new C4(this));
 		spellbook.add(new C5(this));
 		spellbook.add(new C11(this));
+		//Full List
+		spellbook.add(new C6(this));
+		spellbook.add(new C7(this));
+		spellbook.add(new C8(this));
+		spellbook.add(new C15(this));
+		spellbook.add(new C16(this));
+		spellbook.add(new C18(this));
+		spellbook.add(new U1(this));
+		spellbook.add(new U2(this));
+		spellbook.add(new U4(this));
+		spellbook.add(new U5(this));
+		spellbook.add(new U6(this));
+		spellbook.add(new U7(this));
+		spellbook.add(new U11(this));
+		spellbook.add(new R1(this));
+		spellbook.add(new R7(this));
+		spellbook.add(new R8(this));
+		spellbook.add(new L1(this));
+		spellbook.add(new L4(this));
     }
 	public ArrayList<Glyph> getSpellbook(){
 		return spellbook;
@@ -155,5 +175,9 @@ public class Character {
 		}
 		
 		batch.draw(texture, x, y, (float)texture.getWidth()/tilesize, (float)texture.getHeight()/tilesize, 0, 0, 64, 64, movingLeft, false);
+	}
+	
+	public void addGlyphToDice()
+	{
 	}
 }

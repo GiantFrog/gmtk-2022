@@ -105,8 +105,8 @@ public class PauseMenu implements Screen
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		batch.begin();
-		batch.draw(background, 0, 0);
-		batch.draw(dice, 10, 10);
+		batch.draw(background, 0, 0,960,704);
+		batch.draw(dice, 256, 128);
 		batch.end();
 		
 		stage.act(delta);

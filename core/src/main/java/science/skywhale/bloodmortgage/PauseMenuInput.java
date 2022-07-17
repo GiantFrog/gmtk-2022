@@ -59,7 +59,68 @@ public class PauseMenuInput implements InputProcessor
 			case Input.Keys.G:
 				menu.changeDiceSide(6);
 				break;
+			case Input.Keys.H:
+				menu.changeDiceSide(7);
+				break;
+			case Input.Keys.I:
+				menu.changeDiceSide(8);
+				break;
+			case Input.Keys.J:
+				menu.changeDiceSide(9);
+				break;
+			case Input.Keys.K:
+				menu.changeDiceSide(10);
+				break;
+			case Input.Keys.L:
+				menu.changeDiceSide(11);
+				break;
+			case Input.Keys.M:
+				menu.changeDiceSide(12);
+				break;
+			case Input.Keys.N:
+				menu.changeDiceSide(13);
+				break;
+			case Input.Keys.O:
+				menu.changeDiceSide(14);
+				break;
+			case Input.Keys.P:
+				menu.changeDiceSide(15);
+				break;
+			case Input.Keys.Q:
+				menu.changeDiceSide(16);
+				break;
+			case Input.Keys.R:
+				menu.changeDiceSide(17);
+				break;
+			case Input.Keys.S:
+				menu.changeDiceSide(18);
+				break;
+			case Input.Keys.T:
+				menu.changeDiceSide(19);
+				break;
+			case Input.Keys.U:
+				menu.changeDiceSide(20);
+				break;
+			case Input.Keys.V:
+				menu.changeDiceSide(21);
+				break;
+			case Input.Keys.W:
+				menu.changeDiceSide(22);
+				break;
+			case Input.Keys.X:
+				menu.changeDiceSide(23);
+				break;
+			case Input.Keys.Y:
+				menu.changeDiceSide(24);
+				break;
+			case Input.Keys.Z:
+				menu.changeDiceSide(25);
+				break;
+			//TODO MAKE HOLDING SHIFT THEN PRESSING A LETTER GIVE THE DESCRIPTION
+			case Input.Keys.SHIFT_LEFT:
+			case Input.Keys.SHIFT_RIGHT:
 				
+				break;
 		}
 		return false;
 	}
