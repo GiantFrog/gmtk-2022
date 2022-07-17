@@ -32,7 +32,7 @@ public class GameScreen implements Screen
 	double leftToZoom = 0;
 	
 	HUD hud;
-	Character kal, testCharacter2, scrungle, hut, athdranax, rand, birch, vampcat, matty, scraggy, scrumpus;
+	Character kal, testCharacter2, scrungle, hut, athdranax, rand, birch, vampcat, matty, scraggy, scrumpus, chaeriNPC;
 	Music intro, vibing, battlemusic, tophat_guy_anthem, currentSong;
 	
 	Battle battle;
@@ -64,7 +64,7 @@ public class GameScreen implements Screen
 		//testCharacter2.setDie(6);
 		//onMap.add(testCharacter2);
 		Texture scrungleTexture = new Texture(Gdx.files.internal("Generic Demon.png"));
-		scrungle = new Character("Scrungle",1,scrungleTexture,25);
+		scrungle = new Character("Scrungle",1,scrungleTexture,30);
 		scrungle.x = 12;
 		scrungle.y = 12;
 		scrungle.setDie(6);
@@ -110,7 +110,7 @@ public class GameScreen implements Screen
 		onMap.add(rand);
 		
 		Texture[] tophatTextureArray = {new Texture(Gdx.files.internal("flipped Athdrananax.png")), new Texture(Gdx.files.internal("flipped Athdrananax down.png"))};
-		athdranax = new Character("Athdranax",1,new Animation<Texture>(0.24f, tophatTextureArray),20);
+		athdranax = new Character("Athdranax",1,new Animation<Texture>(0.24f, tophatTextureArray),15);
 		athdranax.x = 3;
 		athdranax.y = 10;
 		athdranax.setDie(6);
@@ -136,7 +136,14 @@ public class GameScreen implements Screen
 		birch.setDie(6);
 		onMap.add(birch);
 		
-		scraggy = new Character("Scraggy",1,scrungleTexture,25);
+		Texture chaeriTexture = new Texture("chaeri.png");
+		chaeriNPC = new Character("Chaeri_NPC",1,chaeriTexture,200);
+		chaeriNPC.x = 4;
+		chaeriNPC.y = 13;
+		chaeriNPC.setDie(6);
+		onMap.add(chaeriNPC);
+		
+		scraggy = new Character("Scraggy",1,scrungleTexture,30);
 		scraggy.x = 10;
 		scraggy.y = 6;
 		scraggy.setDie(6);
@@ -148,7 +155,7 @@ public class GameScreen implements Screen
 		scraggy.addGlyphToDice(1,3);
 		onMap.add(scraggy);
 		
-		scrumpus = new Character("Scraggy",1,scrungleTexture,25);
+		scrumpus = new Character("Scraggy",1,scrungleTexture,30);
 		scrumpus.x = 8;
 		scrumpus.y = 16;
 		scrumpus.setDie(6);
@@ -159,6 +166,8 @@ public class GameScreen implements Screen
 		scrumpus.addGlyphToDice(4,1);
 		scrumpus.addGlyphToDice(1,3);
 		onMap.add(scrumpus);
+		
+		
 		
 		hud = new HUD(camera, this);
 		
