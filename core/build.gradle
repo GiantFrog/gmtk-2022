@@ -14,4 +14,5 @@ dependencies {
 	api "com.github.tommyettinger:regexodus:$regExodusVersion"
 	api "com.github.tommyettinger:textratypist:$textratypistVersion"
 	api "de.tomgrill.gdxdialogs:gdx-dialogs-core:$dialogsVersion"
+    api "com.crashinvaders.lml:gdx-lml:$lmlVersion"
 }

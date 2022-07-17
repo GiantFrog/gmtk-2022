@@ -28,38 +28,27 @@ import com.github.tommyettinger.textra.TypingLabel;
  */
 public class GameScreen implements Screen
 {
-	private static final int TILESIZE = 64;
+	static final int TILESIZE = 64;
 	
 	OrthographicCamera camera;
 	ExtendViewport viewport;
-	FitViewport hudView;
 	private MouseKeyboardInput mouseKeyboardInput;
 	private OrthogonalTiledMapRenderer mapRenderer;
 	private TiledMap map;
-	private SpriteBatch batch, hudBatch;
+	private SpriteBatch batch;
 	double leftToZoom = 0;
 	
-	Stage stage;
-	Table bigTable;
-	
-	Character testCharacter, chaeri;
-	TypingLabel chaeriDialog;
-	String tooltip;
-	
-	Texture d6Texture;
-	TextureRegion one, two, three, four, five, six;
-	
+	HUD hud;
+	Character testCharacter;
 	Music intro, vibing;
 	
 	public GameScreen()
 	{
 		batch = new SpriteBatch();
-		hudBatch = new SpriteBatch();
 		map = new TmxMapLoader().load("empty-map.tmx");
 		mapRenderer = new OrthogonalTiledMapRenderer(map, (float)1 / TILESIZE);
 		camera = new OrthographicCamera();
 		viewport = new ExtendViewport(10, 10, camera);
-		hudView = new FitViewport((float)Gdx.graphics.getWidth()/TILESIZE, (float)Gdx.graphics.getHeight()/TILESIZE, camera);
 		camera.setToOrtho(false, 8, 8);
 		camera.zoom = 0.7f;
 		mapRenderer.setView(camera);
@@ -67,34 +56,17 @@ public class GameScreen implements Screen
 		mouseKeyboardInput = new MouseKeyboardInput(this);
 		Gdx.input.setInputProcessor(mouseKeyboardInput);
 		
-		stage = new Stage(hudView);
-		bigTable = new Table();
-		bigTable.setFillParent(true);
-		stage.addActor(bigTable);
-		tooltip = "Press R to {SHAKE}roll!";
-		chaeriDialog = new TypingLabel(tooltip, new Font("fairies-32.fnt"));
-		bigTable.add(chaeriDialog);
-		
 		Texture[] kalTextureArray = {new Texture(Gdx.files.internal("Kal.png")), new Texture(Gdx.files.internal("Kal down walk.png"))};
 		testCharacter = new Character("Kal", 1, new Animation<Texture>(0.24f, kalTextureArray), 20);
 		testCharacter.x = 6;
 		testCharacter.y = 7;
-		chaeri = new Character("Chaeri", 2, new Texture("chaeri.png"), 1000);
-		chaeri.x = (float)Gdx.graphics.getWidth()/TILESIZE + 100;
-		chaeri.y = (float)Gdx.graphics.getHeight()/TILESIZE;
 		
-		//dice textures
-		d6Texture = new Texture(Gdx.files.internal("basic dice.png"));
-		one = new TextureRegion(d6Texture, 0, 128, 128, 128);
-		two = new TextureRegion(d6Texture, 128, 128, 128, 128);
-		three = new TextureRegion(d6Texture, 128, 256, 128, 128);
-		four = new TextureRegion(d6Texture, 128, 0, 128, 128);
-		five = new TextureRegion(d6Texture, 256, 128, 128, 128);
-		six = new TextureRegion(d6Texture, 384, 128, 128, 128);
+		hud = new HUD(camera);
 		
 		//audio setup
-		//intro = Gdx.audio.newMusic(Gdx.files.internal("intro.mp3"));
-		//intro.setVolume(0.8f);
+		intro = Gdx.audio.newMusic(Gdx.files.internal("thewandererstheme.wav"));
+		intro.setVolume(0.7f);
+		intro.setLooping(true);
 		vibing = Gdx.audio.newMusic(Gdx.files.internal("vibing.wav"));
 		vibing.setVolume(0.5f);
 		vibing.setLooping(true);
@@ -136,13 +108,7 @@ public class GameScreen implements Screen
 		batch.end();
 		
 		//render overlay & HUD
-		//TODO fix aspect ratio of things rendered in this way (they have no viewport)
-		stage.act(delta);
-		hudBatch.begin();
-		hudBatch.draw(two, 40, 40);
-		chaeri.render(delta, hudBatch, 1);
-		//stage.draw();
-		hudBatch.end();
+		hud.render(delta);
 	}
 	
 	@Override
@@ -150,9 +116,7 @@ public class GameScreen implements Screen
 	{
 		// Resize your screen here. The parameters represent the new window size.
 		viewport.update(width, height);
-		hudView.update(width, height);
-		chaeri.x = 560;
-		chaeri.y = 5;
+		hud.updateView(width, height);
 	}
 	
 	@Override

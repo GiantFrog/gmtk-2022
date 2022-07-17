@@ -12,6 +12,7 @@ public class Battle {
     //private ArrayList<CharacterEntity> playerMinions;
 
     public Battle(Character player, Character opponent){
+		player.setInBattle(true);
         this.player = new CharacterEntity(player);
         this.opponent = new CharacterEntity(opponent);
 		this.winner = null;
@@ -22,8 +23,13 @@ public class Battle {
 	
 	public String renderLog(int numLines){
 		String output = "";
-		for(int i =0; i < log.size()-numLines;i++){
+		for(int i =0; i < numLines-log.size();i++){
 			output += "\n";
+			numLines = log.size();
+		}
+		
+		for (int i=numLines-1; i >= 0; i--){
+			output += log.get(i) + "\n";
 		}
 		
 		return output;

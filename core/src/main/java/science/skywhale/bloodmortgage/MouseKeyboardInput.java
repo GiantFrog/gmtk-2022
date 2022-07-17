@@ -68,6 +68,12 @@ public class MouseKeyboardInput implements InputProcessor
 			case Input.Keys.SHIFT_RIGHT:
 				level.testCharacter.sprinting = false;
 		}
+		if (level.testCharacter.getInBattle()){
+			switch (keycode){
+				case Input.Keys.R:
+					System.out.println("R pressed");
+			}
+		}
 		return false;
 	}
 	
