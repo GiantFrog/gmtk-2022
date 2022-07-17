@@ -102,6 +102,16 @@ public class Character {
 		}
 	}
 	
+	public void removeGlyphToDice(int diceSide){
+		removeGlyphToDice(diceSide, 0);
+	}
+	public void removeGlyphToDice(int diceSide, int diceNum){
+		Glyph oldGlyph = dice[diceNum].clearSide(diceSide);
+		if (oldGlyph != null){
+			spellbook.add(oldGlyph);
+		}
+	}
+	
 	// set Dice
 	public void setDie(int numSides){
 		setDie(numSides, 0);

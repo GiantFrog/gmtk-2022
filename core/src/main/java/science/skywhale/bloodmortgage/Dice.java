@@ -10,6 +10,15 @@ public class Dice {
 
     }
 
+	public Glyph clearSide(int side){
+		Glyph oldGlyph = glyphs[side-1];
+		if (oldGlyph != null) {
+			oldGlyph.removeFromDice();
+		}
+		glyphs[side-1] = null;
+		return oldGlyph;
+	}
+	
     public Glyph setSide(Glyph newSide, int side){
 		Glyph oldGlyph = glyphs[side-1];
 		if (oldGlyph != null) {
