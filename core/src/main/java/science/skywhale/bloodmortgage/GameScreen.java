@@ -35,7 +35,7 @@ public class GameScreen implements Screen
 	
 	HUD hud;
 	Character kal, testCharacter2, scrungle, hut, athdranax, rand, birch, vampcat, matty, scraggy, scrumpus, chaeriNPC;
-	Music intro, vibing, battlemusic, tophat_guy_anthem, currentSong;
+	Music intro, vibing, battlemusic, tophat_guy_anthem, currentSong, enemyTheme;
 	
 	Battle battle;
 	ArrayList<Character> onMap = new ArrayList<Character>();
@@ -254,8 +254,16 @@ public class GameScreen implements Screen
 			kal.vertiSpeed = kal.horiSpeed = 0;
 			battle = new Battle(kal, compare, onMap, this);
 			hud.initBattleScreen();
+			switch (compare.getName())
+			{
+				case "Athdranax":
+					enemyTheme = tophat_guy_anthem;
+					break;
+				default:
+					enemyTheme = battlemusic;
+			}
 			currentSong.stop();
-			battlemusic.play();
+			enemyTheme.play();
 		}
 	}
 	
