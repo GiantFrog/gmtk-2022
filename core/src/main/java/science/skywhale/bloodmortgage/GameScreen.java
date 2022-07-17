@@ -93,13 +93,16 @@ public class GameScreen implements Screen
 		six = new TextureRegion(d6Texture, 384, 128, 128, 128);
 		
 		//audio setup
-		//intro = Gdx.audio.newMusic(Gdx.files.internal("intro.mp3"));
-		//intro.setVolume(0.8f);
+		intro = Gdx.audio.newMusic(Gdx.files.internal("thewandererstheme.mp3"));
+		intro.setVolume(0.7f);
+		intro.setLooping(true);
 		vibing = Gdx.audio.newMusic(Gdx.files.internal("vibing.wav"));
 		vibing.setVolume(0.5f);
 		vibing.setLooping(true);
 		
-		vibing.play();
+		intro.play();
+		
+		
 	}
 	
 	@Override
