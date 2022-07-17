@@ -33,7 +33,7 @@ public class GameScreen implements Screen
 	
 	HUD hud;
 	Character kal, testCharacter2;
-	Music intro, vibing, battlemusic, currentSong;
+	Music intro, vibing, battlemusic, tophat_guy_anthem, currentSong;
 	
 	Battle battle;
 	ArrayList<Character> onMap = new ArrayList<Character>();
@@ -69,7 +69,7 @@ public class GameScreen implements Screen
 		
 		//audio setup
 		intro = Gdx.audio.newMusic(Gdx.files.internal("thewandererstheme.wav"));
-		intro.setVolume(0.8f);
+		intro.setVolume(0.9f);
 		intro.setLooping(true);
 		vibing = Gdx.audio.newMusic(Gdx.files.internal("vibing.wav"));
 		vibing.setVolume(0.5f);
@@ -77,6 +77,9 @@ public class GameScreen implements Screen
 		battlemusic = Gdx.audio.newMusic(Gdx.files.internal("battle.wav"));
 		battlemusic.setVolume(0.5f);
 		battlemusic.setLooping(true);
+		tophat_guy_anthem = Gdx.audio.newMusic(Gdx.files.internal("tophat_guy_anthem.wav"));
+		tophat_guy_anthem.setVolume(1.0f);
+		tophat_guy_anthem.setLooping(true);
 		
 		intro.play();
 		currentSong = intro;
