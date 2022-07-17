@@ -28,9 +28,11 @@ public class MouseKeyboardInput implements InputProcessor
 			case Input.Keys.UP:
 				clearScreenOnMove();
 				if (!level.kal.inBattle() && !level.hud.battleOver)
+				{
 					level.kal.vertiSpeed = 2;
-					level.athdranax.vertiSpeed = (float)0.01;
-					level.hut.vertiSpeed = (float)0.01;
+					level.athdranax.vertiSpeed = (float) 0.01;
+					level.hut.vertiSpeed = (float) 0.01;
+				}
 				break;
 			case Input.Keys.A:
 			case Input.Keys.LEFT:
@@ -47,9 +49,11 @@ public class MouseKeyboardInput implements InputProcessor
 			case Input.Keys.DOWN:
 				clearScreenOnMove();
 				if (!level.kal.inBattle() && !level.hud.battleOver)
-					level.kal.vertiSpeed = -2;
-					level.athdranax.vertiSpeed = (float) -0.01;
-					level.hut.vertiSpeed = (float) -0.01;
+				{
+					level.kal.vertiSpeed = - 2;
+					level.athdranax.vertiSpeed = (float) - 0.01;
+					level.hut.vertiSpeed = (float) - 0.01;
+				}
 				break;
 			case Input.Keys.D:
 			case Input.Keys.RIGHT:
@@ -88,7 +92,7 @@ public class MouseKeyboardInput implements InputProcessor
 		// ch dialog
 		if (level.hud.chaeriDialogUp) {
 			level.hud.chaeriDialogUp = false;
-			level.hud.chaeriCounter++;
+			level.hud.dialogCounter.put("Chaeri", level.hud.dialogCounter.getOrDefault("Chaeri", 0) + 1);
 			level.hud.chaeriDialog.setText("");
 		}
 		

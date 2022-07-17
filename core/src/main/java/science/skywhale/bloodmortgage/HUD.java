@@ -12,6 +12,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.github.tommyettinger.textra.TypingLabel;
 
+import java.util.HashMap;
+
 import static science.skywhale.bloodmortgage.GameScreen.TILESIZE;
 
 public class HUD
@@ -26,7 +28,7 @@ public class HUD
 	
 	// dialog bools
 	Boolean chaeriDialogUp;
-	int chaeriCounter;
+	HashMap<String, Integer> dialogCounter;
 	TypingLabel chaeriDialog;
 	
 	TextureRegion lastRoll, enemyRoll;
@@ -81,7 +83,7 @@ public class HUD
 		
 		// character dialog controls
 		chaeriDialogUp = false;
-		chaeriCounter = 0;
+		dialogCounter = new HashMap<>();
 		
 		lastRoll = Dice.blueSides[0];
 		enemyRoll = Dice.redSides[0];
@@ -105,10 +107,10 @@ public class HUD
 	{
 		// run everytime press c
 		chaeriDialogUp = true;
-		if (chaeriCounter >= Dialogs.chaeriDialogList.length){
-			chaeriCounter = 0;
+		if (dialogCounter.getOrDefault("Chaeri", 0) >= Dialogs.chaeriDialogList.length){
+			dialogCounter.put("Chaeri", 0);
 		}
-		String newDiag = Dialogs.addLineBreaks(Dialogs.chaeriDialogList[chaeriCounter],
+		String newDiag = Dialogs.addLineBreaks(Dialogs.chaeriDialogList[dialogCounter.getOrDefault("Chaeri", 0)],
 											   40);
 		chaeriDialog.setText(newDiag);
 		// remove when player starts moving again

@@ -260,6 +260,11 @@ public class GameScreen implements Screen
 			if (allies.contains(compare))
 			{
 				//TODO put ally dialog trigger here!!
+				hud.chaeriDialogUp = true;
+				if (hud.dialogCounter.getOrDefault(compare.getName(), 0) >= Dialogs.allDialogs.get(compare.getName()).length){
+					hud.dialogCounter.put(compare.getName(), 0);
+				}
+				hud.chaeriDialog.setText(Dialogs.allDialogs.get(compare.getName())[hud.dialogCounter.getOrDefault(compare.getName(), 0)]);
 			}
 			//enemies
 			else

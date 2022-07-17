@@ -1,5 +1,7 @@
 package science.skywhale.bloodmortgage;
 
+import java.util.HashMap;
+
 public class Dialogs
 {
 	public static String addLineBreaks(String str, int lineLength) {
@@ -160,4 +162,13 @@ public class Dialogs
 													"in the tri-county area!",
 													};
 	
+	static HashMap<String, String[]> allDialogs = new HashMap<>() {{
+		put("Chaeri", chaeriDialogList);
+		put("Athdranax", athdranaxDialogList);
+		put("Rand the Rock", randDialogLIst);
+		put("the Hut of Baba Yaga", hutDialogList);
+		put("Matty Murky", mattyDialogList);
+		put("Chaeri_NPC", chaeri_npcDialogList);
+		put("Magnificent Birch", birchDialogList);
+	}};
 }
