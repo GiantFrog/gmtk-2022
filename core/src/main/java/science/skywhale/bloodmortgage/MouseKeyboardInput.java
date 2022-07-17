@@ -26,27 +26,35 @@ public class MouseKeyboardInput implements InputProcessor
 			//move camera around the map
 			case Input.Keys.W:
 			case Input.Keys.UP:
-				level.testCharacter.vertiSpeed = 3;
+				if (!level.kal.inBattle())
+					level.kal.vertiSpeed = 2;
 				break;
 			case Input.Keys.A:
 			case Input.Keys.LEFT:
-				level.testCharacter.horiSpeed = -3;
-				level.testCharacter.movingLeft = true;
+				if (!level.kal.inBattle())
+				{
+					level.kal.horiSpeed = -2;
+					level.kal.movingLeft = true;
+				}
 				break;
 			case Input.Keys.S:
 			case Input.Keys.DOWN:
-				level.testCharacter.vertiSpeed = -3;
+				if (!level.kal.inBattle())
+					level.kal.vertiSpeed = -2;
 				break;
 			case Input.Keys.D:
 			case Input.Keys.RIGHT:
-				level.testCharacter.horiSpeed = 3;
-				level.testCharacter.movingLeft = false;
+				if (!level.kal.inBattle())
+				{
+					level.kal.horiSpeed = 2;
+					level.kal.movingLeft = false;
+				}
 				break;
 			
-			//modify cameraSpeed when shift is pressed
+			//modify speed when shift is pressed
 			case Input.Keys.SHIFT_LEFT:
 			case Input.Keys.SHIFT_RIGHT:
-				level.testCharacter.sprinting = true;
+				level.kal.sprinting = true;
 				break;
 				
 			//open the pause menu
@@ -60,30 +68,31 @@ public class MouseKeyboardInput implements InputProcessor
 	@Override
 	public boolean keyUp(int keycode)
 	{
+		//stop moving
 		if (!Gdx.input.isKeyPressed(Input.Keys.W) && !Gdx.input.isKeyPressed(Input.Keys.UP) &&
 			!Gdx.input.isKeyPressed(Input.Keys.S) && !Gdx.input.isKeyPressed(Input.Keys.DOWN))
-			level.testCharacter.vertiSpeed = 0;
+			level.kal.vertiSpeed = 0;
 		if (!Gdx.input.isKeyPressed(Input.Keys.A) && !Gdx.input.isKeyPressed(Input.Keys.LEFT) &&
 			!Gdx.input.isKeyPressed(Input.Keys.D) && !Gdx.input.isKeyPressed(Input.Keys.RIGHT))
-			level.testCharacter.horiSpeed = 0;
+			level.kal.horiSpeed = 0;
 		
 		switch (keycode)
 		{
 			case Input.Keys.SHIFT_LEFT:
 			case Input.Keys.SHIFT_RIGHT:
-				level.testCharacter.sprinting = false;
-		}
-		if (level.testCharacter.getInBattle()){
-			switch (keycode){
-				case Input.Keys.R:
-					System.out.println("R pressed");
+				level.kal.sprinting = false;
+				break;
+			case Input.Keys.R:
+				if (level.kal.inBattle())
+				{
 					if (!level.battle.playerTurn()){
 						// if no winner with player, op fgoes
 						Boolean opTurn = level.battle.opponentTurn();
 					}
 					System.out.println(level.battle.renderLog(10));
+					level.hud.updateBattleStage(level.battle.renderLog(	15));
 					System.out.println("*****************");
-			}
+				}
 		}
 		return false;
 	}

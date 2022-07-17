@@ -3,25 +3,15 @@ package science.skywhale.bloodmortgage;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
-import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.github.tommyettinger.textra.Font;
-import com.github.tommyettinger.textra.TypingLabel;
 
 import java.util.ArrayList;
 
@@ -42,8 +32,8 @@ public class GameScreen implements Screen
 	double leftToZoom = 0;
 	
 	HUD hud;
-	Character testCharacter, testCharacter2;
-	Music intro, vibing, battlemusic;
+	Character kal, testCharacter2;
+	Music intro, vibing, battlemusic, currentSong;
 	
 	Battle battle;
 	ArrayList<Character> onMap = new ArrayList<Character>();
@@ -52,7 +42,7 @@ public class GameScreen implements Screen
 	{
 		this.game = game;
 		batch = new SpriteBatch();
-		map = new TmxMapLoader().load("empty-map.tmx");
+		map = new TmxMapLoader().load("map-1.tmx");
 		mapRenderer = new OrthogonalTiledMapRenderer(map, (float)1 / TILESIZE);
 		camera = new OrthographicCamera();
 		viewport = new ExtendViewport(10, 10, camera);
@@ -63,12 +53,10 @@ public class GameScreen implements Screen
 		mouseKeyboardInput = new MouseKeyboardInput(this);
 		
 		Texture[] kalTextureArray = {new Texture(Gdx.files.internal("Kal.png")), new Texture(Gdx.files.internal("Kal down walk.png"))};
-		testCharacter = new Character("Kal", 1, new Animation<Texture>(0.24f, kalTextureArray), 20);
-		testCharacter.x = 6;
-		testCharacter.y = 7;
-		testCharacter.homeX = 6;
-		testCharacter.homeY = 7;
-		testCharacter.setDie(6);
+		kal = new Character("Kal", 1, new Animation<Texture>(0.24f, kalTextureArray), 20);
+		kal.x = kal.homeX = 3.6f;
+		kal.y = kal.homeY = 15.2f;
+		kal.setDie(6);
 		// TESTING TESTY THIBNGS
 		testCharacter2 = new Character("Ennis", 1, new Animation<Texture>(0.24f, kalTextureArray), 20);
 		testCharacter2.x = 9;
@@ -77,7 +65,7 @@ public class GameScreen implements Screen
 		onMap.add(testCharacter2);
 		
 		
-		hud = new HUD(camera);
+		hud = new HUD(camera, this);
 		
 		//audio setup
 		intro = Gdx.audio.newMusic(Gdx.files.internal("thewandererstheme.wav"));
@@ -90,7 +78,8 @@ public class GameScreen implements Screen
 		battlemusic.setVolume(0.5f);
 		battlemusic.setLooping(true);
 		
-		battlemusic.play();
+		intro.play();
+		currentSong = intro;
 	}
 	
 	@Override
@@ -104,8 +93,8 @@ public class GameScreen implements Screen
 	public void render(float delta)
 	{
 		//camera movement
-		camera.position.x = testCharacter.x + 0.5f;
-		camera.position.y = testCharacter.y + 0.5f;
+		camera.position.x = kal.x + 0.5f;
+		camera.position.y = kal.y + 0.5f;
 		
 		//smoothly scroll to the target level of zoom
 		if (leftToZoom <= -.005 || leftToZoom >= .005)
@@ -124,7 +113,7 @@ public class GameScreen implements Screen
 		//render world
 		batch.begin();
 		mapRenderer.render();
-		testCharacter.render(delta, batch, TILESIZE);
+		kal.render(delta, batch, TILESIZE);
 		for (int i = 0; i< onMap.size(); i++){
 			onMap.get(i).render(delta, batch, TILESIZE);
 		}
@@ -134,7 +123,7 @@ public class GameScreen implements Screen
 		hud.render(delta);
 		
 		// test distances
-		if (!testCharacter.getInBattle()){
+		if (! kal.inBattle()){
 			for (int i=0; i <onMap.size(); i++){
 				testToBattle(onMap.get(i));
 			}
@@ -144,13 +133,17 @@ public class GameScreen implements Screen
 	
 	
 	private void testToBattle(Character compare){
-		double xDif = Math.abs(testCharacter.x - compare.x);
-		double yDif = Math.abs(testCharacter.y - compare.y);
+		double xDif = Math.abs(kal.x - compare.x);
+		double yDif = Math.abs(kal.y - compare.y);
 		double dist = Math.sqrt(xDif*xDif + yDif*yDif);
 		if (dist < 1){
 			System.out.println("Battle mode engaged");
 			// TODO: Put log on screen here
-			battle = new Battle(testCharacter, compare, onMap);
+			kal.vertiSpeed = kal.horiSpeed = 0;
+			battle = new Battle(kal, compare, onMap, this);
+			hud.initBattleScreen();
+			currentSong.stop();
+			battlemusic.play();
 		}
 	}
 	
