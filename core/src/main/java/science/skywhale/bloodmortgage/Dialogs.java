@@ -10,11 +10,11 @@ public class Dialogs
 		while (startIndex < lenStr){
 			String newSub = str.substring(startIndex, endIndex);
 			int lastSpace = newSub.lastIndexOf(" ");
-			System.out.println("Start: " + startIndex + " end: " + endIndex + " last: " + lastSpace);
+			//System.out.println("Start: " + startIndex + " end: " + endIndex + " last: " + lastSpace);
 			if (lastSpace > 0){
 				endIndex = startIndex + lastSpace;
 			}
-			System.out.println("Start: " + startIndex + " end: " + endIndex);
+			//System.out.println("Start: " + startIndex + " end: " + endIndex);
 			newSub = str.substring(startIndex, endIndex);
 			newStr += newSub + "\n";
 			
