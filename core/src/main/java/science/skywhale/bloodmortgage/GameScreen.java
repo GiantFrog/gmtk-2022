@@ -32,12 +32,13 @@ public class GameScreen implements Screen
 {
 	static final int TILESIZE = 64;
 	
+	BloodMortgage game;
 	OrthographicCamera camera;
 	ExtendViewport viewport;
 	private MouseKeyboardInput mouseKeyboardInput;
 	private OrthogonalTiledMapRenderer mapRenderer;
 	private TiledMap map;
-	private SpriteBatch batch;
+	SpriteBatch batch;
 	double leftToZoom = 0;
 	
 	HUD hud;
@@ -47,8 +48,9 @@ public class GameScreen implements Screen
 	Battle battle;
 	ArrayList<Character> onMap = new ArrayList<Character>();
 	
-	public GameScreen()
+	public GameScreen(BloodMortgage game)
 	{
+		this.game = game;
 		batch = new SpriteBatch();
 		map = new TmxMapLoader().load("empty-map.tmx");
 		mapRenderer = new OrthogonalTiledMapRenderer(map, (float)1 / TILESIZE);
@@ -59,7 +61,6 @@ public class GameScreen implements Screen
 		mapRenderer.setView(camera);
 		
 		mouseKeyboardInput = new MouseKeyboardInput(this);
-		Gdx.input.setInputProcessor(mouseKeyboardInput);
 		
 		Texture[] kalTextureArray = {new Texture(Gdx.files.internal("Kal.png")), new Texture(Gdx.files.internal("Kal down walk.png"))};
 		testCharacter = new Character("Kal", 1, new Animation<Texture>(0.24f, kalTextureArray), 20);
@@ -96,6 +97,7 @@ public class GameScreen implements Screen
 	public void show()
 	{
 		// Prepare your screen here.
+		Gdx.input.setInputProcessor(mouseKeyboardInput);
 	}
 	
 	@Override

@@ -48,6 +48,11 @@ public class MouseKeyboardInput implements InputProcessor
 			case Input.Keys.SHIFT_RIGHT:
 				level.testCharacter.sprinting = true;
 				break;
+				
+			//open the pause menu
+			case Input.Keys.ESCAPE:
+				level.game.setScreen(new PauseMenu(level));
+				break;
 		}
 		return false;
 	}
