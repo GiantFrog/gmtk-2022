@@ -6,9 +6,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
-import com.github.tommyettinger.textra.Font;
 import com.github.tommyettinger.textra.TypingLabel;
 
 import static science.skywhale.bloodmortgage.GameScreen.TILESIZE;
@@ -18,7 +18,7 @@ public class HUD
 	OrthographicCamera camera;
 	FitViewport hudView;
 	Character chaeri;
-	Stage stage;
+	Stage battleStage;
 	SpriteBatch batch;
 	TypingLabel chaeriDialog;
 	String tooltip;
@@ -26,15 +26,34 @@ public class HUD
 	Texture d6Texture;
 	TextureRegion one, two, three, four, five, six;
 	
+	Table table;
+	Skin skin;
+	
 	public HUD (OrthographicCamera camera)
 	{
 		this.camera = camera;
+		skin = new Skin(Gdx.files.internal("tracer/tracer-ui.json"));
 		hudView = new FitViewport((float) Gdx.graphics.getWidth() / TILESIZE,
 						(float)Gdx.graphics.getHeight() / TILESIZE, camera);
 		batch = new SpriteBatch();
-		stage = new Stage(hudView);
-		tooltip = "Press R to {SHAKE}roll!";
-		chaeriDialog = new TypingLabel(tooltip, new Font("fairies-32.fnt"));
+		battleStage = new Stage(hudView);
+		battleStage = new Stage();
+		table = new Table();
+		table.left();
+		table.top();
+		table.padTop(20);
+		table.padLeft(20);
+		table.setDebug(true); // This is optional, but enables debug lines for tables.
+		table.setFillParent(true);
+		
+		tooltip = "[WHITE]{FADE}BATTLE TIME{ENDFADE}";
+		table.add(new TypingLabel(tooltip, skin));
+		table.row();
+		
+		tooltip = "[WHITE]Press R to {SHAKE}roll!";
+		chaeriDialog = new TypingLabel(tooltip, skin);
+		table.add(chaeriDialog);
+		battleStage.addActor(table);
 		chaeri = new Character("Chaeri", 2, new Texture("chaeri.png"), 1000);
 		chaeri.x = 580;
 		chaeri.y = 0;
@@ -51,11 +70,12 @@ public class HUD
 	
 	public void render (float delta)
 	{
-		stage.act(delta);
+		battleStage.act(delta);
+		battleStage.draw();
+		
 		batch.begin();
 		batch.draw(two, 40, 40);
 		chaeri.render(delta, batch, 1);
-		//stage.draw();
 		batch.end();
 	}
 	
