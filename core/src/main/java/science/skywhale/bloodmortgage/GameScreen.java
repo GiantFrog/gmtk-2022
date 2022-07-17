@@ -42,7 +42,7 @@ public class GameScreen implements Screen
 	{
 		this.game = game;
 		batch = new SpriteBatch();
-		map = new TmxMapLoader().load("empty-map.tmx");
+		map = new TmxMapLoader().load("map-1.tmx");
 		mapRenderer = new OrthogonalTiledMapRenderer(map, (float)1 / TILESIZE);
 		camera = new OrthographicCamera();
 		viewport = new ExtendViewport(10, 10, camera);
