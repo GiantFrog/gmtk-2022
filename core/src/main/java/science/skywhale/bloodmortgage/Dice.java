@@ -14,7 +14,7 @@ public class Dice {
 			new TextureRegion(d6Texture, 128, 256, 128, 128),
 			new TextureRegion(d6Texture, 384, 128, 128, 128),
 			new TextureRegion(d6Texture, 256, 128, 128, 128)
-	};;
+	};
 
     public Dice(int numSides){
         glyphs = new Glyph[numSides];

@@ -34,11 +34,12 @@ public class GameScreen implements Screen
 	double leftToZoom = 0;
 	
 	HUD hud;
-	Character kal, testCharacter2, scrungle, hut, athdranax, rand, birch, vampcat, matty, scraggy, scrumpus, chaeriNPC;
+	Character kal, scrungle, hut, athdranax, rand, birch, vampcat, matty, scraggy, scrumpus, chaeriNPC;
 	Music intro, vibing, battlemusic, tophat_guy_anthem, currentSong, enemyTheme;
 	
 	Battle battle;
-	ArrayList<Character> onMap = new ArrayList<Character>();
+	ArrayList<Character> onMap = new ArrayList<>();
+	ArrayList<Character> allies = new ArrayList<>();
 	
 	public GameScreen(BloodMortgage game)
 	{
@@ -112,6 +113,7 @@ public class GameScreen implements Screen
 		rand.y = 3;
 		rand.setDie(6);
 		onMap.add(rand);
+		allies.add(rand);
 		
 		Texture[] tophatTextureArray = {new Texture(Gdx.files.internal("flipped Athdrananax.png")), new Texture(Gdx.files.internal("flipped Athdrananax down.png"))};
 		athdranax = new Character("Athdranax",1,new Animation<Texture>(0.24f, tophatTextureArray),15);
@@ -132,6 +134,7 @@ public class GameScreen implements Screen
 		matty.y = 16;
 		matty.setDie(6);
 		onMap.add(matty);
+		allies.add(matty);
 		
 		Texture birchTexture = new Texture("MAGNIFICENT BIRCHt.png");
 		birch = new Character("Magnificent Birch",1,birchTexture,200);
@@ -139,6 +142,7 @@ public class GameScreen implements Screen
 		birch.y = 7;
 		birch.setDie(6);
 		onMap.add(birch);
+		allies.add(birch);
 		
 		Texture chaeriTexture = new Texture("chaeri.png");
 		chaeriNPC = new Character("Chaeri_NPC",1,chaeriTexture,2);
@@ -146,6 +150,7 @@ public class GameScreen implements Screen
 		chaeriNPC.y = 13;
 		chaeriNPC.setDie(6);
 		onMap.add(chaeriNPC);
+		allies.add(chaeriNPC);
 		
 		scraggy = new Character("Scraggy",1,scrungleTexture,30);
 		scraggy.x = 10;
@@ -248,22 +253,31 @@ public class GameScreen implements Screen
 		double yDif = Math.abs(kal.y - compare.y);
 		double dist = Math.sqrt(xDif*xDif + yDif*yDif);
 		if (dist < 1){
-			System.out.println("Battle mode engaged");
-			hud.battleOver = true;
-			// TODO: Put log on screen here
-			kal.vertiSpeed = kal.horiSpeed = 0;
-			battle = new Battle(kal, compare, onMap, this);
-			hud.initBattleScreen();
-			switch (compare.getName())
+			//friends
+			if (allies.contains(compare))
 			{
-				case "Athdranax":
-					enemyTheme = tophat_guy_anthem;
-					break;
-				default:
-					enemyTheme = battlemusic;
+				//TODO put ally dialog trigger here!!
 			}
-			currentSong.stop();
-			enemyTheme.play();
+			//enemies
+			else
+			{
+				System.out.println("Battle mode engaged");
+				hud.battleOver = true;
+				// TODO: Put log on screen here
+				kal.vertiSpeed = kal.horiSpeed = 0;
+				battle = new Battle(kal, compare, onMap, this);
+				hud.initBattleScreen();
+				switch (compare.getName())
+				{
+					case "Athdranax":
+						enemyTheme = tophat_guy_anthem;
+						break;
+					default:
+						enemyTheme = battlemusic;
+				}
+				currentSong.stop();
+				enemyTheme.play();
+			}
 		}
 	}
 	
