@@ -42,7 +42,7 @@ public class GameScreen implements Screen
 	
 	HUD hud;
 	Character testCharacter, testCharacter2;
-	Music intro, vibing;
+	Music intro, vibing, battlemusic;
 	
 	Battle battle;
 	ArrayList<Character> onMap = new ArrayList<Character>();
@@ -80,13 +80,16 @@ public class GameScreen implements Screen
 		
 		//audio setup
 		intro = Gdx.audio.newMusic(Gdx.files.internal("thewandererstheme.wav"));
-		intro.setVolume(0.7f);
+		intro.setVolume(0.8f);
 		intro.setLooping(true);
 		vibing = Gdx.audio.newMusic(Gdx.files.internal("vibing.wav"));
 		vibing.setVolume(0.5f);
 		vibing.setLooping(true);
+		battlemusic = Gdx.audio.newMusic(Gdx.files.internal("battle.wav"));
+		battlemusic.setVolume(0.5f);
+		battlemusic.setLooping(true);
 		
-		vibing.play();
+		battlemusic.play();
 	}
 	
 	@Override
