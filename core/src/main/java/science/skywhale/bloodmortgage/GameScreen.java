@@ -242,6 +242,7 @@ public class GameScreen implements Screen
 		double dist = Math.sqrt(xDif*xDif + yDif*yDif);
 		if (dist < 1){
 			System.out.println("Battle mode engaged");
+			hud.battleOver = true;
 			// TODO: Put log on screen here
 			kal.vertiSpeed = kal.horiSpeed = 0;
 			battle = new Battle(kal, compare, onMap, this);

@@ -26,14 +26,20 @@ public class MouseKeyboardInput implements InputProcessor
 			//move camera around the map
 			case Input.Keys.W:
 			case Input.Keys.UP:
-				if (!level.kal.inBattle())
+				if (!level.kal.inBattle() && level.hud.battleOver){
+					level.hud.battleOver = false;
+				}
+				if (!level.kal.inBattle() && !level.hud.battleOver)
 					level.kal.vertiSpeed = 2;
 					level.athdranax.vertiSpeed = (float)0.01;
 					level.hut.vertiSpeed = (float)0.01;
 				break;
 			case Input.Keys.A:
 			case Input.Keys.LEFT:
-				if (!level.kal.inBattle())
+				if (!level.kal.inBattle() && level.hud.battleOver){
+					level.hud.battleOver = false;
+				}
+				if (!level.kal.inBattle() && !level.hud.battleOver)
 				{
 					level.kal.horiSpeed = -2;
 					level.kal.movingLeft = true;
@@ -43,14 +49,20 @@ public class MouseKeyboardInput implements InputProcessor
 				break;
 			case Input.Keys.S:
 			case Input.Keys.DOWN:
-				if (!level.kal.inBattle())
+				if (!level.kal.inBattle() && level.hud.battleOver){
+					level.hud.battleOver = false;
+				}
+				if (!level.kal.inBattle() && !level.hud.battleOver)
 					level.kal.vertiSpeed = -2;
 					level.athdranax.vertiSpeed = (float) -0.01;
 					level.hut.vertiSpeed = (float) -0.01;
 				break;
 			case Input.Keys.D:
 			case Input.Keys.RIGHT:
-				if (!level.kal.inBattle())
+				if (!level.kal.inBattle() && level.hud.battleOver){
+					level.hud.battleOver = false;
+				}
+				if (!level.kal.inBattle() && !level.hud.battleOver)
 				{
 					level.kal.horiSpeed = 2;
 					level.kal.movingLeft = false;
