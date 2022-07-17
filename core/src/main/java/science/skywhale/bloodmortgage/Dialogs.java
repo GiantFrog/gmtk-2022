@@ -4,6 +4,10 @@ import java.util.HashMap;
 
 public class Dialogs
 {
+	public static String addLineBreaks(String str)
+	{
+		return addLineBreaks(str, 40);
+	}
 	public static String addLineBreaks(String str, int lineLength) {
 		int lenStr = str.length();
 		String newStr = "";

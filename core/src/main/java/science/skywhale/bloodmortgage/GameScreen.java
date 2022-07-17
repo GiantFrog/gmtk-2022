@@ -126,6 +126,7 @@ public class GameScreen implements Screen
 		athdranax.addGlyphToDice(2,6);
 		athdranax.addGlyphToDice(1,2);
 		athdranax.addGlyphToDice(0,1);
+		allies.add(athdranax);
 		onMap.add(athdranax);
 		
 		Texture mattyTexture = new Texture("Matty Mercy.png");
@@ -146,7 +147,7 @@ public class GameScreen implements Screen
 		
 		Texture chaeriTexture = new Texture("chaeri.png");
 		chaeriNPC = new Character("Chaeri_NPC",1,chaeriTexture,2);
-		chaeriNPC.x = 4;
+		chaeriNPC.x = 3.5f;
 		chaeriNPC.y = 13;
 		chaeriNPC.setDie(6);
 		onMap.add(chaeriNPC);
@@ -259,12 +260,21 @@ public class GameScreen implements Screen
 			//friends
 			if (allies.contains(compare))
 			{
-				//TODO put ally dialog trigger here!!
-				hud.chaeriDialogUp = true;
-				if (hud.dialogCounter.getOrDefault(compare.getName(), 0) >= Dialogs.allDialogs.get(compare.getName()).length){
-					hud.dialogCounter.put(compare.getName(), 0);
+				if (kal.inRange == null)
+				{
+					hud.chaeriDialogUp = true;
+					if (hud.dialogCounter.getOrDefault(compare.getName(), 0) >= Dialogs.allDialogs.get(compare.getName()).length)
+					{
+						hud.dialogCounter.put(compare.getName(), 0);
+						if (compare == athdranax)
+							allies.remove(athdranax);
+					}
+					String toBuild = "{FADE}";
+					toBuild += Dialogs.addLineBreaks(Dialogs.allDialogs.get(compare.getName())[hud.dialogCounter.getOrDefault(compare.getName(), 0)]);
+					hud.chaeriDialog.setText(toBuild);
+					hud.dialogCounter.put(compare.getName(), hud.dialogCounter.getOrDefault("Chaeri", 0) + 1);
+					kal.inRange = compare;
 				}
-				hud.chaeriDialog.setText(Dialogs.allDialogs.get(compare.getName())[hud.dialogCounter.getOrDefault(compare.getName(), 0)]);
 			}
 			//enemies
 			else
@@ -290,6 +300,8 @@ public class GameScreen implements Screen
 				enemyTheme.play();
 			}
 		}
+		else if (kal.inRange == compare)
+			kal.inRange = null;
 	}
 	
 	@Override

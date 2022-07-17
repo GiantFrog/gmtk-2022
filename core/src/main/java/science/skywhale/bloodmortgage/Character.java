@@ -22,6 +22,7 @@ public class Character {
 	boolean movingLeft = false, sprinting = false;
 	private Texture texture;
 	private Animation<Texture> animation;
+	Character inRange;
 
  
 	public Character(String name, int numDice, Animation<Texture> animation, int maxHealth){

@@ -55,7 +55,7 @@ public class HUD
 		table.top();
 		table.padTop(20);
 		table.padLeft(20);
-		table.setDebug(true); // This is optional, but enables debug lines for tables.
+		table.setDebug(false); // This is optional, but enables debug lines for tables.
 		table.setFillParent(true);
 		battleTable = new Table();
 		battleTable.padBottom(Gdx.graphics.getWidth()/5f);
