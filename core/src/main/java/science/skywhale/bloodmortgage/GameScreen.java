@@ -23,6 +23,8 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.github.tommyettinger.textra.Font;
 import com.github.tommyettinger.textra.TypingLabel;
 
+import java.util.ArrayList;
+
 /**
  * First screen of the application. Displayed after the application is created.
  */
@@ -43,6 +45,7 @@ public class GameScreen implements Screen
 	Music intro, vibing;
 	
 	Battle battle;
+	ArrayList<Character> onMap = new ArrayList<Character>();
 	
 	public GameScreen()
 	{
@@ -62,12 +65,17 @@ public class GameScreen implements Screen
 		testCharacter = new Character("Kal", 1, new Animation<Texture>(0.24f, kalTextureArray), 20);
 		testCharacter.x = 6;
 		testCharacter.y = 7;
+		testCharacter.homeX = 6;
+		testCharacter.homeY = 7;
 		testCharacter.setDie(6);
+		onMap.add(testCharacter);
 		// TESTING TESTY THIBNGS
 		testCharacter2 = new Character("Ennis", 1, new Animation<Texture>(0.24f, kalTextureArray), 20);
 		testCharacter2.x = 9;
 		testCharacter2.y = 9;
 		testCharacter2.setDie(6);
+		onMap.add(testCharacter2);
+		
 		
 		hud = new HUD(camera);
 		
@@ -112,8 +120,7 @@ public class GameScreen implements Screen
 		//render world
 		batch.begin();
 		mapRenderer.render();
-		testCharacter.render(delta, batch, TILESIZE);
-		testCharacter2.render(delta, batch, TILESIZE);
+		renderOnMap(delta);
 		batch.end();
 		
 		//render overlay & HUD
@@ -121,17 +128,26 @@ public class GameScreen implements Screen
 		
 		// test distances
 		if (!testCharacter.getInBattle()){
-			testBattle(testCharacter2);
+			for (int i=1; i <onMap.size(); i++){
+				testToBattle(onMap.get(i));
+			}
 		}
 	}
 	
-	private void testBattle(Character compare){
+	private void renderOnMap(float delta){
+		for (int i = 0; i< onMap.size(); i++){
+			onMap.get(i).render(delta, batch, TILESIZE);
+		}
+	}
+	
+	private void testToBattle(Character compare){
 		double xDif = Math.abs(testCharacter.x - compare.x);
 		double yDif = Math.abs(testCharacter.y - compare.y);
 		double dist = Math.sqrt(xDif*xDif + yDif*yDif);
 		if (dist < 1){
 			System.out.println("Battle mode engaged");
-			battle = new Battle(testCharacter, compare);
+			// TODO: Put log on screen here
+			battle = new Battle(testCharacter, compare, onMap);
 		}
 	}
 	

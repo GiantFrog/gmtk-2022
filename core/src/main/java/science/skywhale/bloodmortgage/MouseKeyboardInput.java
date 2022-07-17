@@ -72,11 +72,19 @@ public class MouseKeyboardInput implements InputProcessor
 			switch (keycode){
 				case Input.Keys.R:
 					System.out.println("R pressed");
-					level.battle.playerTurn();
+					if (!level.battle.playerTurn()){
+						// if no winner with player, op fgoes
+						Boolean opTurn = level.battle.opponentTurn();
+					}
 					System.out.println(level.battle.renderLog(10));
+					System.out.println("*****************");
 			}
 		}
 		return false;
+	}
+	
+	private void battleOver(){
+	
 	}
 	
 	@Override

@@ -8,10 +8,11 @@ public class Battle {
     private CharacterEntity player;
 	private Character winner;
 	private ArrayList<String> log;
+	private ArrayList<Character> onMap;
     //private ArrayList<CharacterEntity> opponentMinions;
     //private ArrayList<CharacterEntity> playerMinions;
 
-    public Battle(Character player, Character opponent){
+    public Battle(Character player, Character opponent, ArrayList<Character> onMap){
 		player.setInBattle(true);
         this.player = new CharacterEntity(player);
         this.opponent = new CharacterEntity(opponent);
@@ -19,6 +20,7 @@ public class Battle {
 		log = new ArrayList<>();
 		log.add("Battle Started");
 		log.add(0, player.getName() + " vs. " + opponent.getName());
+		this.onMap = onMap;
     }
 	
 	public String renderLog(int numLines){
@@ -66,10 +68,15 @@ public class Battle {
 		// TODO: Only one winner so this could be interesting if both are 0
 		if (opponent.health <= 0){
 			winner = player.character;
+			player.character.setInBattle(false);
+			onMap.remove(opponent.character);
 			//return player;
 		}
 		if (player.health <= 0){
 			winner = opponent.character;
+			player.character.setInBattle(false);
+			player.character.x = player.character.homeX;
+			player.character.y = player.character.homeY;
 			//return opponent;
 		}
 		//return null;
