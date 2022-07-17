@@ -7,11 +7,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.github.tommyettinger.textra.TypingLabel;
 import science.skywhale.bloodmortgage.masterspellbook.Glyph;
 
@@ -44,8 +42,8 @@ public class PauseMenu implements Screen
 		batch = previousScreen.batch;
 		background = new Texture("Menu.png");
 		
-		dice = previousScreen.hud.d6Texture;
-		diceSides = Dice.diceSides;
+		dice = Dice.blueD6Texture;
+		diceSides = Dice.blueSides;
 		
 		spellbook = previousScreen.kal.getSpellbook();
 		glyphX = new int[]{256, 384, 384, 384, 640, 512};
@@ -59,20 +57,20 @@ public class PauseMenu implements Screen
 		table.left();
 		//table.padLeft(Gdx.graphics.getWidth()/5);
 		table.top();
-		table.padTop(Gdx.graphics.getHeight()/10);
+		table.padTop(Gdx.graphics.getHeight()/10f);
 		table.setFillParent(true);
 		sideSelect = new Table();
-		sideSelect.padRight(Gdx.graphics.getWidth()/4);
-		sideSelect.padLeft(Gdx.graphics.getWidth()/5);
+		sideSelect.padRight(Gdx.graphics.getWidth()/4f);
+		sideSelect.padLeft(Gdx.graphics.getWidth()/5f);
 		sideSelect.padTop(10);
-		sideSelect.setDebug(true);
+		sideSelect.setDebug(false);
 		table.add(sideSelect);
 		table.row();
 		displayGlyphInfo = new Table();
 		table.add(displayGlyphInfo);
 		//table.add(space);
 		glyphSelect = new Table();
-		glyphSelect.setDebug(true);
+		glyphSelect.setDebug(false);
 		glyphSelect.left();
 		table.add(glyphSelect);
 		stage.addActor(table);
@@ -94,12 +92,13 @@ public class PauseMenu implements Screen
 			Glyph sel = spellbook.get(index);
 			displayGlyphInfo.add(new Label(sel.getName(), skin, "menu"));
 			displayGlyphInfo.row();
-			displayGlyphInfo.add(new Label(sel.getFlavor(), skin, "menu"));
+			String flavor = Dialogs.addLineBreaks(sel.getFlavor(), 30);
+			displayGlyphInfo.add(new Label(flavor, skin, "menu"));
 			displayGlyphInfo.row();
-			displayGlyphInfo.add(new Label(sel.getDescription(), skin, "menu"));
+			String description = Dialogs.addLineBreaks(sel.getDescription(), 30);
+			displayGlyphInfo.add(new Label(description, skin, "menu"));
 		}
 	}
-	
 	public void setSideSelected(int side){
 		editingSide = side;
 		sideSelect.clearChildren(false);

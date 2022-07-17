@@ -22,6 +22,7 @@ public class Character {
 	boolean movingLeft = false, sprinting = false;
 	private Texture texture;
 	private Animation<Texture> animation;
+	Character inRange;
 
  
 	public Character(String name, int numDice, Animation<Texture> animation, int maxHealth){
@@ -166,7 +167,7 @@ public class Character {
 	}
 	
 	
-	public void render (float delta, SpriteBatch batch, int tilesize, TiledMapTileLayer mapLayer) {
+	public void render (float delta, SpriteBatch batch, float tilesize, TiledMapTileLayer mapLayer) {
 		if (animation != null && (horiSpeed != 0 || vertiSpeed != 0))
 		{
 			elapsedTime += delta;

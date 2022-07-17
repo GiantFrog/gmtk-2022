@@ -12,12 +12,12 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.github.tommyettinger.textra.TypingLabel;
 
+import java.util.HashMap;
+
 import static science.skywhale.bloodmortgage.GameScreen.TILESIZE;
 
 public class HUD
 {
-	static final Texture d6Texture = new Texture(Gdx.files.internal("basic dice.png"));
-	
 	OrthographicCamera camera;
 	FitViewport hudView;
 	Character chaeri;
@@ -28,13 +28,13 @@ public class HUD
 	
 	// dialog bools
 	Boolean chaeriDialogUp;
-	int chaeriCounter;
+	HashMap<String, Integer> dialogCounter;
 	TypingLabel chaeriDialog;
 	
-	TextureRegion lastRoll;
-	Texture lastGlyph;
+	TextureRegion lastRoll, enemyRoll;
+	Texture lastGlyph, enemyGlyph;
 	
-	Table battleTable, table;
+	Table battleTable, table, chaeriTable;
 	Skin skin;
 	GameScreen level;
 	
@@ -55,10 +55,10 @@ public class HUD
 		table.top();
 		table.padTop(20);
 		table.padLeft(20);
-		table.setDebug(true); // This is optional, but enables debug lines for tables.
+		table.setDebug(false); // This is optional, but enables debug lines for tables.
 		table.setFillParent(true);
 		battleTable = new Table();
-		battleTable.padBottom(Gdx.graphics.getWidth()/5);
+		battleTable.padBottom(Gdx.graphics.getWidth()/5f);
 		//battleTable.left();
 		//battleTable.top();
 		//battleTable.padTop(20);
@@ -70,7 +70,11 @@ public class HUD
 		table.add(battleTable);
 		chaeriDialog = new TypingLabel("", skin);
 		table.row();
-		table.add(chaeriDialog);
+		chaeriTable = new Table();
+		chaeriTable.add(chaeriDialog);
+		chaeriTable.padLeft(Gdx.graphics.getWidth()/5*2);
+		chaeriTable.padTop(Gdx.graphics.getHeight()/3);
+		table.add(chaeriTable);
 		
 		stage.addActor(table);
 		chaeri = new Character("Chaeri", 2, new Texture("chaeri.png"), 1000);
@@ -79,9 +83,10 @@ public class HUD
 		
 		// character dialog controls
 		chaeriDialogUp = false;
-		chaeriCounter = 0;
+		dialogCounter = new HashMap<>();
 		
-		lastRoll = Dice.diceSides[0];
+		lastRoll = Dice.blueSides[0];
+		enemyRoll = Dice.redSides[0];
 	}
 	
 	public void updateBattleStage(String updates){
@@ -102,10 +107,12 @@ public class HUD
 	{
 		// run everytime press c
 		chaeriDialogUp = true;
-		if (chaeriCounter >= Dialogs.chaeriDialogList.length){
-			chaeriCounter = 0;
+		if (dialogCounter.getOrDefault("Chaeri", 0) >= Dialogs.chaeriDialogList.length){
+			dialogCounter.put("Chaeri", 0);
 		}
-		chaeriDialog.setText(Dialogs.chaeriDialogList[chaeriCounter]);
+		String newDiag = Dialogs.addLineBreaks(Dialogs.chaeriDialogList[dialogCounter.getOrDefault("Chaeri", 0)],
+											   40);
+		chaeriDialog.setText(newDiag);
 		// remove when player starts moving again
 	}
 	
@@ -126,7 +133,10 @@ public class HUD
 		batch.draw(lastRoll, 40, 40);
 		if (lastGlyph != null)
 			batch.draw(lastGlyph, 40, 40);
-		chaeri.render(delta, batch, 1, null);
+		batch.draw(enemyRoll, 792, 40);
+		if (enemyGlyph != null)
+			batch.draw(enemyGlyph, 792, 40);
+		chaeri.render(delta, batch, .35f, null);
 		batch.end();
 	}
 	

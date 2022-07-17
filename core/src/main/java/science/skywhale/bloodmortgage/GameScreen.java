@@ -35,7 +35,7 @@ public class GameScreen implements Screen
 	
 	HUD hud;
 	Character kal, scrungle, hut, athdranax, rand, birch, vampcat, matty, scraggy, scrumpus, chaeriNPC;
-	Music intro, vibing, battlemusic, tophat_guy_anthem, currentSong, enemyTheme;
+	Music intro, vibing, battlemusic, tophat_guy_anthem, bossmusic, currentSong, enemyTheme;
 	
 	Battle battle;
 	ArrayList<Character> onMap = new ArrayList<>();
@@ -68,7 +68,7 @@ public class GameScreen implements Screen
 		//testCharacter2.setDie(6);
 		//onMap.add(testCharacter2);
 		Texture scrungleTexture = new Texture(Gdx.files.internal("Generic Demon.png"));
-		scrungle = new Character("Scrungle",1,scrungleTexture,30);
+		scrungle = new Character("Scrungle",1,scrungleTexture,20);
 		scrungle.x = 12;
 		scrungle.y = 12;
 		scrungle.setDie(6);
@@ -81,7 +81,7 @@ public class GameScreen implements Screen
 		onMap.add(scrungle);
 		
 		Texture[] hutTextureArray = {new Texture(Gdx.files.internal("baba yaga house.png")), new Texture(Gdx.files.internal("baba yaga house down.png"))};
-		hut = new Character("the Hut of Baba Yaga", 1, new Animation<Texture>(0.24f, hutTextureArray),60);
+		hut = new Character("the Hut of Baba Yaga", 1, new Animation<Texture>(0.24f, hutTextureArray),70);
 		hut.x = 16;
 		hut.y = 3;
 		hut.movingLeft = true;
@@ -116,7 +116,7 @@ public class GameScreen implements Screen
 		allies.add(rand);
 		
 		Texture[] tophatTextureArray = {new Texture(Gdx.files.internal("flipped Athdrananax.png")), new Texture(Gdx.files.internal("flipped Athdrananax down.png"))};
-		athdranax = new Character("Athdranax",1,new Animation<Texture>(0.24f, tophatTextureArray),15);
+		athdranax = new Character("Athdranax",1,new Animation<Texture>(0.24f, tophatTextureArray),30);
 		athdranax.x = 3;
 		athdranax.y = 10;
 		athdranax.setDie(6);
@@ -126,6 +126,7 @@ public class GameScreen implements Screen
 		athdranax.addGlyphToDice(2,6);
 		athdranax.addGlyphToDice(1,2);
 		athdranax.addGlyphToDice(0,1);
+		allies.add(athdranax);
 		onMap.add(athdranax);
 		
 		Texture mattyTexture = new Texture("Matty Mercy.png");
@@ -146,13 +147,13 @@ public class GameScreen implements Screen
 		
 		Texture chaeriTexture = new Texture("chaeri.png");
 		chaeriNPC = new Character("Chaeri_NPC",1,chaeriTexture,2);
-		chaeriNPC.x = 4;
+		chaeriNPC.x = 3.5f;
 		chaeriNPC.y = 13;
 		chaeriNPC.setDie(6);
 		onMap.add(chaeriNPC);
 		allies.add(chaeriNPC);
 		
-		scraggy = new Character("Scraggy",1,scrungleTexture,30);
+		scraggy = new Character("Scraggy",1,scrungleTexture,20);
 		scraggy.x = 10;
 		scraggy.y = 6;
 		scraggy.setDie(6);
@@ -164,7 +165,7 @@ public class GameScreen implements Screen
 		scraggy.addGlyphToDice(1,3);
 		onMap.add(scraggy);
 		
-		scrumpus = new Character("Scraggy",1,scrungleTexture,30);
+		scrumpus = new Character("Scraggy",1,scrungleTexture,20);
 		scrumpus.x = 8;
 		scrumpus.y = 16;
 		scrumpus.setDie(6);
@@ -193,6 +194,9 @@ public class GameScreen implements Screen
 		tophat_guy_anthem = Gdx.audio.newMusic(Gdx.files.internal("tophat_guy_anthem.wav"));
 		tophat_guy_anthem.setVolume(1.0f);
 		tophat_guy_anthem.setLooping(true);
+		bossmusic = Gdx.audio.newMusic(Gdx.files.internal("Baba_yaga.wav"));
+		bossmusic.setVolume(0.9f);
+		bossmusic.setLooping(true);
 		
 		intro.play();
 		currentSong = intro;
@@ -256,7 +260,21 @@ public class GameScreen implements Screen
 			//friends
 			if (allies.contains(compare))
 			{
-				//TODO put ally dialog trigger here!!
+				if (kal.inRange == null)
+				{
+					hud.chaeriDialogUp = true;
+					if (hud.dialogCounter.getOrDefault(compare.getName(), 0) >= Dialogs.allDialogs.get(compare.getName()).length)
+					{
+						hud.dialogCounter.put(compare.getName(), 0);
+						if (compare == athdranax)
+							allies.remove(athdranax);
+					}
+					String toBuild = "{FADE}";
+					toBuild += Dialogs.addLineBreaks(Dialogs.allDialogs.get(compare.getName())[hud.dialogCounter.getOrDefault(compare.getName(), 0)]);
+					hud.chaeriDialog.setText(toBuild);
+					hud.dialogCounter.put(compare.getName(), hud.dialogCounter.getOrDefault("Chaeri", 0) + 1);
+					kal.inRange = compare;
+				}
 			}
 			//enemies
 			else
@@ -272,6 +290,9 @@ public class GameScreen implements Screen
 					case "Athdranax":
 						enemyTheme = tophat_guy_anthem;
 						break;
+					case "the Hut of Baba Yaga":
+						enemyTheme = bossmusic;
+						break;
 					default:
 						enemyTheme = battlemusic;
 				}
@@ -279,6 +300,8 @@ public class GameScreen implements Screen
 				enemyTheme.play();
 			}
 		}
+		else if (kal.inRange == compare)
+			kal.inRange = null;
 	}
 	
 	@Override
