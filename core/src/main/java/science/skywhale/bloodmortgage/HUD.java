@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.viewport.FitViewport;
@@ -28,10 +29,12 @@ public class HUD
 	
 	Table table;
 	Skin skin;
+	GameScreen level;
 	
-	public HUD (OrthographicCamera camera)
+	public HUD (OrthographicCamera camera, GameScreen level)
 	{
 		this.camera = camera;
+		this.level = level;
 		skin = new Skin(Gdx.files.internal("tracer/tracer-ui.json"));
 		hudView = new FitViewport((float) Gdx.graphics.getWidth() / TILESIZE,
 						(float)Gdx.graphics.getHeight() / TILESIZE, camera);
@@ -68,10 +71,18 @@ public class HUD
 		six = new TextureRegion(d6Texture, 384, 128, 128, 128);
 	}
 	
+	public void updateBattleStage(String updates){
+		table.clearChildren(false); // TODO: want true or false?
+		table.add(new Label(updates, skin));
+		//table.
+	}
+	
 	public void render (float delta)
 	{
-		battleStage.act(delta);
-		battleStage.draw();
+		if (level.testCharacter.getInBattle()) {
+			battleStage.act(delta);
+			battleStage.draw();
+		}
 		
 		batch.begin();
 		batch.draw(two, 40, 40);

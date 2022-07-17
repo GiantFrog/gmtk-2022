@@ -27,6 +27,8 @@ public class Battle {
 		String output = "";
 		for(int i =0; i < numLines-log.size();i++){
 			output += "\n";
+		}
+		if (numLines-log.size() >0 ){
 			numLines = log.size();
 		}
 		

@@ -77,7 +77,7 @@ public class GameScreen implements Screen
 		onMap.add(testCharacter2);
 		
 		
-		hud = new HUD(camera);
+		hud = new HUD(camera, this);
 		
 		//audio setup
 		intro = Gdx.audio.newMusic(Gdx.files.internal("thewandererstheme.wav"));
@@ -90,7 +90,7 @@ public class GameScreen implements Screen
 		battlemusic.setVolume(0.5f);
 		battlemusic.setLooping(true);
 		
-		battlemusic.play();
+		vibing.play();
 	}
 	
 	@Override

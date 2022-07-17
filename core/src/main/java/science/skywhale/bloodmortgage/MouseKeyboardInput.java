@@ -82,6 +82,7 @@ public class MouseKeyboardInput implements InputProcessor
 						Boolean opTurn = level.battle.opponentTurn();
 					}
 					System.out.println(level.battle.renderLog(10));
+					level.hud.updateBattleStage(level.battle.renderLog(	15));
 					System.out.println("*****************");
 			}
 		}
