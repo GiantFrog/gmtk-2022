@@ -17,13 +17,13 @@ public class Testing {
 		// tODO: Test ward  C2
 		
 		player.addGlyphToDice(1, 2);
-		Battle battle = new Battle(player, opponent);
+		/*Battle battle = new Battle(player, opponent);
 		battle.playerTurn();
 		battle.logScores();
 		
 		battle.opponentTurn();
 		battle.logScores();
-		
+		*/
 		
 		// todo: TEST Archane boost C1
 	}
@@ -62,7 +62,7 @@ public class Testing {
 	}
 	
 	public static void fight(Character player, Character opponent){
-		Battle battle = new Battle(player, opponent);
+		/*Battle battle = new Battle(player, opponent);
 		
 		// fight
 		Boolean fightOver = false;
@@ -83,6 +83,8 @@ public class Testing {
 		
 		// print winner
 		System.out.println("WINNER: " + battle.getWinner());
+		
+		 */
 	}
 	
 }
