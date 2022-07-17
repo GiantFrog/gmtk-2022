@@ -10,6 +10,7 @@ public class C1 extends Glyph {
         this.owner = owner;
         this.glyphType = 0;
 		this.flavor = "A simple Glyph you learned in Scribing 101.";
+		this.imgPath = "runes/c1.png";
     }
 
     @Override
