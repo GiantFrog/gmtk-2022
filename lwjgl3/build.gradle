@@ -91,7 +91,7 @@ if (JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_14)) {
             if (os.contains('win')) {
                 imageOptions = ["--icon", "icons/logo.ico"]
             } else if (os.contains('nix') || os.contains('nux') || os.contains('bsd')) {
-                imageOptions = ["--icon", "icons/logo.png"]
+                imageOptions = ["--icon", "icons/logo.png", "--type", "app-image"]
             } else if (os.contains('mac')) {
                 imageOptions = ["--icon", "icons/logo.icns", " --java-options", "\"XstartOnFirstThread\""]
             }

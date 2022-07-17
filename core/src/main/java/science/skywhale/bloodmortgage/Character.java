@@ -3,6 +3,7 @@ package science.skywhale.bloodmortgage;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import science.skywhale.bloodmortgage.masterspellbook.*;
 
 import java.util.ArrayList;
@@ -155,7 +156,7 @@ public class Character {
 	}
 	
 	
-	public void render (float delta, SpriteBatch batch, int tilesize) {
+	public void render (float delta, SpriteBatch batch, int tilesize, TiledMapTileLayer mapLayer) {
 		if (animation != null && (horiSpeed != 0 || vertiSpeed != 0))
 		{
 			elapsedTime += delta;
@@ -163,15 +164,24 @@ public class Character {
 		}
 		
 		//update the player position
-		if (sprinting)
+		if (horiSpeed != 0 || vertiSpeed != 0)
 		{
-			x += delta*horiSpeed*1.75f;
-			y += delta*vertiSpeed*1.75f;
-		}
-		else
-		{
-			x += delta*horiSpeed;
-			y += delta*vertiSpeed;
+			float xChange = 0, yChange = 0;
+			if (sprinting)
+			{
+				xChange = delta * horiSpeed * 1.75f;
+				yChange = delta * vertiSpeed * 1.75f;
+			}
+			else
+			{
+				xChange = delta * horiSpeed;
+				yChange = delta * vertiSpeed;
+			}
+			//look to see if we would rub against a tile marked as solid
+			if (!mapLayer.getCell(Math.round(x + xChange), Math.round(y)).getTile().getProperties().get("solid", Boolean.class))
+				x += xChange;
+			if (!mapLayer.getCell(Math.round(x), Math.round(y + yChange)).getTile().getProperties().get("solid", Boolean.class))
+				y += yChange;
 		}
 		
 		batch.draw(texture, x, y, (float)texture.getWidth()/tilesize, (float)texture.getHeight()/tilesize, 0, 0, 64, 64, movingLeft, false);

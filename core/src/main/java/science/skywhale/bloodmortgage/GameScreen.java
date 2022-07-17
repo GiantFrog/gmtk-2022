@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
@@ -28,6 +29,7 @@ public class GameScreen implements Screen
 	private MouseKeyboardInput mouseKeyboardInput;
 	private OrthogonalTiledMapRenderer mapRenderer;
 	private TiledMap map;
+	TiledMapTileLayer mapLayer;
 	SpriteBatch batch;
 	double leftToZoom = 0;
 	
@@ -43,6 +45,7 @@ public class GameScreen implements Screen
 		this.game = game;
 		batch = new SpriteBatch();
 		map = new TmxMapLoader().load("map-1.tmx");
+		mapLayer = (TiledMapTileLayer)map.getLayers().get(0);
 		mapRenderer = new OrthogonalTiledMapRenderer(map, (float)1 / TILESIZE);
 		camera = new OrthographicCamera();
 		viewport = new ExtendViewport(10, 10, camera);
@@ -80,6 +83,7 @@ public class GameScreen implements Screen
 		hut = new Character("the Hut of Baba Yaga", 1, new Animation<Texture>(0.24f, hutTextureArray),60);
 		hut.x = 16;
 		hut.y = 3;
+		hut.movingLeft = true;
 		hut.setDie(6);
 		hut.addGlyphToDice(21,3);
 		hut.addGlyphToDice(20,6);
@@ -217,9 +221,9 @@ public class GameScreen implements Screen
 		//render world
 		batch.begin();
 		mapRenderer.render();
-		kal.render(delta, batch, TILESIZE);
+		kal.render(delta, batch, TILESIZE, mapLayer);
 		for (int i = 0; i< onMap.size(); i++){
-			onMap.get(i).render(delta, batch, TILESIZE);
+			onMap.get(i).render(delta, batch, TILESIZE, mapLayer);
 		}
 		batch.end();
 		

@@ -93,7 +93,7 @@ public class HUD
 		
 		batch.begin();
 		batch.draw(two, 40, 40);
-		chaeri.render(delta, batch, 1);
+		chaeri.render(delta, batch, 1, null);
 		batch.end();
 	}
 	
