@@ -92,10 +92,11 @@ public class PauseMenu implements Screen
 			Glyph sel = spellbook.get(index);
 			displayGlyphInfo.add(new Label(sel.getName(), skin, "menu"));
 			displayGlyphInfo.row();
-			String flavor = addLineBreaks(sel.getFlavor(), 20);
+			String flavor = addLineBreaks(sel.getFlavor(), 30);
 			displayGlyphInfo.add(new Label(flavor, skin, "menu"));
 			displayGlyphInfo.row();
-			displayGlyphInfo.add(new Label(sel.getDescription(), skin, "menu"));
+			String description = addLineBreaks(sel.getDescription(), 30);
+			displayGlyphInfo.add(new Label(description, skin, "menu"));
 		}
 	}
 	public String addLineBreaks(String str, int lineLength) {
@@ -111,10 +112,11 @@ public class PauseMenu implements Screen
 				endIndex = startIndex + lastSpace;
 			}
 			System.out.println("Start: " + startIndex + " end: " + endIndex);
-			newStr += str.substring(startIndex, endIndex) + "\n";
+			newSub = str.substring(startIndex, endIndex);
+			newStr += newSub + "\n";
 			
 			if (lastSpace > 0){
-				startIndex += endIndex + 1;
+				startIndex += newSub.length() + 1;
 			} else {
 				startIndex += lineLength;
 			}
