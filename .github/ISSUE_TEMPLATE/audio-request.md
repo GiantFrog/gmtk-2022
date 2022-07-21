@@ -7,11 +7,11 @@ assignees: vanaguy8, GiantFrog
 
 ---
 
-Intent
+**Intent**
 How will this asset be used?
 
-Description
+**Description**
 How long should this be? What did you envision it sounding like?
 
-References
+**References**
 Feel free to post links to anything similar to what you need.
